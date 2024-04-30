@@ -1,0 +1,15 @@
+**Alertas
+
+<button id="miBoton">Mostrar Alerta</button>
+<script>
+
+    document.getElementById('miBoton').addEventListener('click', function () {
+        var usuario = "{{ usuario.username }}";
+        Swal.fire({
+            title: '¡Hola ' + usuario + '!',
+            icon: 'error',
+            confirmButtonText: '¡Entendido!'
+        });
+    });
+</script> 
+

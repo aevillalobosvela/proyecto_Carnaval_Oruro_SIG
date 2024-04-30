@@ -1,0 +1,147 @@
+{% extends 'base.html' %} {% block content %}
+{% load static %}
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+
+        <!-- Left Column -->
+        <div class="w3-quarter ">
+
+            <div class="w3-white w3-text-grey w3-card-4 rounded-4">
+                <div class="w3-display-container centrado w3-center">
+                    <img src="{% static '/img/avatar.jpg' %}" style="width:90%" alt="Avatar">
+                </div>
+                <div class="w3-container w3-text-black">
+                    <h2>{{ usuario.first_name }} {{ usuario.last_name }}</h2>
+                </div>
+                <div class="w3-container">
+                    <p><i class="fa fa-user fa-fw w3-margin-right w3-xlarge w3-text-purple  "></i>{{ usuario.username }}
+                    </p>
+                    <p><i class="fa fa-at fa-fw w3-margin-right w3-xlarge w3-text-purple"></i>{{ usuario.email }}</p>
+                    <p><i class="fa fa-calendar fa-fw w3-margin-right w3-xlarge w3-text-purple"></i>{{ usuario.fec_nac}}
+                    </p>
+                    <br>
+
+                </div>
+            </div><br>
+
+        </div>
+
+        <div class="w3-half">
+            <div class="w3-row-padding ">
+                <div class="w3-rest mt-3">
+                    <div class="w3-container w3-card rounded-4">
+                        <div class="w3-container w3-center">
+                            <h3 class="w3-text-white"><b>ACCIONES DISPONIBLES</b></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-half">
+                    <div class="w3-container w3-card  rounded-4">
+                        <div class="w3-container w3-center mt-4 mb-4">
+                            <form action="/marcar_llegada/" method="POST">
+                                {% csrf_token %}
+                                <div class="primero">
+                                    <button type="submit">
+                                        Marcar llegada
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-half">
+                    <div class="w3-container w3-card  rounded-4">
+                        <div class="w3-container w3-center mt-4 mb-4">
+                            <form action="/marcar_salida/" method="POST">
+                                {% csrf_token %}
+                                <div class="primero">
+                                    <button type="submit">
+                                        Marcar salida
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-rest mt-3">
+                <div class="w3-container w3-card w3-white rounded-4">
+                    <div class="w3-container">
+                        <h5 class="mt-4 mb-4"><b>:{{ mensaje|linebreaks }}</b></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-quarter">
+
+            <div class="w3-container w3-card w3-white w3-margin-bottom rounded-4">
+                <div class="reloj mt-4 mb-4 centrado">
+                    <div class="numbers">
+                        <span class="number"></span>
+                        <span class="number"></span>
+                        <span class="number"></span>
+                        <span class="number"></span>
+                        <span class="number"></span>
+                        <span class="number"></span>
+                        <span class="number"></span>
+                        <span class="number"></span>
+                        <span class="number"></span>
+                        <span class="number"></span>
+                        <span class="number"></span>
+                        <span class="number"></span>
+                    </div>
+                    <div class="needles">
+                        <span class="h"></span>
+                        <span class="m"></span>
+                        <span class="s"></span>
+                        <span class="center"></span>
+                    </div>
+                    <div class="pie"></div>
+                </div>
+                <div>
+                    <h3 class="w3-center mt-4 mb-3 centrado"><b>{{ fec_hora }}</b></h3>
+                </div>
+
+            </div>
+
+            <div class="w3-container w3-card w3-white rounded-4">
+                <div class="w3-container">
+                    <h4 class="w3-opacity mt-4 mb-3"><i class="fa fa-arrow-right fa-fw w3-margin-right"></i><b>Hora de
+                            ingreso</b>
+                    </h4>
+                    <h5 class="w3-center"><b>08:00 a.m.</b></h5>
+                    <h4 class="w3-opacity mb-3"><i class="fa fa-arrow-left fa-fw w3-margin-right"></i><b>Hora de
+                            salida</b>
+                    </h4>
+                    <h5 class="w3-center mb-3"><b>06:00 p.m.</b></h5>
+                </div>
+            </div>
+
+            <!-- End Right Column -->
+        </div>
+
+
+
+        <!-- End Grid -->
+    </div>
+
+    <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-deep-purple w3-center w3-margin-top">
+    <br>
+    <p>Find me on social media.</p>
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <br><br>
+</footer>
+
+{% endblock %}

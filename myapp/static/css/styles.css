@@ -1,0 +1,552 @@
+.centrado {
+  display: block;
+  margin: 0 auto;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-size: cover;
+  background-position: center;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #000;
+}
+
+.altura-fija {
+  height: 100px;
+}
+/* ---------------------------------------------------------------------------------- */
+
+.navbol {
+  background-image: linear-gradient(
+    to bottom,
+    #d82828,
+    #e45518,
+    #ea7a00,
+    #eb9d00,
+    #e7be00,
+    #d7c906,
+    #c6d31a,
+    #b2dc2e,
+    #95d12e,
+    #77c62f,
+    #57bb31,
+    #2faf34
+  );
+}
+
+.fontbol {
+  font-family: system-ui;
+  color: rgb(155, 15, 15);
+}
+
+.fontbolnav {
+  font-family: system-ui;
+  color: rgb(155, 15, 15);
+}
+
+.fontbolnav:hover {
+  font-family: system-ui;
+  color: rgb(187, 47, 12)
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+.pushable {
+  position: relative;
+  background: transparent;
+  padding: 0px;
+  border: none;
+  cursor: pointer;
+  outline-offset: 4px;
+  outline-color: deeppink;
+  transition: filter 250ms;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: hsl(226, 25%, 69%);
+  border-radius: 8px;
+  filter: blur(2px);
+  will-change: transform;
+  transform: translateY(2px);
+  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  background: linear-gradient(
+    to right,
+    hsl(248, 39%, 39%) 0%,
+    hsl(248, 39%, 49%) 8%,
+    hsl(248, 39%, 39%) 92%,
+    hsl(248, 39%, 29%) 100%
+  );
+}
+
+.front {
+  display: block;
+  position: relative;
+  border-radius: 8px;
+  background: hsl(248, 53%, 58%);
+  padding: 16px 32px;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 1rem;
+  transform: translateY(-4px);
+  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.pushable:hover {
+  filter: brightness(110%);
+}
+
+.pushable:hover .front {
+  transform: translateY(-6px);
+  transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.pushable:active .front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.pushable:hover .shadow {
+  transform: translateY(4px);
+  transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+}
+
+.pushable:active .shadow {
+  transform: translateY(1px);
+  transition: transform 34ms;
+}
+
+.pushable:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* -BOTONES------------------------------------------------- */
+.primero button {
+  padding: 1em 2em;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #652caf;
+  transition: all 1000ms;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #652caf;
+}
+
+.primero button:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+  outline: 2px solid #51195c;
+  box-shadow: 4px 5px 17px -4px #000000;
+}
+
+.primero button::before {
+  content: "";
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #9242aa;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.primero button:hover::before {
+  width: 250%;
+}
+
+.segundo button {
+  padding: 15px 25px;
+  border: unset;
+  border-radius: 15px;
+  color: #212121;
+  z-index: 1;
+  background: #e8e8e8;
+  position: relative;
+  font-weight: 1000;
+  font-size: 17px;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 250ms;
+  overflow: hidden;
+}
+
+.segundo button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 15px;
+  background-color: #212121;
+  z-index: -1;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 250ms;
+}
+
+.segundo button:hover {
+  color: #e8e8e8;
+}
+
+.segundo button:hover::before {
+  width: 100%;
+}
+
+/* ------------------------------------------- */
+.input {
+  max-width: 190px;
+  height: 44px;
+  background-color: #05060f0a;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #05060f99;
+  transition: color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.input:hover,
+.input:focus,
+.input-group:hover .input {
+  outline: none;
+  border-color: #05060f;
+}
+
+.input-group:hover .label,
+.input:focus {
+  color: #05060fc2;
+}
+
+/* RELOJ--------------------------------------------- */
+
+.reloj {
+  width: 200px;
+  height: 200px;
+  background: transparent;
+  border-radius: 50%;
+  border: 20px solid transparent;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 2px 2px black, inset 2px 2px 2px black,
+    -1px -1px 5px rgba(0, 0, 0, 0.473), inset -1px -1px 5px rgba(0, 0, 0, 0.473);
+}
+
+.numbers {
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 20px;
+  background-color: transparent;
+}
+
+.number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: 0.1rem;
+  height: 0.9rem;
+  background-color: rgb(106, 108, 117);
+}
+
+.number:nth-child(1) {
+  transform: translate(-50%, -50%) rotateZ(calc(30deg)) translateY(-80px);
+}
+
+.number:nth-child(2) {
+  transform: translate(-50%, -50%) rotateZ(calc(60deg)) translateY(-80px);
+}
+
+.number:nth-child(3) {
+  transform: translate(-50%, -50%) rotateZ(calc(90deg)) translateY(-80px);
+}
+
+.number:nth-child(4) {
+  transform: translate(-50%, -50%) rotateZ(calc(120deg)) translateY(-80px);
+}
+
+.number:nth-child(5) {
+  transform: translate(-50%, -50%) rotateZ(calc(150deg)) translateY(-80px);
+}
+
+.number:nth-child(6) {
+  transform: translate(-50%, -50%) rotateZ(calc(180deg)) translateY(-80px);
+}
+
+.number:nth-child(7) {
+  transform: translate(-50%, -50%) rotateZ(calc(210deg)) translateY(-80px);
+}
+
+.number:nth-child(8) {
+  transform: translate(-50%, -50%) rotateZ(calc(240deg)) translateY(-80px);
+}
+
+.number:nth-child(9) {
+  transform: translate(-50%, -50%) rotateZ(calc(270deg)) translateY(-80px);
+}
+
+.number:nth-child(10) {
+  transform: translate(-50%, -50%) rotateZ(calc(300deg)) translateY(-80px);
+}
+
+.number:nth-child(11) {
+  transform: translate(-50%, -50%) rotateZ(calc(330deg)) translateY(-80px);
+}
+
+.number:nth-child(12) {
+  transform: translate(-50%, -50%) rotateZ(calc(0deg)) translateY(-80px);
+}
+
+.number:nth-child(3),
+.number:nth-child(6),
+.number:nth-child(9),
+.number:nth-child(12) {
+  width: 0.3rem;
+  height: 1.5rem;
+}
+
+.needles {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.h,
+.m,
+.s,
+.center {
+  display: inline-block;
+  width: 7px;
+  height: 20px;
+  background-color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50% 50% 0 0;
+}
+
+.s {
+  transform: translate(-50%, -80%);
+}
+
+.h {
+  background-color: black;
+  transform-origin: 50% 100%;
+  animation: rotate 43200s 60s infinite linear;
+  transform: translate(-50%, -100%) rotateZ(5deg);
+  height: 2.5rem;
+  z-index: 1;
+}
+
+.m {
+  background-color: rgb(176, 176, 185);
+  z-index: 2;
+  height: 4rem;
+  width: 5px;
+  transform-origin: 50% 100%;
+  transform: translate(-50%, -100%) rotateZ(60deg);
+  animation: rotate 3600s 60s infinite steps(60, end);
+}
+
+.s {
+  background-color: rgb(240, 31, 31);
+  z-index: 3;
+  height: 5rem;
+  width: 3px;
+  transform-origin: 50% 80%;
+  animation: rotate 60s infinite steps(60, end);
+}
+
+.center {
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border: solid 4px red;
+  z-index: 4;
+  border-radius: 50%;
+}
+
+@keyframes rotate {
+  100% {
+    transform: translate(-50%, -80%) rotateZ(360deg);
+  }
+}
+
+/* --------------------------------------- */
+
+.face {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  outline: 10px solid #333;
+  background: repeating-radial-gradient(
+      circle at 50% 50%,
+      rgba(200, 200, 200, 0.2) 0%,
+      rgba(200, 200, 200, 0.2) 2%,
+      transparent 2%,
+      transparent 3%,
+      rgba(200, 200, 200, 0.2) 3%,
+      transparent 3%
+    ),
+    conic-gradient(
+      white 0%,
+      silver 10%,
+      white 35%,
+      silver 45%,
+      white 60%,
+      silver 70%,
+      white 80%,
+      silver 95%,
+      white 100%
+    );
+  box-shadow: inset 0 0 20px #0007;
+}
+
+.hour {
+  position: absolute;
+  width: 5px;
+  height: 60px;
+  background: #aaa;
+  left: 87.5px;
+  top: 43px;
+  border-radius: 3px 3px 1px 1px;
+  transform-origin: 2px 47px;
+  box-shadow: 0 0 5px #0005, inset 1.5px 3px 0px #333,
+    inset -1.5px -3px 0px #333;
+  z-index: 1;
+  animation: watch 43200s linear infinite;
+}
+
+.minute {
+  position: absolute;
+  width: 4px;
+  height: 78px;
+  background: #aaa;
+  left: 88px;
+  top: 25px;
+  border-radius: 3px 3px 1px 1px;
+  transform-origin: 2px 65px;
+  box-shadow: 0 0 5px #0005, inset 1.5px 3px 0px #333,
+    inset -1.5px -3px 0px #333;
+  z-index: 2;
+  animation: watch 3600s linear infinite;
+}
+
+.second {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: red;
+  left: 85px;
+  top: 85px;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  z-index: 3;
+  animation: watch 60s steps(60, end) 0s infinite;
+}
+
+.second::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 85px;
+  left: 3px;
+  bottom: -10px;
+  background: red;
+  border-radius: 2px;
+  box-shadow: 5px 0 2px rgba(128, 128, 128, 0.2);
+}
+
+.second::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  left: 2px;
+  top: 2px;
+  background: #555;
+  border-radius: 50%;
+}
+
+.v-index {
+  position: absolute;
+  color: #333;
+  font-size: 24px;
+  left: 83.5px;
+  top: -3px;
+  text-shadow: 0 157px 0 #333;
+  z-index: 1;
+}
+
+.h-index {
+  position: absolute;
+  color: #333;
+  font-size: 24px;
+  top: 72px;
+  left: 5px;
+  transform: rotate(-90deg);
+  text-shadow: 0 158px 0 #333;
+  z-index: 1;
+}
+
+@keyframes watch {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

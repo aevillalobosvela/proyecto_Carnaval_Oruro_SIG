@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORINSA S.R.L.</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!-- datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/2.1.1/css/buttons.dataTables.min.css">
+    <!-- w3schools -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+    <!-- Fuentes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- scripts -->
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <!-- local -->
+    <script type="text/javascript" src="{% static '/js/funciones.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/sweetalert2.all.min.js' %}"></script>
+    <!-- datatables -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.1/js/dataTables.buttons.min.js"></script>
+
+    <style>
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Roboto", sans-serif
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav  class="navbar navbar-expand-lg navbol" style="justify-content:space-around;">
+        <div class="container-fluid mx-1">
+            <a class="navbar-brand" href="#">
+                <img id="" src="{% static '/img/diablada2.png' %}" alt="" draggable="false" height="50" /></a>
+            <h2 class="fontbol">Carnaval de Oruro</h2>
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ">
+                    <li class="fontbolnav nav-item ms-3 mt-2">
+                        <a class="btn" href="/"><b>Mapa</b></a>
+                    </li>
+                    <li class="fontbolnav nav-item ms-3 mt-2">
+                        <a class="btn" href="/"><b>Actividades</b></a>
+                    </li>
+                    <li class="fontbolnav nav-item ms-3 mt-2">
+                        <a class="btn" href="/"><b>Informacion</b></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                   <i class="fa fa-user-circle fa-3x" aria-hidden="true"></i>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block content %} {% endblock %}
+</body>
+
+</html>
