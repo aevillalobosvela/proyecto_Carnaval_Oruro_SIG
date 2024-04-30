@@ -42,7 +42,56 @@ def login(request):
             login(request, user)
             return redirect("inicio")
 
-
+def registro(request):
+    if request.method == "GET":
+        return render(request, "registro.html", {"form": UserCreationForm})
+    else:
+        print(request.POST)
+        try:
+            if request.POST["is_superuser"] == "on":
+                superusuario = True
+        except:
+            superusuario = False
+        if request.POST["password1"] == request.POST["password2"]:
+            try:
+                user = UsuarioPersonalizado.objects.create_user(
+                    username=request.POST["username"],
+                    password=request.POST["password1"],
+                    first_name=request.POST["first_name"],
+                    last_name=request.POST["last_name"],
+                    email=request.POST["email"],
+                    fec_nac=request.POST["fec_nac"],
+                    salario=request.POST["salario"],
+                    is_superuser=superusuario,
+                )
+                user.save()
+                login(request, user)
+                return redirect("signin")
+            except IntegrityError:
+                return render(
+                    request,
+                    "signup.html",
+                    {"form": UserCreationForm, "error": "Usuario ya registrado"},
+                )
+            except ValueError:
+                return render(
+                    request,
+                    "signup.html",
+                    {"form": UserCreationForm, "error": "Datos no validos"},
+                )
+            except:
+                return render(
+                    request,
+                    "signup.html",
+                    {"form": UserCreationForm, "error": "Error en el registro"},
+                )
+        return render(
+            request,
+            "signup.html",
+            {"form": UserCreationForm, "error": "Los Passwords no coinciden"},
+        )
+        
+        
 def signup(request):
     if request.method == "GET":
         return render(request, "signup.html", {"form": UserCreationForm})
