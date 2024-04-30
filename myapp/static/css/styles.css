@@ -11,6 +11,7 @@ body {
 }
 
 body {
+  background-image: url("/static/img/fondocar.png");
   background-size: cover;
   background-position: center;
 }
@@ -54,8 +55,10 @@ body {
 
 .fontbolnav:hover {
   font-family: system-ui;
-  color: rgb(187, 47, 12)
+  color: rgb(187, 47, 12);
 }
+
+/* ---------------------------------------------------------------------------------- */
 
 /* ---------------------------------------------------------------------------------- */
 

@@ -47,35 +47,37 @@
 </head>
 
 <body>
-
-    <nav  class="navbar navbar-expand-lg navbol" style="justify-content:space-around;">
-        <div class="container-fluid mx-1">
-            <a class="navbar-brand" href="#">
-                <img id="" src="{% static '/img/diablada2.png' %}" alt="" draggable="false" height="50" /></a>
-            <h2 class="fontbol">Carnaval de Oruro</h2>
-            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ">
-                    <li class="fontbolnav nav-item ms-3 mt-2">
-                        <a class="btn" href="/"><b>Mapa</b></a>
-                    </li>
-                    <li class="fontbolnav nav-item ms-3 mt-2">
-                        <a class="btn" href="/"><b>Actividades</b></a>
-                    </li>
-                    <li class="fontbolnav nav-item ms-3 mt-2">
-                        <a class="btn" href="/"><b>Informacion</b></a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                   <i class="fa fa-user-circle fa-3x" aria-hidden="true"></i>
-                </ul>
+    <header>
+        <nav class="navbar navbar-expand-lg navbol" style="justify-content:space-around;">
+            <div class="container-fluid mx-1">
+                <a class="navbar-brand" href="#">
+                    <img id="" src="{% static '/img/diablada2.png' %}" alt="" draggable="false" height="50" /></a>
+                <h2 class="fontbol">Carnaval de Oruro</h2>
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ">
+                        <li class="fontbolnav nav-item ms-3 mt-2">
+                            <a class="btn" href="/"><b>Mapa</b></a>
+                        </li>
+                        <li class="fontbolnav nav-item ms-3 mt-2">
+                            <a class="btn" href="/"><b>Actividades</b></a>
+                        </li>
+                        <li class="fontbolnav nav-item ms-3 mt-2">
+                            <a class="btn" href="/"><b>Informacion</b></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <i class="fa fa-user-circle fa-3x" aria-hidden="true"></i>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
+
     {% block content %} {% endblock %}
 </body>
 
