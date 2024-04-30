@@ -25,6 +25,24 @@ body {
 }
 /* ---------------------------------------------------------------------------------- */
 
+.mainnav {
+  background-image: linear-gradient(
+    to right top,
+    #205054,
+    #19444d,
+    #143844,
+    #122d3b,
+    #102230,
+    #122034,
+    #191e37,
+    #231a37,
+    #3f193f,
+    #5d113b,
+    #75092e,
+    #851717
+  );
+}
+
 .navbol {
   background-image: linear-gradient(
     to bottom,
@@ -43,23 +61,27 @@ body {
   );
 }
 
-.fontbol {
-  font-family: system-ui;
-  color: rgb(155, 15, 15);
-}
-
 .fontbolnav {
+  text-decoration: none;
   font-family: system-ui;
-  color: rgb(155, 15, 15);
+  color: rgb(233, 218, 218);
 }
 
 .fontbolnav:hover {
-  font-family: system-ui;
-  color: rgb(187, 47, 12);
+  color: rgb(255, 255, 255);
 }
 
 /* ---------------------------------------------------------------------------------- */
-
+.container-fixed-left {
+  position: fixed;
+  top: 89px; /* Ajusta esta altura según la altura de tu navbar */
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+  overflow-y: auto;
+  width: 33.333333%;
+  background-color: #f8f9fa; /* /* Cambia el color de fondo según tus preferencias */
+}
 /* ---------------------------------------------------------------------------------- */
 
 .pushable {

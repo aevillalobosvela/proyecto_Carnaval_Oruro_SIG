@@ -13,9 +13,35 @@ import pandas as pd
 from django.http import HttpResponse
 from datetime import datetime, timedelta
 
+
 # Create your views here.
 def inicio(request):
     return render(request, "inicio.html")
+
+
+def login(request):
+    if request.method == "GET":
+        return render(request, "login.html", {"form": AuthenticationForm})
+    else:
+        user = authenticate(
+            request,
+            username=request.POST["username"],
+            password=request.POST["password"],
+        )
+        if user is None:
+            print(request.POST["username"])
+            return render(
+                request,
+                "login.html",
+                {
+                    "form": AuthenticationForm,
+                    "error": "Usuario o Password incorrecto(s)",
+                },
+            )
+        else:
+            login(request, user)
+            return redirect("inicio")
+
 
 def signup(request):
     if request.method == "GET":
@@ -97,15 +123,18 @@ def signin(request):
 def about(request):
     return render(request, "about.html")
 
+
 def control(request):
     usuario = request.user
     empleados = UsuarioPersonalizado.objects.filter(is_superuser=False)
     return render(request, "control.html", {"usuario": usuario, "empleados": empleados})
 
+
 def marcar(request):
     ahora = datetime.now()
     usuario = request.user
     return render(request, "marcar.html", {"usuario": usuario, "fec_hora": ahora})
+
 
 def marcar_llegada(request):
     fecha_actual = timezone.now().date()
@@ -146,6 +175,7 @@ def marcar_llegada(request):
         "marcar.html",
         {"usuario": usuario, "fec_hora": ahora, "mensaje": mensaje},
     )
+
 
 def marcar_salida(request):
     fecha_actual = timezone.now().date()
@@ -189,9 +219,11 @@ def marcar_salida(request):
         {"usuario": usuario, "fec_hora": ahora, "mensaje": mensaje},
     )
 
+
 def signout(request):
     logout(request)
     return redirect("signin")
+
 
 def exportar_excel(request):
     registros = UsuarioPersonalizado.objects.filter(is_superuser=False)
@@ -218,6 +250,7 @@ def exportar_excel(request):
     df.to_excel(response, index=False, engine="openpyxl")
 
     return response
+
 
 def calcular(request, empleado_id):
     now = timezone.now()
@@ -297,7 +330,6 @@ def calcular(request, empleado_id):
 """ ------------------------------------------------------------------ """
 
 
-
 def task_detail(request, task_id):
     if request.method == "GET":
         task = get_object_or_404(Task, pk=task_id, user=request.user)
@@ -332,4 +364,3 @@ def delete_task(request, task_id):
     if request.method == "POST":
         task.delete()
         return redirect("tasks")
-

@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!-- datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/2.1.1/css/buttons.dataTables.min.css">
+    <!-- w3schools -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+    <!-- Fuentes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- scripts -->
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <!-- local -->
+    <script type="text/javascript" src="{% static '/js/funciones.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/sweetalert2.all.min.js' %}"></script>
+    <!-- datatables -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.1/js/dataTables.buttons.min.js"></script>
+    <style>
+        body {
+            background-image: linear-gradient(to right top, #205054, #19444d, #143844, #122d3b, #102230, #122034, #191e37, #231a37, #3f193f, #5d113b, #75092e, #851717);
+        }
+
+        .custom-link {
+            text-decoration: none;
+            color: rgba(95, 37, 150);
+            transition: 0.5s;
+            width: 100%;
+            margin: 0px;
+        }
+
+        .custom-link:hover {
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+        }
+
+        button {
+            background-color: #ffffff;
+            color: #205054;
+            border: 1px solid rgb(14, 54, 39);
+            width: 7.2em;
+            height: 2em;
+            font-size: 17px;
+            border-radius: 0.4em;
+            transition: 0.5s;
+            padding: 0px;
+        }
+
+        button:hover {
+            color: white;
+            background-color: #205054;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4 col-sm-10 mt-4 ">
+                    <div class="card border">
+                        <div class="custom-fondo card-header text-center">
+                            <div class="m-3">
+                                <img src="{% static '/img/diablada1.png' %}" width="150" alt="">
+                            </div>
+                            <p style="margin-bottom: 0px;">¡Bienvenido usuario!</p>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                {% if error %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error }}
+                                </div>
+                                {% endif %}
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Usuario</label>
+                                    <input type="text" class="form-control" id="username" name="username" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" />
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" type="button">
+                                        Ingresar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer text-center">
+                            <p style="margin-bottom: 0px">¿No tienes una cuenta?</p>
+                            <a href="/registro">Crea una cuenta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
