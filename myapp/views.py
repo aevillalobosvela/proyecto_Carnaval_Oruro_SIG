@@ -42,6 +42,12 @@ def login(request):
             login(request, user)
             return redirect("inicio")
 
+def conoce(request):
+    return render(request, "conoce.html")
+       
+def planifica(request):
+    return render(request, "planifica.html") 
+
 def registro(request):
     if request.method == "GET":
         return render(request, "registro.html", {"form": UserCreationForm})
@@ -91,6 +97,8 @@ def registro(request):
             {"form": UserCreationForm, "error": "Los Passwords no coinciden"},
         )
         
+        
+
         
 def signup(request):
     if request.method == "GET":
