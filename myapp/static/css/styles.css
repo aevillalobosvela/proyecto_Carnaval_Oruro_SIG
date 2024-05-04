@@ -72,25 +72,6 @@ body {
 }
 
 /* ---------------------------------------------------------------------------------- */
-.container-fixed-left {
-  position: fixed;
-  top: 89px; /* Ajusta esta altura según la altura de tu navbar */
-  bottom: 0;
-  left: 0;
-  z-index: 1030;
-  overflow-y: auto;
-  width: 33.333333%;
-  background-color: #f8f9fa; /* /* Cambia el color de fondo según tus preferencias */
-}
-
-.container-principal {
-  /* Ajusta esta altura según la altura de tu navbar */
-  bottom: 0;
-  left: 110px;
-  z-index: 1030;
-  width: 33.333333%;
-  background-color: #df0a7f;
-}
 /* ---------------------------------------------------------------------------------- */
 
 /*
@@ -132,100 +113,40 @@ a:focus {
 
 .wrapper {
   display: flex;
-  width: 100%;
-  align-items: stretch;
+  height: calc(100% - 89.375px);
 }
 
 #sidebar {
-  min-width: 250px;
-  max-width: 250px;
+  width: 400px;
   background: #ffffff;
   color: #000000;
   transition: all 0.3s;
-  border-right: solid #969696;
+  border-right: solid 1px #000000;
 }
 
 #sidebar.active {
-  margin-left: -250px;
+  margin-left: -393px;
 }
 
 #sidebar .sidebar-header {
   padding: 20px;
-  background: #6d7fcc;
-}
-
-#sidebar ul.components {
-  padding: 20px 0;
-  border-bottom: 1px solid #47748b;
-}
-
-#sidebar ul p {
-  color: #fff;
-  padding: 10px;
-}
-
-#sidebar ul li a {
-  padding: 10px;
-  font-size: 1.1em;
-  display: block;
-}
-
-#sidebar ul li a:hover {
-  color: #7386d5;
-  background: #fff;
-}
-
-#sidebar ul li.active > a,
-a[aria-expanded="true"] {
-  color: #fff;
-  background: #6d7fcc;
-}
-
-a[data-toggle="collapse"] {
-  position: relative;
-}
-
-.dropdown-toggle::after {
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-}
-
-ul ul a {
-  font-size: 0.9em !important;
-  padding-left: 30px !important;
-  background: #6d7fcc;
-}
-
-ul.CTAs {
-  padding: 20px;
-}
-
-ul.CTAs a {
-  text-align: center;
-  font-size: 0.9em !important;
-  display: block;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
-
-a.download {
-  background: #fff;
-  color: #7386d5;
-}
-
-a.article,
-a.article:hover {
-  background: #6d7fcc !important;
-  color: #fff !important;
+  background: #ffffff;
+  border-bottom: 1px solid;
 }
 
 .btn-tab {
-  border-radius: 0 !important; 
+  border-radius: 0 !important;
   padding: 5px !important;
-  background: #6d7fcc !important;
+  background-image: linear-gradient(
+    to bottom,
+    #eb9d00,
+    #e7be00,
+    #d7c906,
+    #c6d31a,
+    #b2dc2e,
+    #95d12e,
+    #77c62f
+  ) !important;
   transition: right 0.3s ease;
 }
 
@@ -235,112 +156,7 @@ a.article:hover {
 
 #content {
   width: 100%;
-  padding: 20px;
-  min-height: 100vh;
   transition: all 0.3s;
-}
-
-/* ---------------------------------------------------
-    MEDIAQUERIES
------------------------------------------------------ */
-
-@media (max-width: 768px) {
-  #sidebar {
-    margin-left: -250px;
-  }
-  #sidebar.active {
-    margin-left: 0;
-  }
-  #sidebarCollapse span {
-    display: none;
-  }
-}
-
-.pushable {
-  position: relative;
-  background: transparent;
-  padding: 0px;
-  border: none;
-  cursor: pointer;
-  outline-offset: 4px;
-  outline-color: deeppink;
-  transition: filter 250ms;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-.shadow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: hsl(226, 25%, 69%);
-  border-radius: 8px;
-  filter: blur(2px);
-  will-change: transform;
-  transform: translateY(2px);
-  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
-}
-
-.edge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  border-radius: 8px;
-  background: linear-gradient(
-    to right,
-    hsl(248, 39%, 39%) 0%,
-    hsl(248, 39%, 49%) 8%,
-    hsl(248, 39%, 39%) 92%,
-    hsl(248, 39%, 29%) 100%
-  );
-}
-
-.front {
-  display: block;
-  position: relative;
-  border-radius: 8px;
-  background: hsl(248, 53%, 58%);
-  padding: 16px 32px;
-  color: white;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-size: 1rem;
-  transform: translateY(-4px);
-  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
-}
-
-.pushable:hover {
-  filter: brightness(110%);
-}
-
-.pushable:hover .front {
-  transform: translateY(-6px);
-  transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
-}
-
-.pushable:active .front {
-  transform: translateY(-2px);
-  transition: transform 34ms;
-}
-
-.pushable:hover .shadow {
-  transform: translateY(4px);
-  transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
-}
-
-.pushable:active .shadow {
-  transform: translateY(1px);
-  transition: transform 34ms;
-}
-
-.pushable:focus:not(:focus-visible) {
-  outline: none;
 }
 
 /* -BOTONES------------------------------------------------- */

@@ -19,23 +19,25 @@
         href="https://cdn.datatables.net/buttons/2.1.1/css/buttons.dataTables.min.css">
     <!-- w3schools -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
     <!-- Fuentes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- scripts -->
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+    <script src="{% static '/js/jquery-3.6.0.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $('#icon').toggleClass('fa-arrow-circle-left fa-arrow-circle-right')
+            });
+        });
+    </script>   
     <!-- local -->
-    <script type="text/javascript" src="{% static '/js/funciones.js' %}"></script>
     <script type="text/javascript" src="{% static '/js/sweetalert2.all.min.js' %}"></script>
-    <!-- datatables -->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.1.1/js/dataTables.buttons.min.js"></script>
     <script src="https://kit.fontawesome.com/b06183c7c4.js" crossorigin="anonymous"></script>
@@ -67,9 +69,10 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
+                        <p>Nombre del Usuario</p>
                         <form action="/login/" method="GET">
                             {% csrf_token %}
-                            <button type="submit" style="border: 0px; background-color: rgb(77, 21, 4);">
+                            <button type="submit" style="border: 0px; background-color: rgba(255, 245, 238, 0);">
                                 <i class="fontbolnav fa fa-user-circle fa-3x" aria-hidden="true"></i>
                             </button>
                         </form>
