@@ -32,19 +32,6 @@
             background-image: linear-gradient(to right top, #205054, #19444d, #143844, #122d3b, #102230, #122034, #191e37, #231a37, #3f193f, #5d113b, #75092e, #851717);
         }
 
-        .custom-link {
-            text-decoration: none;
-            color: rgba(95, 37, 150);
-            transition: 0.5s;
-            width: 100%;
-            margin: 0px;
-        }
-
-        .custom-link:hover {
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-        }
-
         button {
             background-color: #ffffff;
             color: #205054;
@@ -70,12 +57,78 @@
     <div>
         <div class="container">
             <div class="row justify-content-center">
+                <div style="margin-bottom: 114px; margin-top: 110px;" class="col-md-6 col-sm-10">
+                    <div class="card border">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-2 text-center mt-3">
+                                    <img src="{% static '/img/diablada1.png' %}" width="60" alt="">
+                                </div>
+                                <div class="col-10 mt-2">
+                                    <p style="margin-bottom: 3px">Bienvenido nuevo usuario</p>
+                                    <p style="margin-bottom: 0px">¡Vamos a registrarte!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <div class="row">
+                                    {% if error %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                    {% endif %}
+                                    <div class="col-6 mb-3">
+                                        <label for="nombre" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" required />
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <label for="user" class="form-label">Usuario</label>
+                                        <input type="text" class="form-control" id="user" name="user" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 mb-3">
+                                        <label for="password1" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password1" name="password1"
+                                            required />
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <label for="password2" class="form-label">Repetir Password</label>
+                                        <input type="password" class="form-control" id="password2" name="password2"
+                                            required />
+                                    </div>
+                                </div>
+
+                                <div class="row m-3">
+                                    <div class="col-6 text-end">
+                                        <div>
+                                            <button type="submit">Registrarse</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div>
+                                            <a href="/login/" class="btn btn-danger">No gracias</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+
+                        </div>
+                        <div style="color: rgb(20, 113, 129)" class="card-footer">
+                            Politica de privacidad
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
                 <div class="col-md-4 col-sm-10 mt-4 ">
                     <div class="card border">
                         <div class="custom-fondo card-header text-center">
-                            <div class="m-3">
-                                <img src="{% static '/img/diablada1.png' %}" width="150" alt="">
-                            </div>
                             <p style="margin-bottom: 0px;">¡Bienvenido usuario!</p>
                         </div>
                         <div class="card-body">
@@ -108,7 +161,6 @@
                                     ¿No tienes una cuenta?
                                 </button>
                             </form>
-                            
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,4 @@
-from .forms import TaskForm
-from .models import UsuarioPersonalizado, diario, Task, pagomes
+from .models import diario, pagomes
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -53,48 +52,34 @@ def registro(request):
         return render(request, "registro.html", {"form": UserCreationForm})
     else:
         print(request.POST)
-        try:
-            if request.POST["is_superuser"] == "on":
-                superusuario = True
-        except:
-            superusuario = False
+        
         if request.POST["password1"] == request.POST["password2"]:
             try:
-                user = UsuarioPersonalizado.objects.create_user(
-                    username=request.POST["username"],
-                    password=request.POST["password1"],
-                    first_name=request.POST["first_name"],
-                    last_name=request.POST["last_name"],
-                    email=request.POST["email"],
-                    fec_nac=request.POST["fec_nac"],
-                    salario=request.POST["salario"],
-                    is_superuser=superusuario,
-                )
-                user.save()
-                login(request, user)
-                return redirect("signin")
+               
+                return redirect("registro")
             except IntegrityError:
                 return render(
                     request,
-                    "signup.html",
+                    "registro.html",
                     {"form": UserCreationForm, "error": "Usuario ya registrado"},
                 )
             except ValueError:
                 return render(
                     request,
-                    "signup.html",
+                    "registro.html",
                     {"form": UserCreationForm, "error": "Datos no validos"},
                 )
             except:
                 return render(
                     request,
-                    "signup.html",
+                    "registro.html",
                     {"form": UserCreationForm, "error": "Error en el registro"},
                 )
         return render(
             request,
-            "signup.html",
+            "registro.html",
             {"form": UserCreationForm, "error": "Los Passwords no coinciden"},
+            print("dd")
         )
         
         
@@ -112,7 +97,7 @@ def signup(request):
             superusuario = False
         if request.POST["password1"] == request.POST["password2"]:
             try:
-                user = UsuarioPersonalizado.objects.create_user(
+                user = User.objects.create_user(
                     username=request.POST["username"],
                     password=request.POST["password1"],
                     first_name=request.POST["first_name"],
@@ -183,7 +168,7 @@ def about(request):
 
 def control(request):
     usuario = request.user
-    empleados = UsuarioPersonalizado.objects.filter(is_superuser=False)
+    empleados = User.objects.filter(is_superuser=False)
     return render(request, "control.html", {"usuario": usuario, "empleados": empleados})
 
 
@@ -283,7 +268,7 @@ def signout(request):
 
 
 def exportar_excel(request):
-    registros = UsuarioPersonalizado.objects.filter(is_superuser=False)
+    registros = User.objects.filter(is_superuser=False)
 
     data = {
         "id": [],
@@ -317,13 +302,13 @@ def calcular(request, empleado_id):
     )
 
     usuario = request.user
-    empleados = UsuarioPersonalizado.objects.filter(is_superuser=False)
+    empleados = User.objects.filter(is_superuser=False)
     if request.method == "GET":
         return render(
             request, "control.html", {"usuario": usuario, "empleados": empleados}
         )
     else:
-        empleado = UsuarioPersonalizado.objects.get(id=empleado_id)
+        empleado = User.objects.get(id=empleado_id)
         reg_retraso = diario.objects.filter(
             empleado=empleado_id,
             retraso=True,
@@ -387,7 +372,7 @@ def calcular(request, empleado_id):
 """ ------------------------------------------------------------------ """
 
 
-def task_detail(request, task_id):
+""" def task_detail(request, task_id):
     if request.method == "GET":
         task = get_object_or_404(Task, pk=task_id, user=request.user)
         form = TaskForm(instance=task)
@@ -421,3 +406,4 @@ def delete_task(request, task_id):
     if request.method == "POST":
         task.delete()
         return redirect("tasks")
+ """
