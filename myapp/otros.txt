@@ -13,3 +13,137 @@
     });
 </script> 
 
+** modelos
+class diario(models.Model):
+    fech_reg = models.DateField(null=True, blank=True)
+    hora_in = models.TimeField(blank=True)
+    hora_out = models.TimeField(blank=True)
+    retraso = models.BooleanField(default=False)
+    salida = models.BooleanField(default=False)
+    empleado = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class pagomes(models.Model):
+    anio_pago = models.PositiveIntegerField(blank=True)
+    mes_pago = models.PositiveIntegerField(blank=True)
+    retrasos = models.PositiveIntegerField(blank=True)
+    salidas = models.PositiveIntegerField(blank=True)
+    tot_descento = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True
+    )
+    empleado = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+
+    
+    path("about/", views.about),
+    path("signup/", views.signup, name="signup"),
+    path("control/", views.control, name="control"),
+    path("marcar/", views.marcar, name="marcar"),
+    path("exportar-excel/", views.exportar_excel, name="exportar_excel"),
+    path("marcar_llegada/", views.marcar_llegada, name="marcar_llegada"),
+    path("marcar_salida/", views.marcar_salida, name="marcar_salida"),
+    path("calcular/<int:empleado_id>/", views.calcular, name="calcular"),
+
+
+    {% extends 'base.html' %} {% block content %}
+{% load static %}
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+        <div class="w3-rest ">
+            <div class="w3-container w3-card rounded-4">
+                <div class="w3-container w3-center mb-2">
+                    <h3 class="w3-text-white"><b>CONTROL DE EMPLEADOS</b></h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Left Column -->
+        <div class="w3-quarter ">
+            <div class="w3-white w3-text-grey w3-card-4 rounded-4">
+                <div class="w3-display-container centrado w3-center ">
+                    <img class="mt-2" src="{% static '/img/avatar2.jpg' %}" style="width:85%" alt="Avatar">
+                </div>
+                <div class="w3-container w3-text-black">
+                    <h2>{{ usuario.first_name }} {{ usuario.last_name }}</h2>
+                </div>
+                <div class="w3-container">
+                    <p><i class="fa fa-user fa-fw w3-margin-right w3-xlarge w3-text-purple  "></i>{{ usuario.username }}
+                    </p>
+                    <p><i class="fa fa-at fa-fw w3-margin-right w3-xlarge w3-text-purple"></i>{{ usuario.email }}</p>
+                    <p><i class="fa fa-calendar fa-fw w3-margin-right w3-xlarge w3-text-purple"></i>{{ usuario.fec_nac}}
+                    </p>
+                    <br>
+
+                </div>
+            </div><br>
+
+        </div>
+        <div class="w3-rest">
+            <div class="mb-2 w3-container w3-card w3-white rounded-4">
+                :{{ mensaje|linebreaks }}
+            </div>
+        </div>
+        <div class="w3-rest">
+            <div class="w3-container w3-card w3-white rounded-4">
+                <div class="w3-container">
+                    <div class="mt-2 w3-center">
+                        <button id="exportarBtn" class="btn btn-success btn-lg"> <i
+                                class="fa fa-file-excel-o"></i></button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-light" id="empleados">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido(s)</th>
+                                    <th>Fec. Nacimiento</th>
+                                    <th>Correo</th>
+                                    <th>Salario</th>
+                                    <th>pago/mes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for empleado in empleados %}
+                                <tr>
+                                    <td>{{ empleado.id }}</td>
+                                    <td>{{ empleado.first_name }}</td>
+                                    <td>{{ empleado.last_name }}</td>
+                                    <td>{{ empleado.fec_nac }}</td>
+                                    <td>{{ empleado.email }}</td>
+                                    <td>{{ empleado.salario }}</td>
+                                    <td>
+                                        <form action="{% url 'calcular' empleado.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <div class="w3-center"><button type="submit"
+                                                    class="btn btn-outline-dark btn-sm">Calcular</button></div>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="w3-container w3-deep-purple w3-center w3-margin-top">
+    <br>
+    <p>Find me on social media.</p>
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <br><br>
+</footer>
+
+{% endblock %}

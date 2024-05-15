@@ -1,4 +1,5 @@
-from .models import diario, pagomes
+""" from .models import diario, pagomes """
+
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -14,13 +15,15 @@ from datetime import datetime, timedelta
 
 
 # Create your views here.
+
 def inicio(request):
-    return render(request, "inicio.html")
+    usuario = request.user
+    return render(request, "inicio.html", {"usuario": usuario})
 
 
-def login(request):
+def login_user(request):
     if request.method == "GET":
-        return render(request, "login.html", {"form": AuthenticationForm})
+        return render(request, "login_user.html", {"form": AuthenticationForm})
     else:
         user = authenticate(
             request,
@@ -31,32 +34,44 @@ def login(request):
             print(request.POST["username"])
             return render(
                 request,
-                "login.html",
+                "login_user.html",
                 {
                     "form": AuthenticationForm,
                     "error": "Usuario o Password incorrecto(s)",
                 },
             )
         else:
+            print("Ingresa bien")
+            print(request.POST["username"])
             login(request, user)
             return redirect("inicio")
 
+
 def conoce(request):
     return render(request, "conoce.html")
-       
+
+
 def planifica(request):
-    return render(request, "planifica.html") 
+    usuario = request.user
+    return render(request, "planifica.html", {"usuario": usuario})
+
 
 def registro(request):
     if request.method == "GET":
         return render(request, "registro.html", {"form": UserCreationForm})
     else:
         print(request.POST)
-        
+
         if request.POST["password1"] == request.POST["password2"]:
             try:
-               
-                return redirect("registro")
+                user = User.objects.create_user(
+                    username=request.POST["user"],
+                    password=request.POST["password1"],
+                    first_name=request.POST["nombre"],
+                )
+                user.save()
+                print("Usuario registrado")
+                return redirect("login_user")
             except IntegrityError:
                 return render(
                     request,
@@ -75,16 +90,14 @@ def registro(request):
                     "registro.html",
                     {"form": UserCreationForm, "error": "Error en el registro"},
                 )
+
         return render(
             request,
             "registro.html",
             {"form": UserCreationForm, "error": "Los Passwords no coinciden"},
-            print("dd")
         )
-        
-        
 
-        
+
 def signup(request):
     if request.method == "GET":
         return render(request, "signup.html", {"form": UserCreationForm})
@@ -178,7 +191,12 @@ def marcar(request):
     return render(request, "marcar.html", {"usuario": usuario, "fec_hora": ahora})
 
 
-def marcar_llegada(request):
+def signout(request):
+    logout(request)
+    return redirect("inicio")
+
+
+""" def marcar_llegada(request):
     fecha_actual = timezone.now().date()
     hora_actual = datetime.now().time()
     hora_format = hora_actual.strftime("%H:%M:%S")
@@ -262,9 +280,7 @@ def marcar_salida(request):
     )
 
 
-def signout(request):
-    logout(request)
-    return redirect("signin")
+
 
 
 def exportar_excel(request):
@@ -366,7 +382,7 @@ def calcular(request, empleado_id):
                 "obj_empleado": empleado,
                 "mensaje": mensaje,
             },
-        )
+        ) """
 
 
 """ ------------------------------------------------------------------ """

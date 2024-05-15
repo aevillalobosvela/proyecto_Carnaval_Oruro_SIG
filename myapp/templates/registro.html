@@ -57,7 +57,7 @@
     <div>
         <div class="container">
             <div class="row justify-content-center">
-                <div style="margin-bottom: 114px; margin-top: 110px;" class="col-md-6 col-sm-10">
+                <div style="margin-bottom: 114px; margin-top: 100px;" class="col-md-6 col-sm-10">
                     <div class="card border">
                         <div class="card-header">
                             <div class="row">
@@ -109,7 +109,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div>
-                                            <a href="/login/" class="btn btn-danger">No gracias</a>
+                                            <a href="/login_user/" class="btn btn-danger">No gracias</a>
                                         </div>
                                     </div>
 
@@ -119,48 +119,6 @@
                         </div>
                         <div style="color: rgb(20, 113, 129)" class="card-footer">
                             Politica de privacidad
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-4 col-sm-10 mt-4 ">
-                    <div class="card border">
-                        <div class="custom-fondo card-header text-center">
-                            <p style="margin-bottom: 0px;">¡Bienvenido usuario!</p>
-                        </div>
-                        <div class="card-body">
-                            <form method="POST" action="">
-                                {% csrf_token %}
-                                {% if error %}
-                                <div class="alert alert-danger" role="alert">
-                                    {{ error }}
-                                </div>
-                                {% endif %}
-                                <div class="mb-3">
-                                    <label for="username" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="username" name="username" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" />
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" type="button">
-                                        Ingresar
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-footer text-center">
-                            <form action="/registro/" method="GET">
-                                {% csrf_token %}
-                                <button type="submit" style="border: 0px;">
-                                    ¿No tienes una cuenta?
-                                </button>
-                            </form>
                         </div>
                     </div>
                 </div>
