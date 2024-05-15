@@ -8,12 +8,29 @@ $(document).ready(function () {
 });
 
 var map = L.map("map").setView([-17.961255, -67.106084], 15);
+
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-L.marker([-17.961255, -67.106084])
-  .addTo(map)
-  .bindPopup("A pretty CSS3 popup.<br> Easily customizable.")
-  .openPopup();
+
+var control = L.Routing.control({
+  routeWhileDragging: true,
+}).addTo(map);
+
+var selectedPoints = [];
+
+function onMapClick(e) {
+  console.log(selectedPoints);
+  if (selectedPoints.length < 2) {
+    selectedPoints.push(e.latlng);
+    L.marker(e.latlng).addTo(map);
+
+    if (selectedPoints.length === 2) {
+      control.setWaypoints(selectedPoints);
+    }
+  }
+}
+
+map.on("click", onMapClick);
