@@ -1,4 +1,5 @@
 console.log("funciona");
+var marker = null;
 
 $(document).ready(function () {
   $("#sidebarCollapse").on("click", function () {
@@ -14,8 +15,19 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+document
+  .getElementById("select-location")
+  .addEventListener("change", function (e) {
+    let coords = e.target.value.split(",");
+    map.flyTo(coords, 17);
+    if (marker) {
+      map.removeLayer(marker);
+    }
+    marker = L.marker(e.target.value.split(",")).addTo(map);
+    markeroption = 1;
+  });
 
-var control = L.Routing.control({
+/* var control = L.Routing.control({
   routeWhileDragging: true,
 }).addTo(map);
 
@@ -34,3 +46,4 @@ function onMapClick(e) {
 }
 
 map.on("click", onMapClick);
+ */
