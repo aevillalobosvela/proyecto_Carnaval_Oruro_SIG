@@ -29,15 +29,24 @@
     <script src="{% static '/js/lrm-graphhopper-1.2.0.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.0/Control.MiniMap.min.js"></script>
     <style>
-        #map {
-            height: 100%;
+        .salud-icon {
+            color: rgb(255, 0, 13);
         }
+        .seguridad-icon {
+            color: rgb(8, 4, 226);
+        }
+        .deposito-icon {
+            color: rgb(21, 148, 10);
+        }
+        .paso-icon {
+            color: rgb(40, 243, 243);
+        }
+        
     </style>
 </head>
 
 <body>
     <header>
-
         <nav class="navbar navbar-expand-lg mainnav" style="justify-content:space-around;">
             <div class="container-fluid mx-1">
                 <a class="navbar-brand" href="#">
@@ -93,7 +102,7 @@
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
             © 2020 Copyright:
-            <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            <a class="text-body" href="https://mdbootstrap.com/">Sistemas de Informacion Geografica</a>
         </div>
         <!-- Copyright -->
     </footer>
