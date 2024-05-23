@@ -9,17 +9,24 @@
             <h3 class="text-center">Sigue el recorrido</h3>
         </div>
 
-        <div class="m-3">
+        <div class="m-3 text-center">
             <h5>¿Que esta buscando?</h5>
+            <h5>Seleccione un elemento</h5>
         </div>
-        <div class="m-3">
-            <select name="select-location" id="select-location">
-                <option value="-1">Seleccione un lugar</option>
-                <option value="-17.951367760239243, -67.1108950693493">Plaza Sebastian Pagador</option>
-                <option value="-17.961654, -67.110700">Parque de la Union</option>
-                <option value="-17.969829647594043, -67.11461519634534">Plaza principal</option>
-            </select>
+
+        <div id="card-info" class="card mx-auto" style="width: 16rem; display: none;">
+            <img class="card-img-top" id="marker-image" src="" alt="imagen" height="170" width="100%" />
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <div id="marker-info">Haz clic en un marcador para ver la información.</div>
+                <div class="text-center">
+                    <a href="#" class="btn btn-success">Como llegar</a>
+                </div>
+            </div>
         </div>
+
+
+
         <div>
             <p style="color: black; position: absolute; bottom: 0;" class="m-2">Usuario actual: {{ usuario.username}}
             </p>
