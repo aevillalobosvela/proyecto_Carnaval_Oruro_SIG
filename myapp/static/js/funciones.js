@@ -97,45 +97,134 @@ var pasoIcon = L.divIcon({
 });
 
 var salud = [
-  [-17.95673328212476, -67.10514358751995],
-  [-17.96024064600984, -67.10672157609262],
-  [-17.961972664664998, -67.10711606163198],
-  [-17.9649961858182, -67.10797251964217],
-  [-17.96752062510037, -67.10642871368316],
-  [-17.967350696772108, -67.1090570216887],
-  [-17.96830949637342, -67.10834253603726],
-  [-17.971001611183457, -67.10789866090145],
-  [-17.971851152980786, -67.11084594456847],
-  [-17.970479752967943, -67.11052697142715],
-  [-17.97106395970095, -67.11434172990847],
-  [-17.968831317791306, -67.11491280866207],
-  [-17.967959273763388, -67.11557586819224],
-  [-17.969046738340957, -67.11670863651712],
-  [-17.96837117245009, -67.11745703527103],
-  [-17.970575558772797, -67.11839044916223],
-  [-17.968391571163625, -67.11857283003275],
+  {
+    coord: [-17.95673328212476, -67.10514358751995],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud1.jpg",
+  },
+  {
+    coord: [-17.96024064600984, -67.10672157609262],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud7.png",
+  },
+  {
+    coord: [-17.961972664664998, -67.10711606163198],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud3.jpg",
+  },
+  {
+    coord: [-17.9649961858182, -67.10797251964217],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud2.jpeg",
+  },
+  {
+    coord: [-17.96752062510037, -67.10642871368316],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud4.jfif",
+  },
+  {
+    coord: [-17.967350696772108, -67.1090570216887],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud10.jpg",
+  },
+  {
+    coord: [-17.96830949637342, -67.10834253603726],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud9.jpg",
+  },
+  {
+    coord: [-17.971001611183457, -67.10789866090145],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud8.jpeg",
+  },
+  {
+    coord: [-17.971851152980786, -67.11084594456847],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud7.png",
+  },
+  {
+    coord: [-17.970479752967943, -67.11052697142715],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud6.jpg",
+  },
+  {
+    coord: [-17.97106395970095, -67.11434172990847],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud5.png",
+  },
+  {
+    coord: [-17.968831317791306, -67.11491280866207],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud4.jfif",
+  },
+  {
+    coord: [-17.967959273763388, -67.11557586819224],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud3.jpg",
+  },
+  {
+    coord: [-17.969046738340957, -67.11670863651712],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud2.jpeg",
+  },
+  {
+    coord: [-17.96837117245009, -67.11745703527103],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud10.jpg",
+  },
+  {
+    coord: [-17.970575558772797, -67.11839044916223],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud9.jpg",
+  },
+  {
+    coord: [-17.968391571163625, -67.11857283003275],
+    titulo: "Puesto de Salud",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/salud/salud5.png",
+  },
 ];
 
 var seguridad = [
   {
     coord: [-17.960904600543504, -67.10464288776342],
-    popupContent: "<b>Estación de Policía A</b><br>Dirección: Calle Falsa 123",
-    imagen_ruta: "static/img/diablada1.png",
+    titulo: "Puesto Policial",
+    direccion: "Avenida Villaroel y Rajka Bakovic",
+    imagen_ruta: "static/img/mapa/policia/policia1.jpg",
   },
   {
     coord: [-17.96997219875942, -67.10608421753413],
-    popupContent: "<b>Estación de Policía B</b><br>Dirección: Caalsa 123",
-    imagen_ruta: "static/img/diablada2.png",
+    titulo: "Puesto Policial",
+    direccion: "Avenida Brasil esquina Ayacucho",
+    imagen_ruta: "static/img/mapa/policia/policia2.png",
   },
   {
     coord: [-17.97004282806646, -67.10925108756975],
-    popupContent: "<b>Estación de Policía C</b><br>Dirección: Callsa 123",
-    imagen_ruta: "static/img/diablada3.png",
+    titulo: "Puesto Policial",
+    direccion: "Junin esquina Velasco Galvarro",
+    imagen_ruta: "static/img/mapa/policia/policia3.png",
   },
   {
     coord: [-17.969577303263794, -67.11562158873598],
-    popupContent: "<b>Estación de Policía D</b><br>Dirección: Cala 123",
-    imagen_ruta: "static/img/diablada1.png",
+    titulo: "Puesto Policial",
+    direccion: "Bolivar entre Washington y Presidente Montes",
+    imagen_ruta: "static/img/mapa/policia/policia4.png",
   },
 ];
 
@@ -184,22 +273,31 @@ var pasoMarkers = L.layerGroup();
 
 // Añadir marcadores a las capas correspondientes
 
-salud.forEach(function (coord) {
-  L.marker(coord, { icon: saludIcon })
-    .bindPopup("Puesto de salud")
-    .addTo(saludMarkers);
+salud.forEach(function (data) {
+  var mark_salud = L.marker(data.coord, { icon: saludIcon }).addTo(
+    saludMarkers
+  );
+
+  mark_salud.on("click", function () {
+    document.getElementById("titulo-info").innerHTML = data.titulo;
+    document.getElementById("marker-info").innerHTML = data.direccion;
+    document.getElementById("marker-image").src = data.imagen_ruta;
+    var card = document.getElementById("card-info");
+    card.style.display = "block";
+  });
 });
 
 seguridad.forEach(function (data) {
-  var mark_seguridad = L.marker(data.coord, { icon: seguridadIcon })
-    .bindPopup(data.popupContent)
-    .addTo(seguridadMarkers);
+  var mark_seguridad = L.marker(data.coord, { icon: seguridadIcon }).addTo(
+    seguridadMarkers
+  );
 
   mark_seguridad.on("click", function () {
-    document.getElementById("marker-info").innerHTML = data.popupContent;
+    document.getElementById("titulo-info").innerHTML = data.titulo;
+    document.getElementById("marker-info").innerHTML = data.direccion;
     document.getElementById("marker-image").src = data.imagen_ruta;
-    var card = document.getElementById('card-info');
-    card.style.display = 'block'; 
+    var card = document.getElementById("card-info");
+    card.style.display = "block";
   });
 });
 
@@ -223,10 +321,11 @@ pasoMarkers.addTo(map1);
 
 // Añadir control de capas al mapa
 var overlayMaps = {
-  "Puestos de salud": saludMarkers,
+  '<i class="fa fa-plus-square fa-lg salud-icon"></i> Puestos de Salud': saludMarkers,
   "Puestos de policia": seguridadMarkers,
-  "Depositos de basura": depositoMarkers,
-  "Paso peatonal": pasoMarkers,
+  '<i class="fa fa-dumpster fa-lg deposito-icon"></i>  Depositos de basura':
+    depositoMarkers,
+  '<i class="fa fa-walking fa-lg paso-icon"></i> Paso peatonal': pasoMarkers,
 };
 
-L.control.layers(null, overlayMaps, {collapsed: false}).addTo(map1);
+L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map1);
