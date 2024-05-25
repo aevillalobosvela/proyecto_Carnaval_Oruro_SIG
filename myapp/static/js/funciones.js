@@ -1,4 +1,6 @@
 var marker = null;
+var userLocation; // Variable para almacenar la ubicación del usuario
+var selectedDestination; // Variable para almacenar la ubicación de destino seleccionada
 
 $(document).ready(function () {
   $("#sidebarCollapse").on("click", function () {
@@ -32,6 +34,34 @@ var miniMap = new L.Control.MiniMap(osmLayer, {
   toggleDisplay: true,
   minimized: false,
 }).addTo(map1);
+
+var usuarioIcon = L.divIcon({
+  html: '<i class="fa fa-map-marker fa-3x"></i>',
+  className: "usuario-icon",
+});
+//falta poner las rutas
+function onLocationFound(e) {
+  userLocation = e.latlng;
+  // Agregar un marcador en la ubicación del usuario
+  var marker = L.marker(e.latlng ,{ icon: usuarioIcon })
+    .addTo(map1)
+    .bindPopup("Usted esta aqui")
+    .openPopup();
+  // Centrar el mapa en la ubicación del usuario
+  map1.setView(e.latlng, 15);
+}
+
+// Función para manejar errores de geolocalización
+function onLocationError(e) {
+  alert(e.message);
+}
+
+// Solicitar la ubicación del usuario
+map1.on("locationfound", onLocationFound);
+map1.on("locationerror", onLocationError);
+
+// Iniciar la solicitud de geolocalización
+map1.locate({ setView: true, maxZoom: 16 });
 
 /* -LINEA PRINCIPAL-------------------------------------------------------------------------------------- */
 var inicio_mark = L.marker([-17.957698858097284, -67.10479645507664]).addTo(
@@ -232,119 +262,199 @@ var deposito = [
   {
     coord: [-17.958162222453723, -67.10383872615658],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Rajka Bakovic altura Maestranza de trenes",
     imagen_ruta: "static/img/mapa/deposito1.jpg",
   },
 
   {
     coord: [-17.961871638556104, -67.10485530735654],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Rajka Bakovic y Aroma B",
     imagen_ruta: "static/img/mapa/deposito2.jpg",
   },
   {
     coord: [-17.962939698438237, -67.10738917535684],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Velasco Galvarro entre Ignacion Leon y Rodriguez",
     imagen_ruta: "static/img/mapa/deposito1.jpg",
   },
   {
     coord: [-17.96438935918436, -67.10557386374819],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Rajka Bakovic entre 1ro de noviembre e Ignacio Leon",
     imagen_ruta: "static/img/mapa/deposito2.jpg",
   },
   {
     coord: [-17.966234141181957, -67.10608421871093],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Rajka Bakovic entre Montecinos y Herrera",
     imagen_ruta: "static/img/mapa/deposito1.jpg",
   },
   {
     coord: [-17.96690164408122, -67.10857219663252],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Velasco Galvarro entre Caro y Montecinos",
     imagen_ruta: "static/img/mapa/deposito2.jpg",
   },
   {
     coord: [-17.96985081775946, -67.10975875403427],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Junin entre Pagador y Velasco Galvarro",
     imagen_ruta: "static/img/mapa/deposito1.jpg",
   },
   {
     coord: [-17.972518647939644, -67.10786038993952],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Rajka Bakovic entre Sucre y Bolivar",
     imagen_ruta: "static/img/mapa/deposito2.jpg",
   },
   {
     coord: [-17.972203105769392, -67.11069283995452],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Sucre y Pagador",
     imagen_ruta: "static/img/mapa/deposito1.jpg",
   },
   {
     coord: [-17.969364874871864, -67.11122856882136],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Junin y Potosi",
     imagen_ruta: "static/img/mapa/deposito2.jpg",
   },
   {
     coord: [-17.971282410997027, -67.11338482364664],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Sucre entre Soria Galvarro y 6 de octubre",
     imagen_ruta: "static/img/mapa/deposito1.jpg",
   },
   {
     coord: [-17.968427981363902, -67.11412790694166],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Junin entre Presidente Montes y La Plata",
     imagen_ruta: "static/img/mapa/deposito2.jpg",
   },
   {
     coord: [-17.970793256204615, -67.11562528581392],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Sucre y Presidente Montes",
     imagen_ruta: "static/img/mapa/deposito1.jpg",
   },
   {
     coord: [-17.967905771918094, -67.11646492647472],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Junin y Camacho",
     imagen_ruta: "static/img/mapa/deposito2.jpg",
   },
   {
     coord: [-17.97014077161978, -67.11760220056858],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Sucre entre Petot y Camacho",
     imagen_ruta: "static/img/mapa/deposito1.jpg",
   },
   {
     coord: [-17.96919780574735, -67.11965645278329],
     titulo: "Deposito de residuos",
-    direccion: "",
+    direccion: "Baptista entre Sucre y Bolivar",
     imagen_ruta: "static/img/mapa/deposito2.jpg",
   },
 ];
 
 var paso = [
-  [-17.960267941563636, -67.10566629779373],
-  [-17.961438635889948, -67.10597809898691],
-  [-17.96232490570489, -67.10624536653067],
-  [-17.963638247407577, -67.10661875207893],
-  [-17.96469277359838, -67.10692629832128],
-  [-17.96760141424165, -67.107748519253],
-  [-17.96931290786419, -67.10821900347709],
-  [-17.970145425340334, -67.10849503765594],
-  [-17.971549712202382, -67.10889715033233],
-  [-17.970761641932842, -67.11191130908375],
-  [-17.970600745648813, -67.1127185622055],
-  [-17.970291361872633, -67.11368578897864],
-  [-17.969290201345903, -67.11425703612471],
-  [-17.969038883539426, -67.11503249077249],
-  [-17.969006313356555, -67.11793503846157],
-  [-17.967101796362787, -67.1178681017945],
+  {
+    coord: [-17.960267941563636, -67.10566629779373],
+    titulo: "Paso Peatonal",
+    direccion: "Avenida Villarroel",
+    imagen_ruta: "static/img/mapa/paso1.jpg",
+  },
+  {
+    coord: [-17.961438635889948, -67.10597809898691],
+    titulo: "Paso Peatonal",
+    direccion: "Calle Aroma A",
+    imagen_ruta: "static/img/mapa/paso2.jpg",
+  },
+  {
+    coord: [-17.96232490570489, -67.10624536653067],
+    titulo: "Paso Peatonal",
+    direccion: "Calle Rodriguez",
+    imagen_ruta: "static/img/mapa/paso1.jpg",
+  },
+  {
+    coord: [-17.963638247407577, -67.10661875207893],
+    titulo: "Paso Peatonal",
+    direccion: "Calle Jose Ignacio Leon",
+    imagen_ruta: "static/img/mapa/paso2.jpg",
+  },
+  {
+    coord: [-17.96469277359838, -67.10692629832128],
+    titulo: "Paso Peatonal",
+    direccion: "Calle 1ro de Noviembre",
+    imagen_ruta: "static/img/mapa/paso1.jpg",
+  },
+  {
+    coord: [-17.96760141424165, -67.107748519253],
+    titulo: "Paso Peatonal",
+    direccion: "Calle Caro",
+    imagen_ruta: "static/img/mapa/paso2.jpg",
+  },
+  {
+    coord: [-17.96931290786419, -67.10821900347709],
+    titulo: "Paso Peatonal",
+    direccion: "Calle Ayacucho",
+    imagen_ruta: "static/img/mapa/paso1.jpg",
+  },
+  {
+    coord: [-17.970145425340334, -67.10849503765594],
+    titulo: "Paso Peatonal",
+    direccion: "Calle Junin",
+    imagen_ruta: "static/img/mapa/paso2.jpg",
+  },
+  {
+    coord: [-17.971549712202382, -67.10889715033233],
+    titulo: "Paso Peatonal",
+    direccion: "Calle Bolivar",
+    imagen_ruta: "static/img/mapa/paso1.jpg",
+  },
+  {
+    coord: [-17.970761641932842, -67.11191130908375],
+    titulo: "Paso Peatonal",
+    direccion: "Calle Potosi",
+    imagen_ruta: "static/img/mapa/paso2.jpg",
+  },
+  {
+    coord: [-17.970600745648813, -67.1127185622055],
+    titulo: "Paso Peatonal",
+    direccion: "Calle 6 de Octubre",
+    imagen_ruta: "static/img/mapa/paso1.jpg",
+  },
+  {
+    coord: [-17.970291361872633, -67.11368578897864],
+    titulo: "Paso Peatonal",
+    direccion: "Calle Soria Galvarro",
+    imagen_ruta: "static/img/mapa/paso2.jpg",
+  },
+  {
+    coord: [-17.969290201345903, -67.11425703612471],
+    titulo: "Paso Peatonal",
+    direccion: "Adolfo Mier y La Plata",
+    imagen_ruta: "static/img/mapa/paso1.jpg",
+  },
+  {
+    coord: [-17.969038883539426, -67.11503249077249],
+    titulo: "Paso Peatonal",
+    direccion: "Adolfo Mier y Presidente Montes",
+    imagen_ruta: "static/img/mapa/paso2.jpg",
+  },
+  {
+    coord: [-17.969006313356555, -67.11793503846157],
+    titulo: "Paso Peatonal",
+    direccion: "Calle Petot",
+    imagen_ruta: "static/img/mapa/paso1.jpg",
+  },
+  {
+    coord: [-17.967101796362787, -67.1178681017945],
+    titulo: "Paso Peatonal",
+    direccion: "Calle Junin",
+    imagen_ruta: "static/img/mapa/paso2.jpg",
+  },
 ];
 
 var saludMarkers = L.layerGroup();
@@ -360,6 +470,7 @@ salud.forEach(function (data) {
   );
 
   mark_salud.on("click", function () {
+    map1.setView(data.coord, 16);
     document.getElementById("titulo-info").innerHTML = data.titulo;
     document.getElementById("marker-info").innerHTML = data.direccion;
     document.getElementById("marker-image").src = data.imagen_ruta;
@@ -374,6 +485,7 @@ seguridad.forEach(function (data) {
   );
 
   mark_seguridad.on("click", function () {
+    map1.setView(data.coord, 16);
     document.getElementById("titulo-info").innerHTML = data.titulo;
     document.getElementById("marker-info").innerHTML = data.direccion;
     document.getElementById("marker-image").src = data.imagen_ruta;
@@ -388,6 +500,7 @@ deposito.forEach(function (data) {
   );
 
   mark_deposito.on("click", function () {
+    map1.setView(data.coord, 16);
     document.getElementById("titulo-info").innerHTML = data.titulo;
     document.getElementById("marker-info").innerHTML = data.direccion;
     document.getElementById("marker-image").src = data.imagen_ruta;
@@ -396,10 +509,16 @@ deposito.forEach(function (data) {
   });
 });
 
-paso.forEach(function (coord) {
-  L.marker(coord, { icon: pasoIcon })
-    .bindPopup("Paso peatonal")
-    .addTo(pasoMarkers);
+paso.forEach(function (data) {
+  var mark_paso = L.marker(data.coord, { icon: pasoIcon }).addTo(pasoMarkers);
+  mark_paso.on("click", function () {
+    map1.setView(data.coord, 16);
+    document.getElementById("titulo-info").innerHTML = data.titulo;
+    document.getElementById("marker-info").innerHTML = data.direccion;
+    document.getElementById("marker-image").src = data.imagen_ruta;
+    var card = document.getElementById("card-info");
+    card.style.display = "block";
+  });
 });
 
 // Añadir las capas de marcadores al mapa
