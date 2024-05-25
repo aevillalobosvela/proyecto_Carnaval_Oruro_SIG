@@ -100,103 +100,103 @@ var salud = [
   {
     coord: [-17.95673328212476, -67.10514358751995],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Sector Avenida Heroes del Chaco",
     imagen_ruta: "static/img/mapa/salud/salud1.jpg",
   },
   {
     coord: [-17.96024064600984, -67.10672157609262],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Avenida Villaroel y Velasco Galvarro",
     imagen_ruta: "static/img/mapa/salud/salud7.png",
   },
   {
     coord: [-17.961972664664998, -67.10711606163198],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Velasco Galvarro entre Aroma y Rodriguez",
     imagen_ruta: "static/img/mapa/salud/salud3.jpg",
   },
   {
     coord: [-17.9649961858182, -67.10797251964217],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Velasco Galvarro entre Herrera y 1ro de noviembre",
     imagen_ruta: "static/img/mapa/salud/salud2.jpeg",
   },
   {
     coord: [-17.96752062510037, -67.10642871368316],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Rajka Bakovic entre Caro y Montecinos",
     imagen_ruta: "static/img/mapa/salud/salud4.jfif",
   },
   {
     coord: [-17.967350696772108, -67.1090570216887],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Caro entre Pagador y Velasco Galvarro",
     imagen_ruta: "static/img/mapa/salud/salud10.jpg",
   },
   {
     coord: [-17.96830949637342, -67.10834253603726],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Cochabamba ente Velasco Galvarro y Av. 6 de agosto",
     imagen_ruta: "static/img/mapa/salud/salud9.jpg",
   },
   {
     coord: [-17.971001611183457, -67.10789866090145],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Adolfo Mier entre Av. 6 de agosto y rajka Bakovic",
     imagen_ruta: "static/img/mapa/salud/salud8.jpeg",
   },
   {
     coord: [-17.971851152980786, -67.11084594456847],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Adolfo Mier entre Av. 6 de agosto y Rajka Bakovic",
     imagen_ruta: "static/img/mapa/salud/salud7.png",
   },
   {
     coord: [-17.970479752967943, -67.11052697142715],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Pagador y Adolfo Mier",
     imagen_ruta: "static/img/mapa/salud/salud6.jpg",
   },
   {
     coord: [-17.97106395970095, -67.11434172990847],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Pagador y Adolfo Mier",
     imagen_ruta: "static/img/mapa/salud/salud5.png",
   },
   {
     coord: [-17.968831317791306, -67.11491280866207],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Presidente Montes entre Junin y Adolfo Mier",
     imagen_ruta: "static/img/mapa/salud/salud4.jfif",
   },
   {
     coord: [-17.967959273763388, -67.11557586819224],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Junin y Washington",
     imagen_ruta: "static/img/mapa/salud/salud3.jpg",
   },
   {
     coord: [-17.969046738340957, -67.11670863651712],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Camacho entre Bolivar y Adolfo Mier",
     imagen_ruta: "static/img/mapa/salud/salud2.jpeg",
   },
   {
     coord: [-17.96837117245009, -67.11745703527103],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Petot y Adolfo Mier",
     imagen_ruta: "static/img/mapa/salud/salud10.jpg",
   },
   {
     coord: [-17.970575558772797, -67.11839044916223],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Petot entre Murguia y Sucre",
     imagen_ruta: "static/img/mapa/salud/salud9.jpg",
   },
   {
     coord: [-17.968391571163625, -67.11857283003275],
     titulo: "Puesto de Salud",
-    direccion: "",
+    direccion: "Linares entre Bolivar y Adolfo Mier",
     imagen_ruta: "static/img/mapa/salud/salud5.png",
   },
 ];
@@ -229,22 +229,103 @@ var seguridad = [
 ];
 
 var deposito = [
-  [-17.958162222453723, -67.10383872615658],
-  [-17.961871638556104, -67.10485530735654],
-  [-17.962939698438237, -67.10738917535684],
-  [-17.96438935918436, -67.10557386374819],
-  [-17.966234141181957, -67.10608421871093],
-  [-17.96690164408122, -67.10857219663252],
-  [-17.96985081775946, -67.10975875403427],
-  [-17.972518647939644, -67.10786038993952],
-  [-17.972203105769392, -67.11069283995452],
-  [-17.969364874871864, -67.11122856882136],
-  [-17.971282410997027, -67.11338482364664],
-  [-17.968427981363902, -67.11412790694166],
-  [-17.970793256204615, -67.11562528581392],
-  [-17.967905771918094, -67.11646492647472],
-  [-17.97014077161978, -67.11760220056858],
-  [-17.96919780574735, -67.11965645278329],
+  {
+    coord: [-17.958162222453723, -67.10383872615658],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito1.jpg",
+  },
+
+  {
+    coord: [-17.961871638556104, -67.10485530735654],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito2.jpg",
+  },
+  {
+    coord: [-17.962939698438237, -67.10738917535684],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito1.jpg",
+  },
+  {
+    coord: [-17.96438935918436, -67.10557386374819],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito2.jpg",
+  },
+  {
+    coord: [-17.966234141181957, -67.10608421871093],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito1.jpg",
+  },
+  {
+    coord: [-17.96690164408122, -67.10857219663252],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito2.jpg",
+  },
+  {
+    coord: [-17.96985081775946, -67.10975875403427],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito1.jpg",
+  },
+  {
+    coord: [-17.972518647939644, -67.10786038993952],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito2.jpg",
+  },
+  {
+    coord: [-17.972203105769392, -67.11069283995452],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito1.jpg",
+  },
+  {
+    coord: [-17.969364874871864, -67.11122856882136],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito2.jpg",
+  },
+  {
+    coord: [-17.971282410997027, -67.11338482364664],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito1.jpg",
+  },
+  {
+    coord: [-17.968427981363902, -67.11412790694166],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito2.jpg",
+  },
+  {
+    coord: [-17.970793256204615, -67.11562528581392],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito1.jpg",
+  },
+  {
+    coord: [-17.967905771918094, -67.11646492647472],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito2.jpg",
+  },
+  {
+    coord: [-17.97014077161978, -67.11760220056858],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito1.jpg",
+  },
+  {
+    coord: [-17.96919780574735, -67.11965645278329],
+    titulo: "Deposito de residuos",
+    direccion: "",
+    imagen_ruta: "static/img/mapa/deposito2.jpg",
+  },
 ];
 
 var paso = [
@@ -301,10 +382,18 @@ seguridad.forEach(function (data) {
   });
 });
 
-deposito.forEach(function (coord) {
-  L.marker(coord, { icon: depositoIcon })
-    .bindPopup("Deposito de basura")
-    .addTo(depositoMarkers);
+deposito.forEach(function (data) {
+  var mark_deposito = L.marker(data.coord, { icon: depositoIcon }).addTo(
+    depositoMarkers
+  );
+
+  mark_deposito.on("click", function () {
+    document.getElementById("titulo-info").innerHTML = data.titulo;
+    document.getElementById("marker-info").innerHTML = data.direccion;
+    document.getElementById("marker-image").src = data.imagen_ruta;
+    var card = document.getElementById("card-info");
+    card.style.display = "block";
+  });
 });
 
 paso.forEach(function (coord) {
@@ -321,7 +410,8 @@ pasoMarkers.addTo(map1);
 
 // Añadir control de capas al mapa
 var overlayMaps = {
-  '<i class="fa fa-plus-square fa-lg salud-icon"></i> Puestos de Salud': saludMarkers,
+  '<i class="fa fa-plus-square fa-lg salud-icon"></i> Puestos de Salud':
+    saludMarkers,
   "Puestos de policia": seguridadMarkers,
   '<i class="fa fa-dumpster fa-lg deposito-icon"></i>  Depositos de basura':
     depositoMarkers,
