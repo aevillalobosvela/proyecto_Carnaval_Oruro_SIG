@@ -1,6 +1,7 @@
 var marker = null;
 var userLocation; // Variable para almacenar la ubicación del usuario
 var selectedDestination; // Variable para almacenar la ubicación de destino seleccionada
+var routingControl;
 
 $(document).ready(function () {
   $("#sidebarCollapse").on("click", function () {
@@ -39,11 +40,11 @@ var usuarioIcon = L.divIcon({
   html: '<i class="fa fa-map-marker fa-3x"></i>',
   className: "usuario-icon",
 });
-//falta poner las rutas
+
 function onLocationFound(e) {
   userLocation = e.latlng;
   // Agregar un marcador en la ubicación del usuario
-  var marker = L.marker(e.latlng ,{ icon: usuarioIcon })
+  var marker = L.marker(e.latlng, { icon: usuarioIcon })
     .addTo(map1)
     .bindPopup("Usted esta aqui")
     .openPopup();
@@ -62,6 +63,26 @@ map1.on("locationerror", onLocationError);
 
 // Iniciar la solicitud de geolocalización
 map1.locate({ setView: true, maxZoom: 16 });
+
+function generateRoute() {
+  if (!userLocation || !selectedDestination) {
+    alert("Usuario o destino no encontrados");
+    return;
+  }
+  if (routingControl) {
+    map1.removeControl(routingControl);
+  }
+  routingControl = L.Routing.control({
+    waypoints: [userLocation, selectedDestination],
+    routeWhileDragging: true,
+  }).addTo(map1);
+}
+
+document.getElementById("routeButton").addEventListener("click", generateRoute);
+
+function adjustCoordinatesToRight(coords, offset) {
+  return [coords[0], coords[1] + offset];
+}
 
 /* -LINEA PRINCIPAL-------------------------------------------------------------------------------------- */
 var inicio_mark = L.marker([-17.957698858097284, -67.10479645507664]).addTo(
@@ -470,12 +491,14 @@ salud.forEach(function (data) {
   );
 
   mark_salud.on("click", function () {
-    map1.setView(data.coord, 16);
+    var adjustedCoord = adjustCoordinatesToRight(data.coord, 0.003); // Ajustar 0.005 grados a la derecha
+    map1.setView(adjustedCoord, 16);
     document.getElementById("titulo-info").innerHTML = data.titulo;
     document.getElementById("marker-info").innerHTML = data.direccion;
     document.getElementById("marker-image").src = data.imagen_ruta;
     var card = document.getElementById("card-info");
     card.style.display = "block";
+    selectedDestination = data.coord;
   });
 });
 
@@ -485,12 +508,14 @@ seguridad.forEach(function (data) {
   );
 
   mark_seguridad.on("click", function () {
-    map1.setView(data.coord, 16);
+    var adjustedCoord = adjustCoordinatesToRight(data.coord, 0.003); // Ajustar 0.005 grados a la derecha
+    map1.setView(adjustedCoord, 16);
     document.getElementById("titulo-info").innerHTML = data.titulo;
     document.getElementById("marker-info").innerHTML = data.direccion;
     document.getElementById("marker-image").src = data.imagen_ruta;
     var card = document.getElementById("card-info");
     card.style.display = "block";
+    selectedDestination = data.coord;
   });
 });
 
@@ -500,24 +525,28 @@ deposito.forEach(function (data) {
   );
 
   mark_deposito.on("click", function () {
-    map1.setView(data.coord, 16);
+    var adjustedCoord = adjustCoordinatesToRight(data.coord, 0.003); // Ajustar 0.005 grados a la derecha
+    map1.setView(adjustedCoord, 16);
     document.getElementById("titulo-info").innerHTML = data.titulo;
     document.getElementById("marker-info").innerHTML = data.direccion;
     document.getElementById("marker-image").src = data.imagen_ruta;
     var card = document.getElementById("card-info");
     card.style.display = "block";
+    selectedDestination = data.coord;
   });
 });
 
 paso.forEach(function (data) {
   var mark_paso = L.marker(data.coord, { icon: pasoIcon }).addTo(pasoMarkers);
   mark_paso.on("click", function () {
-    map1.setView(data.coord, 16);
+    var adjustedCoord = adjustCoordinatesToRight(data.coord, 0.003); // Ajustar 0.005 grados a la derecha
+    map1.setView(adjustedCoord, 16);
     document.getElementById("titulo-info").innerHTML = data.titulo;
     document.getElementById("marker-info").innerHTML = data.direccion;
     document.getElementById("marker-image").src = data.imagen_ruta;
     var card = document.getElementById("card-info");
     card.style.display = "block";
+    selectedDestination = data.coord;
   });
 });
 
