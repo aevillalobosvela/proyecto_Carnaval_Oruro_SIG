@@ -43,8 +43,7 @@ var usuarioIcon = L.divIcon({
 
 function onLocationFound(e) {
   userLocation = e.latlng;
-  // Agregar un marcador en la ubicación del usuario
-  var marker = L.marker(e.latlng, { icon: usuarioIcon })
+  var marker = L.marker(e.latlng)
     .addTo(map1)
     .bindPopup("Usted esta aqui")
     .openPopup();

@@ -1,14 +1,54 @@
-// Inicializa el mapa
-console.log("funciona2");
+var userLocation;
+var control = null;
+var routingControl = null;
+let routeLayer = null;
 
-const map = L.map("map").setView(
-  [-17.970316344905434, -67.11377867610823],
-  14.5
-); // Coordenadas iniciales de ejemplo
+// Inicializa el mapa
+var map = L.map("map", {
+  center: [-17.964138034171146, -67.10734251787665],
+  zoom: 14,
+  maxZoom: 18,
+  minZoom: 14,
+});
+
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
-// Datos de hoteles, restaurantes y lugares turísticos
+
+var osmLayer = new L.TileLayer(
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }
+);
+
+var miniMap = new L.Control.MiniMap(osmLayer, {
+  toggleDisplay: true,
+  minimized: false,
+}).addTo(map);
+
+function onLocationFound(e) {
+  userLocation = e.latlng;
+  var marker = L.marker(e.latlng)
+    .addTo(map)
+    .bindPopup("Usted esta aqui")
+    .openPopup();
+  // Centrar el mapa en la ubicación del usuario
+  map.setView(e.latlng, 15);
+}
+
+function onLocationError(e) {
+  alert(e.message);
+}
+
+map.on("locationfound", onLocationFound);
+map.on("locationerror", onLocationError);
+
+map.locate({ setView: true, maxZoom: 16 });
+
+/* -LUGARES - HOTELES-------------------------------------------------------------------------------------- */
+
 const markers = {
   hotels: [
     {
@@ -29,7 +69,7 @@ const markers = {
     { name: "Hotel Plaza", lat: -17.969128960958876, lon: -67.11433118959974 },
     { name: "Hotel Briggs", lat: -17.966435243509885, lon: -67.11511642884702 },
     {
-      name: "HOTEL VIRGEN DEL SOCAVON",
+      name: "Hotel Virgen del Socavon",
       lat: -17.966999837934388,
       lon: -67.11797146632333,
     },
@@ -40,7 +80,7 @@ const markers = {
     },
     { name: "Hotel Houston", lat: -17.97066614215071, lon: -67.11287912028908 },
     {
-      name: "RESIDENCIAL HINOJOSA",
+      name: "Residencial Hinojosa",
       lat: -17.96133155320207,
       lon: -67.10812583378078,
     },
@@ -79,7 +119,7 @@ const markers = {
       lon: -67.11012398774643,
     },
     {
-      name: "RESTAURANT VEGETARIANO GOVINDA",
+      name: "Restaurant Vegetariano Govinda",
       lat: -17.97176463310805,
       lon: -67.11167180731627,
     },
@@ -95,12 +135,12 @@ const markers = {
       lon: -67.10527572080795,
     },
     {
-      name: "dori pollo oruro",
+      name: "Dori pollo Oruro",
       lat: -17.964040814872025,
       lon: -67.10047047743406,
     },
     {
-      name: "super hamburguesas oruro",
+      name: "Super hamburguesas Oruro",
       lat: -17.96494390601734,
       lon: -67.11024889908734,
     },
@@ -169,23 +209,23 @@ function selectOption(selectId, lat, lon) {
   document.getElementById(selectId).value = `${lat},${lon}`;
 }
 // Definir iconos personalizados
-const hotelIcon = L.icon({
-  iconUrl: "images/hotelito.png", // URL de la imagen del ícono del hotel
-  iconSize: [30, 30], // Tamaño del ícono [ancho, alto]
+var hotelIcon = L.icon({
+  iconUrl: "/static/img/generaruta/hotelito.png", // URL de la imagen del ícono del hotel
+  iconSize: [40, 40], // Tamaño del ícono [ancho, alto]
   iconAnchor: [15, 30], // Punto de anclaje del ícono [horizontal, vertical], en este caso, el centro inferior del ícono
   popupAnchor: [0, -30], // Punto de anclaje del popup en relación con el ícono [horizontal, vertical], en este caso, justo arriba del ícono
 });
 
 const foodIcon = L.icon({
-  iconUrl: "images/hamburguesa.png", // URL de la imagen del ícono del restaurante
-  iconSize: [30, 30], // Tamaño del ícono [ancho, alto]
+  iconUrl: "/static/img/generaruta/hamburguesa.png", // URL de la imagen del ícono del restaurante
+  iconSize: [40, 40], // Tamaño del ícono [ancho, alto]
   iconAnchor: [15, 30], // Punto de anclaje del ícono [horizontal, vertical], en este caso, el centro inferior del ícono
   popupAnchor: [0, -30], // Punto de anclaje del popup en relación con el ícono [horizontal, vertical], en este caso, justo arriba del ícono
 });
 
 const tourismIcon = L.icon({
-  iconUrl: "images/turir.png", // URL de la imagen del ícono del lugar turístico
-  iconSize: [30, 30], // Tamaño del ícono [ancho, alto]
+  iconUrl: "/static/img/generaruta/turir.png", // URL de la imagen del ícono del lugar turístico
+  iconSize: [40, 40], // Tamaño del ícono [ancho, alto]
   iconAnchor: [15, 30], // Punto de anclaje del ícono [horizontal, vertical], en este caso, el centro inferior del ícono
   popupAnchor: [0, -30], // Punto de anclaje del popup en relación con el ícono [horizontal, vertical], en este caso, justo arriba del ícono
 });
@@ -213,13 +253,23 @@ tourismLayer.addTo(map);
 
 // Generar ruta
 document.getElementById("generateRoute").addEventListener("click", function () {
+  if (routingControl) {
+    map.removeControl(routingControl);
+  }
+
+  // Elimina la capa de marcadores anterior si existe
+  if (routeLayer) {
+    map.removeLayer(routeLayer);
+  }
+
+  control = null;
   const hotelCoords = document.getElementById("hotelSelect").value.split(",");
   const foodCoords = document.getElementById("foodSelect").value.split(",");
   const tourismCoords = document
     .getElementById("tourismSelect")
     .value.split(",");
-
   const waypoints = [
+    L.latLng(userLocation),
     L.latLng(parseFloat(hotelCoords[0]), parseFloat(hotelCoords[1])),
     L.latLng(parseFloat(foodCoords[0]), parseFloat(foodCoords[1])),
     L.latLng(parseFloat(tourismCoords[0]), parseFloat(tourismCoords[1])),
@@ -240,31 +290,25 @@ document.getElementById("generateRoute").addEventListener("click", function () {
   ).bindPopup("Lugar Turístico");
 
   // Añadir marcadores a la capa de la ruta
-  const routeLayer = L.layerGroup([hotelMarker, foodMarker, tourismMarker]);
+  routeLayer = L.layerGroup([hotelMarker, foodMarker, tourismMarker]).addTo(
+    map
+  );
 
-  if (window.routingControl) {
-    map.removeControl(window.routingControl);
-  }
-
-  window.routingControl = L.Routing.control({
+  routingControl = L.Routing.control({
     waypoints: waypoints,
-    routeWhileDragging: true,
-    createMarker: function (i, waypoint, number) {
-      if (number === 0) {
-        return hotelMarker;
-      } else if (number === 1) {
-        return foodMarker;
-      } else if (number === 2) {
-        return tourismMarker;
-      }
-    },
-    lineOptions: {
-      styles: [{ color: "#00BFFF", weight: 6 }],
-    },
+    router: L.Routing.graphHopper("0269abc3-031c-448e-95c7-3db60aaa6dc0", {
+      urlParameters: {
+        vehicle: "car",
+        locale: "es", // Opcional: ajusta el idioma de las instrucciones de la ruta
+      },
+    }),
+    show: true, // Oculta la ruta por defecto
+    showMarkers: false, // Oculta los marcadores
+    routeWhileDragging: false,
   }).addTo(map);
 
   // Ajustar el mapa para que se centre y haga zoom en la ruta generada
-  map.fitBounds(routeLayer.getBounds());
+  map.fitBounds(routingControl.getBounds());
 });
 
 // Crear instancias de capas de mapa adicionales
