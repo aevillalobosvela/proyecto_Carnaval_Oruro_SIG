@@ -87,18 +87,44 @@
     </div>
 </div>
 
+<nav class="navbar navbar-expand-lg navbol" style="justify-content:space-around;">
+    <div class="container-fluid mx-1">
+        </button>
+    </div>
+</nav>
+
 <div class="banner2">
     <img src="{% static '/img/generaruta/baner2.png' %}" alt="">
 </div>
-<div class="container">
-    <div class="row align-items-start">
-        <div class="col">
-            <div id="recommendation"></div>
-            <button class="btn btn-custom" onclick="generateRandomRoute()">Recomendar Ruta</button>
+
+<nav class="navbar navbar-expand-lg navbol" style="justify-content:space-around;">
+    <div class="container-fluid mx-1">
+        </button>
+    </div>
+</nav>
+
+<div class="container-fluid" style="background-image: linear-gradient(to right, #6d0606, #691e00, #632d00, #5d3800, #564200, #514700, #4a4d00, #425200, #3b5500, #315800, #245b00, #0e5e02);">
+    <div class="row">
+        <div class="col-4 text-center">
+            <div id="recommendation" class="text-center mx-4 mt-5 mb-3">
+                <div class="card mx-auto" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title">¿Quieres saber como llegar a algun lugar?</h5>
+                        <h6 class="card-subtitle m-2 text-muted">Genera una ruta sugerida</h6>
+                        <p class="card-text">¿Donde quedarme?</p>
+                        <p class="card-text">¿Donde comer?</p>
+                        <p class="card-text">¿Donde ir?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a class="btn btn-lg btn-warning" onclick="generateRandomRoute()" href="#">
+                    Quiero recibir una<br>Recomendacion</a>
+            </div>
         </div>
-        <div class="col">
-            <div class="container mt-5">
-                <h2>Calificación de Necesidad</h2>
+        <div class="col-4">
+            <div class="container text-center">
+                <h3 class="mt-3" style="color: white;" >Califica el Servicio</h3>
                 <div class="rating">
                     <input type="radio" id="star5_need" name="rating_need" value="5" /><label class="star"
                         for="star5_need">★</label>
@@ -111,7 +137,8 @@
                     <input type="radio" id="star1_need" name="rating_need" value="1" /><label class="star"
                         for="star1_need">★</label>
                 </div>
-                <h2>Calificación de Situación</h2>
+                <h5 style="color: white;" >Necesidades suplidas</h5>
+                
                 <div class="rating">
                     <input type="radio" id="star5_situation" name="rating_situation" value="5" /><label class="star"
                         for="star5_situation">★</label>
@@ -124,7 +151,8 @@
                     <input type="radio" id="star1_situation" name="rating_situation" value="1" /><label class="star"
                         for="star1_situation">★</label>
                 </div>
-                <h2>Calificación de Experiencia</h2>
+                <h5 style="color: white;" >Situación favorable</h5>
+                
                 <div class="rating">
                     <input type="radio" id="star5_experience" name="rating_experience" value="5" /><label class="star"
                         for="star5_experience">★</label>
@@ -137,7 +165,8 @@
                     <input type="radio" id="star1_experience" name="rating_experience" value="1" /><label class="star"
                         for="star1_experience">★</label>
                 </div>
-                <h2>Calificación de Satisfacción</h2>
+                <h5 style="color: white;" >Experiencia personal</h5>
+                
                 <div class="rating">
                     <input type="radio" id="star5_satisfaction" name="rating_satisfaction" value="5" /><label
                         class="star" for="star5_satisfaction">★</label>
@@ -150,8 +179,12 @@
                     <input type="radio" id="star1_satisfaction" name="rating_satisfaction" value="1" /><label
                         class="star" for="star1_satisfaction">★</label>
                 </div>
-                <button type="button" class="btn btn-primary mt-4 btn-custom-save"
-                    onclick="guardarCalificacion()">Guardar Calificación</button>
+                <h5 style="color: white;" >Satisfacción general</h5>
+                <div class="mb-3">
+                    <button type="button" class="btn btn-info mt-4 btn-custom-save"
+                        onclick="guardarCalificacion()">Guardar Calificación</button>
+                </div>
+
             </div>
 
             <!-- Modal -->
@@ -175,11 +208,21 @@
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="container">
-                <button type="button" class="btn btn-primary btn-custom-places"
-                    onclick="mostrarLugaresRecomendados()">Visita hoy¡¡</button>
-                <div id="lugaresContainer" class="row" style="display: none;"></div>
+        <div class="col-4">
+            <div class="container text-center">
+                <div class="m-4">
+                    <button type="button" class="btn btn-lg btn-danger btn-custom-places"
+                    onclick="mostrarLugaresRecomendados()">¡Visita hoy mismo!</button>
+                </div>
+               
+                <div id="lugaresContainer" class="row" >
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Conoce mas</h5>
+                            <p class="card-text">Espacio Publicitario</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -268,7 +268,8 @@ document.getElementById("generateRoute").addEventListener("click", function () {
   const tourismCoords = document
     .getElementById("tourismSelect")
     .value.split(",");
-  const waypoints = [
+  
+    const waypoints = [
     L.latLng(userLocation),
     L.latLng(parseFloat(hotelCoords[0]), parseFloat(hotelCoords[1])),
     L.latLng(parseFloat(foodCoords[0]), parseFloat(foodCoords[1])),
@@ -335,6 +336,10 @@ carto.addTo(map);
 
 // Función para generar una ruta aleatoria
 function generateRandomRoute() {
+  if (routingControl) {
+    map.removeControl(routingControl);
+  }
+
   const randomHotel =
     markers.hotels[Math.floor(Math.random() * markers.hotels.length)];
   const randomFood =
@@ -343,18 +348,23 @@ function generateRandomRoute() {
     markers.tourism[Math.floor(Math.random() * markers.tourism.length)];
 
   const waypoints = [
+    L.latLng(userLocation),
     L.latLng(randomHotel.lat, randomHotel.lon),
     L.latLng(randomFood.lat, randomFood.lon),
     L.latLng(randomTourism.lat, randomTourism.lon),
   ];
 
-  if (window.routingControl) {
-    map.removeControl(window.routingControl);
-  }
-
-  window.routingControl = L.Routing.control({
+  routingControl = L.Routing.control({
     waypoints: waypoints,
-    routeWhileDragging: true,
+    router: L.Routing.graphHopper("0269abc3-031c-448e-95c7-3db60aaa6dc0", {
+      urlParameters: {
+        vehicle: "car",
+        locale: "es", // Opcional: ajusta el idioma de las instrucciones de la ruta
+      },
+    }),
+    show: true, // Oculta la ruta por defecto
+    showMarkers: false, // Oculta los marcadores
+    routeWhileDragging: false,
   }).addTo(map);
 
   displayRecommendation(randomHotel, randomFood, randomTourism);
@@ -364,7 +374,7 @@ function generateRandomRoute() {
 function displayRecommendation(hotel, food, tourism) {
   const recommendationDiv = document.getElementById("recommendation");
   recommendationDiv.innerHTML = `
-                <div class="card" style="width: 18rem;">
+                <div class="card mx-auto"  style="width: 100%;">
                   <div class="card-body">
                     <h5 class="card-title">Recomendación de Ruta</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Ruta sugerida</h6>
