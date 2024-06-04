@@ -1,190 +1,368 @@
 {% extends 'base.html' %} {% block content %}
 {% load static %}
-<div class="main">
 
-    <div id="carouselExampleCaptions" class="carousel slide mx-5 ">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
-                aria-label="Slide 4"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
-                aria-label="Slide 5"></button>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div style="color: white; display: flex; align-items: center; background-image: linear-gradient(to right, #6d0606, #691e00, #632d00, #5d3800, #564200, #514700, #4a4d00, #425200, #3b5500, #315800, #245b00, #0e5e02);"
+            class="sidebar-header text-center">
+            <img src="{% static '/img/conoceoruro/logo.jpeg' %}" alt="Imagen izquierda" width="80"
+                style="border-radius: 10%;">
+            <h3 class="text-center">Conoce mas de Oruro</h3>
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{% static '/img/oruro3.jpg' %}" width="1000" height="540" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2
-                        style="text-shadow: -2px -2px 0 #796703, 2px -2px 0 #796703, -2px 2px 0 #796703, 2px 2px 0 #796703;">
-                        Misticismo y Tradición</h5>
-                        <h4
-                            style="text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; color: rgb(204, 204, 204);">
-                            Historias hechas realidad mediante la danza</h4>
-                </div>
+
+        <div style="height: 77%; background-image: url('/static/img/conoceoruro/m.png'); background-size: cover;
+        background-position: center;" class="controls p-3">
+            <div class="text-center mb-3">
+                <form class="d-flex" role="search" id="search-form">
+                    <input class="form-control me-2" type="search" placeholder="Busca tu lugar" aria-label="Search"
+                        id="search-input">
+                    <button class="btn btn-success" type="submit" id="search-button">Buscar</button>
+                </form>
             </div>
-            <div class="carousel-item">
-                <img src="{% static '/img/oruro2.jpg' %}" width="1000" height="540" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2
-                        style="text-shadow: -2px -2px 0 #b45303, 2px -2px 0 #b45303, -2px 2px 0 #b45303, 2px 2px 0 #b45303;">
-                        Cultura ancestral</h5>
-                        <h4
-                            style="text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; color: rgb(204, 204, 204);">
-                            Testimonio vivo de pueblos y personas</h4>
-                </div>
+
+            <div>
+                <select class="mb-2 select-custom" name="select-hoteles" id="select-hoteles">
+                    <option value="-1">Seleccione un hotel:</option>
+                    <option value="-17.96557445732872, -67.10635546869543">Hostal Graciela</option>
+                    <option value="-17.96236147092776, -67.10278318404016">Hotel Glorioso</option>
+                    <option value="-17.962245388504577, -67.10661148774666">Gran Hotel Bolivia</option>
+                    <option value="-17.969128960958876, -67.11433118959974">Hotel Plaza</option>
+                    <option value="-17.966435243509885, -67.11511642884702">Hotel Briggs</option>
+                    <option value="-17.966999837934388, -67.11797146632333">HOTEL VIRGEN DEL SOCAVON</option>
+                    <option value="-17.969679495368712, -67.11468300546305">Solárium Restaurante Hotel Edén</option>
+                    <option value="-17.97066614215071, -67.11287912028908">Hotel Houston</option>
+                    <option value="-17.96133155320207, -67.10812583378078">RESIDENCIAL HINOJOSA</option>
+                    <option value="-17.97079249639655, -67.11288998959968">Hotel Sucre Palace</option>
+                    <option value="-17.9710297289956, -67.11040125520366">Gran Hotel Galaxia</option>
+                    <option value="-17.96796209935517, -67.10727228033335">Hotel Monarca</option>
+                </select>
+
+                <select class="mb-2 select-custom" name="select-restaurantes" id="select-restaurantes">
+                    <option value="-1">Seleccione un restaurante:</option>
+                    <option value="-17.970316344905434, -67.11377867610823">Restaurante El Negrito</option>
+                    <option value="-17.96870930117551, -67.11460981164859">La Casona</option>
+                    <option value="-17.973590414724292, -67.1109544668418">Restaurant Nayjama</option>
+                    <option value="-17.97040545305779, -67.11318575768243">Factory Xpress</option>
+                    <option value="-17.969960995628657, -67.11012398774643">Restaurant Pagador</option>
+                    <option value="-17.97176463310805, -67.11167180731627">RESTAURANT VEGETARIANO GOVINDA</option>
+                    <option value="-17.96918993343915, -67.11670964541871">Bravo's Pizza</option>
+                    <option value="-17.95126278008152, -67.10876464048772">Charquekan Orureño "El Puente"</option>
+                    <option value="-17.96550514868362, -67.10527572080795">Churrasqueria Santa Brasa</option>
+                    <option value="-17.964040814872025, -67.10047047743406">dori pollo oruro</option>
+                    <option value="-17.96494390601734, -67.11024889908734">super hamburguesas oruro</option>
+                    <option value="-17.962150621053368, -67.10382486932191">Restaurant El Fogón</option>
+                    <option value="-17.96362586649361, -67.11157757054858">Rancheria Oruro</option>
+                </select>
+
+                <select class="mb-2 select-custom" name="select-museos" id="select-museos">
+                    <option value="-1">Seleccione un museo:</option>
+                    <option value="-17.981218340991997, -67.12250936960811">Museo Nacional Antropológico Eduardo López
+                        Rivas
+                    </option>
+                    <option value="-17.967538060592556, -67.1123490626169">Museo Simón I. Patiño</option>
+                    <option value="-17.967171985345495, -67.11886950750217">Museo Sacro del Santuario del Socavón
+                    </option>
+                    <option value="-17.990566057353647, -67.13706274727136">Museo Mineralógico</option>
+                    <option value="-17.971544164910565, -67.1017033147293">Casa Arte Taller Cardozo Velasquez Oruro
+                    </option>
+                    <option value="-17.964236861414186, -67.112514718436">Museo Diocesano San Miguel Oruro</option>
+                    <option value="-17.974403851760847, -67.12051834727194">Estacion superior Teleferico Turistico
+                    </option>
+                    <option value="-17.98096464920422, -67.12270221843559">Museo Arqueológico</option>
+                    <option value="-17.97671444617219, -67.13986746261656">Esculturas Plaza Chiripujio</option>
+                </select>
+
+                <select class="mb-2 select-custom" name="select-iglesias" id="select-iglesias">
+                    <option value="-1">Seleccione una iglesia:</option>
+                    <option value="-17.967410541719083, -67.11884670872529">Iglesia del Virgen del Socavón</option>
+                    <option value="-17.967189477386366, -67.11443379145307">Parroquia Santo Domingo</option>
+                    <option value="-17.960318940871762, -67.11004610309142">Iglesia de San Gerardo</option>
+                    <option value="-17.970448252650204, -67.1030149184552">Parroquia Jesús Obrero</option>
+                    <option value="-17.969286308419335, -67.1134836992319">Catedral Nuestra Señora de la Asunción
+                    </option>
+                </select>
             </div>
-            <div class="carousel-item">
-                <img src="{% static '/img/oruro1.jpg' %}" width="1000" height="540" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2
-                        style="text-shadow: -2px -2px 0 #003877, 2px -2px 0 #003877, -2px 2px 0 #003877, 2px 2px 0 #003877;">
-                        Pasiones entregadas</h5>
-                        <h4
-                            style="text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; color: rgb(204, 204, 204);">
-                            Un pueblo que siente y se expresa</h4>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="{% static '/img/oruro4.jpg' %}" width="1000" height="540" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2
-                        style="text-shadow: -2px -2px 0 #976201, 2px -2px 0 #976201, -2px 2px 0 #976201, 2px 2px 0 #976201;">
-                        Fiesta incomparable</h5>
-                        <h4
-                            style="text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; color: rgb(204, 204, 204);">
-                            Un evento de alegría y festejo</h4>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="{% static '/img/oruro5.jpg' %}" width="1000" height="540" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2
-                        style="text-shadow: -2px -2px 0 #91036d, 2px -2px 0 #91036d, -2px 2px 0 #91036d, 2px 2px 0 #91036d;">
-                        Vive la experiencia</h5>
-                        <h4
-                            style="text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; color: rgb(204, 204, 204);">
-                            Colores y sentimientos vivos</h4>
-                </div>
+            <div>
+                <p style="color: rgb(255, 255, 255); position: absolute; bottom: 0;" class="m-2">Usuario actual:
+                    {{usuario.username}}
+                </p>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+    </nav>
+    <button type="button" id="sidebarCollapse" class="btn btn-tab">
+        <i id="icon" class="fas fa-arrow-circle-left"></i>
+    </button>
+
+    <div id="content">
+        <div style="height: 100%;" id="map2"></div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbol" style="justify-content:space-around;">
+    <div class="container-fluid mx-1">
         </button>
     </div>
+</nav>
 
-    <div class="container marketing mt-5">
+<div class="banner2">
+    <img src="images/banner2.png" alt="">
+    <h6>NUESTRAS RECOMENDACIONES</h6>
+</div>
 
-        <!-- Three columns of text below the carousel -->
-        <div class="row">
-            <div class="col-lg-4 text-center">
-                <img style="border-radius: 50%;" src="{% static '/img/conoce/f1.jpg' %}" width="190" height="190"
-                    alt="">
-                <h2 class="fw-normal">Planifique su llegada</h2>
-                <p>Encuentre los sitios para su estadía, alimentacion, recreacion, etc. De acuerdo a sus necesidades y
-                    especificaciones</p>
-                <p><a class="btn btn-danger" href="/">Ver más »</a></p>
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4 text-center">
-                <img style="border-radius: 50%;" src="{% static '/img/conoce/f2.jpg' %}" width="190" height="190"
-                    alt="">
-                <h2 class="fw-normal">Disfrute de la ciudad</h2>
-                <p>Encuentre y visite los muchos puntos turisticos de la ciudad de Oruro y sus alrededores para mejorar
-                    su experiencia</p>
-                <p><a class="btn btn-warning" href="/planifica/">Ver más »</a></p>
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4 text-center">
-                <img style="border-radius: 50%;" src="{% static '/img/conoce/f3.jpg' %}" width="190" height="190"
-                    alt="">
-                <h2 class="fw-normal">Cree buenos recuerdos</h2>
-                <p>Que los buenos momentos le sean constantes, le deseamos lo mejor y que viva las emociones de la fiesta mas grande de
-                    la region</p>
-                <p><a class="btn btn-success" href="https://open.spotify.com/intl-es/track/1kFRzBh5SVlbDNrFu0oiGF?si=08bc937e01ce42cd">Ver más »</a></p>
-            </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
+<nav class="navbar navbar-expand-lg navbol" style="justify-content:space-around;">
+    <div class="container-fluid mx-1">
+        </button>
+    </div>
+</nav>
 
-
-        <!-- START THE FEATURETTES -->
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="featurette-heading fw-normal lh-1">El Carnaval de Oruro. <span
-                        class="text-body-secondary">Místico y Mágico</span></h2>
-                <p class="lead">El Carnaval de Oruro es uno de los más hermosos y singulares de todo el mundo, todos los
-                    años grupos folklóricos de bailarines de todas partes de Bolivia y el mundo se reúnen en Oruro para
-                    rendir tributo con su música y danza a la Virgen de la Candelaria también llamada del Socavón. Los
-                    bailarines realizan un recorrido de varios kilómetros culminando su participación en el Santuario de
-                    la Virgen a la que ofrecen el sacrificio de su baile a cambio del cumplimiento de un deseo.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>Hostal Graciela</h2>
+                <p>Un lugar acogedor y céntrico, ideal para viajeros que buscan comodidad a un precio razonable.</p>
+                <p>¡Te invitamos a descansar en Hostal Graciela y disfrutar de una experiencia única!</p>
+                <div class="rating">
+                    <input type="radio" id="star5_1" name="rating" value="5">
+                    <label for="star5_1">&#9733;</label>
+                    <input type="radio" id="star4_1" name="rating" value="4">
+                    <label for="star4_1">&#9733;</label>
+                    <input type="radio" id="star3_1" name="rating" value="3">
+                    <label for="star3_1">&#9733;</label>
+                    <input type="radio" id="star2_1" name="rating" value="2">
+                    <label for="star2_1">&#9733;</label>
+                    <input type="radio" id="star1_1" name="rating" value="1">
+                    <label for="star1_1">&#9733;</label>
+                </div>
             </div>
-            <div class="col-md-5">
-                <img src="{% static '/img/conoce/c1.jpg' %}" width="500" height="500"
-                alt="">
+        </div>
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>Hotel Glorioso</h2>
+                <p>Con una ubicación privilegiada y un ambiente tranquilo, Hotel Glorioso ofrece una estancia placentera
+                    para sus huéspedes.</p>
+                <p>¡Ven y descubre la elegancia y el confort de Hotel Glorioso en tu próximo viaje!</p>
+                <div class="rating">
+                    <input type="radio" id="star5_2" name="rating" value="5">
+                    <label for="star5_2">&#9733;</label>
+                    <input type="radio" id="star4_2"" name=" rating" value="4">
+                    <label for="star4_2">&#9733;</label>
+                    <input type="radio" id="star3_2" name="rating" value="3">
+                    <label for="star3_2">&#9733;</label>
+                    <input type="radio" id="star2_2" name="rating" value="2">
+                    <label for="star2_2">&#9733;</label>
+                    <input type="radio" id="star1_2" name="rating" value="1">
+                    <label for="star1_2">&#9733;</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>Gran Hotel Bolivia</h2>
+                <p>Con su imponente arquitectura y servicios de primera clase, Gran Hotel Bolivia es la opción perfecta
+                    para aquellos que buscan lujo y comodidad.</p>
+                <p>¡Descubre el encanto y la elegancia de Gran Hotel Bolivia en cada detalle!</p>
+                <div class="rating">
+                    <input type="radio" id="star5_3" name="rating" value="5">
+                    <label for="star5_3">&#9733;</label>
+                    <input type="radio" id="star4_3" name="rating" value="4">
+                    <label for="star4_3">&#9733;</label>
+                    <input type="radio" id="star3_3" name="rating" value="3">
+                    <label for="star3_3">&#9733;</label>
+                    <input type="radio" id="star2_3" name="rating" value="2">
+                    <label for="star2_3">&#9733;</label>
+                    <input type="radio" id="star1_3" name="rating" value="1">
+                    <label for="star1_3">&#9733;</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>Restaurant Nayjama</h2>
+                <p>Sumérgete en la cultura local y deleita tu paladar con los sabores tradicionales en Restaurant
+                    Nayjama.</p>
+                <div class="rating">
+                    <input type="radio" id="star5_4" name="rating" value="5">
+                    <label for="star5_4">&#9733;</label>
+                    <input type="radio" id="star4_4" name="rating" value="4">
+                    <label for="star4_4">&#9733;</label>
+                    <input type="radio" id="star3_4" name="rating" value="3">
+                    <label for="star3_4">&#9733;</label>
+                    <input type="radio" id="star2_4" name="rating" value="2">
+                    <label for="star2_4">&#9733;</label>
+                    <input type="radio" id="star1_4" name="rating" value="1">
+                    <label for="star1_4">&#9733;</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>La Casona</h2>
+                <p>Descubre la elegancia y el sabor en La Casona, donde cada plato es una experiencia culinaria única.
+                </p>
+                <div class="rating">
+                    <input type="radio" id="star5_5" name="rating" value="5">
+                    <label for="star5_5">&#9733;</label>
+                    <input type="radio" id="star4_5" name="rating" value="4">
+                    <label for="star4_5">&#9733;</label>
+                    <input type="radio" id="star3_5" name="rating" value="3">
+                    <label for="star3_5">&#9733;</label>
+                    <input type="radio" id="star2_5" name="rating" value="2">
+                    <label for="star2_5">&#9733;</label>
+                    <input type="radio" id="star1_5" name="rating" value="1">
+                    <label for="star1_5">&#9733;</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>Restaurant Nayjama</h2>
+                <p>Sumérgete en la cultura local y deleita tu paladar con los sabores tradicionales en Restaurant
+                    Nayjama.</p>
+                <div class="rating">
+                    <input type="radio" id="star5_6" name="rating" value="5">
+                    <label for="star5_6">&#9733;</label>
+                    <input type="radio" id="star4_6" name="rating" value="4">
+                    <label for="star4_6">&#9733;</label>
+                    <input type="radio" id="star3_6" name="rating" value="3">
+                    <label for="star3_6">&#9733;</label>
+                    <input type="radio" id="star2_6" name="rating" value="2">
+                    <label for="star2_6">&#9733;</label>
+                    <input type="radio" id="star1_6" name="rating" value="1">
+                    <label for="star1_6">&#9733;</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>Museo Nacional Antropológico Eduardo López Rivas</h2>
+                <p>Descubre la riqueza cultural y la historia ancestral de la región en el Museo Nacional Antropológico
+                    Eduardo López Rivas. Con una impresionante colección de artefactos y exhibiciones, este museo ofrece
+                    una mirada fascinante a la vida y las tradiciones de las civilizaciones pasadas.</p>
+                <div class="rating">
+                    <input type="radio" id="star5_7" name="rating" value="5">
+                    <label for="star5_7">&#9733;</label>
+                    <input type="radio" id="star4_7" name="rating" value="4">
+                    <label for="star4_7">&#9733;</label>
+                    <input type="radio" id="star3_7" name="rating" value="3">
+                    <label for="star3_7">&#9733;</label>
+                    <input type="radio" id="star2_7" name="rating" value="2">
+                    <label for="star2_7">&#9733;</label>
+                    <input type="radio" id="star1_7" name="rating" value="1">
+                    <label for="star1_7">&#9733;</label>
+                </div>
             </div>
         </div>
 
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading fw-normal lh-1">La Ciudad de Oruro. <span
-                        class="text-body-secondary">Hogar de la fiesta</span></h2>
-                <p class="lead">La celebración se realiza en la ciudad de Oruro, la cual es considerada la capital
-                    folclórica de Bolivia. En el carnaval de Oruro aun conviven la religión pagana y católica, mostrando
-                    ante el mundo su sincretismo religioso único, tres días antes al sábado de peregrinación hacia el
-                    santuario del socavón por parte de los 48 conjuntos, la gente visita al cóndor y una semana después
-                    la a la víbora al sur de la ciudad, el sapo al norte y al este los arenales (hormigas). El carnaval
-                    de Oruro parte de la estructura temporal lluviosa del altiplano (jallupacha) que se inicia con los
-                    rituales de noviembre relacionado al culto de los muertos en «todo santos» (Siguiente semana el
-                    primer convite del carnaval), periodo que se extiende hasta febrero (Entrada de peregrinación hacia
-                    la Virgen del Socavón).</p>
-            </div>
-            <div class="col-md-5 order-md-1">
-                <img src="{% static '/img/conoce/c2.jpg' %}" width="450" height="450"
-                alt="">
-            </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="featurette-heading fw-normal lh-1">Las danzas. <span class="text-body-secondary">Expresion de
-                        los pueblos</span></h2>
-                <p class="lead">La zona andino–altiplánica de Bolivia en cuyo pie se encuentran los valles llamados
-                    Yungas de donde provienen las danzas de los Negritos, la Saya y los Caporales. En la población densa de
-                    esta zona donde se encuentran los departamentos de Potosí, Oruro y parte de La Paz están la
-                    morenada, la diablada, el Tinku, llamerada, kullawada, kallawayas, los doctorcitos, Incas, kantus y
-                    chutas</p>
-                <p class="lead">La zona de los valles ocupada por los departamentos de Cochabamba y Chuquisaca, fueron
-                    inspiradores del Pujllay, los Potolos y el salay.</p>
-                <p class="lead">Los llanos y las selvas con los departamentos de Santa Cruz, Beni, Pando, Tarija y parte
-                    de Chuquisaca provienen inspiraciones de los chunchos y tobas, danzas guerreras que involucran otras
-                    etnias en su interior.</p>
-            </div>
-            <div class="col-md-5">
-                <img src="{% static '/img/conoce/c3.jpg' %}" width="500" height="500"
-                alt="">
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>Museo Simón I. Patiño</h2>
+                <p>Sumérgete en la historia y el legado de una de las figuras más influyentes de la región en el Museo
+                    Simón I. Patiño. Con una variedad de exhibiciones y artefactos históricos, este museo ofrece una
+                    experiencia educativa y enriquecedora para los visitantes interesados en conocer más sobre la vida y
+                    el trabajo de Simón I. Patiño y su impacto en la sociedad.</p>
+                <div class="rating">
+                    <input type="radio" id="star5_8" name="rating" value="5">
+                    <label for="star5_8">&#9733;</label>
+                    <input type="radio" id="star4_8" name="rating" value="4">
+                    <label for="star4_8">&#9733;</label>
+                    <input type="radio" id="star3_8" name="rating" value="3">
+                    <label for="star3_8">&#9733;</label>
+                    <input type="radio" id="star2_8" name="rating" value="2">
+                    <label for="star2_8">&#9733;</label>
+                    <input type="radio" id="star1_8" name="rating" value="1">
+                    <label for="star1_8">&#9733;</label>
+                </div>
             </div>
         </div>
 
-        <hr class="featurette-divider">
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>Museo Sacro del Santuario del Socavón</h2>
+                <p>Explora la espiritualidad y la devoción en el Museo Sacro del Santuario del Socavón. Ubicado en el
+                    corazón del santuario, este museo alberga una impresionante colección de arte sacro y reliquias
+                    religiosas, ofreciendo a los visitantes una visión única de la fe y las tradiciones devocionales
+                    asociadas al Santuario del Socavón.</p>
+                <div class="rating">
+                    <input type="radio" id="star5_9" name="rating" value="5">
+                    <label for="star5_9">&#9733;</label>
+                    <input type="radio" id="star4_9" name="rating" value="4">
+                    <label for="star4_9">&#9733;</label>
+                    <input type="radio" id="star3_9" name="rating" value="3">
+                    <label for="star3_9">&#9733;</label>
+                    <input type="radio" id="star2_9" name="rating" value="2">
+                    <label for="star2_9">&#9733;</label>
+                    <input type="radio" id="star1_9" name="rating" value="1">
+                    <label for="star1_9">&#9733;</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>Iglesia del Virgen del Socavón</h2>
+                <p>Sumérgete en la devoción y la espiritualidad en la majestuosa Iglesia de la Virgen del Socavón. Con
+                    una arquitectura impresionante y una rica historia religiosa, esta iglesia es un lugar de encuentro
+                    para los fieles y los visitantes que buscan paz y reflexión en medio del bullicio de la vida
+                    cotidiana.</p>
+                <div class="rating">
+                    <input type="radio" id="star5_10" name="rating" value="5">
+                    <label for="star5_10">&#9733;</label>
+                    <input type="radio" id="star4_10" name="rating" value="4">
+                    <label for="star4_10">&#9733;</label>
+                    <input type="radio" id="star3_10" name="rating" value="3">
+                    <label for="star3_10">&#9733;</label>
+                    <input type="radio" id="star2_10" name="rating" value="2">
+                    <label for="star2_10">&#9733;</label>
+                    <input type="radio" id="star1_10" name="rating" value="1">
+                    <label for="star1_10">&#9733;</label>
+                </div>
+            </div>
+        </div>
 
-    </div><!-- /.container -->
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>Parroquia Santo Domingo</h2>
+                <p>Descubre la belleza y la serenidad en la Parroquia Santo Domingo. Con su encantadora arquitectura
+                    colonial y su ambiente tranquilo, esta iglesia es un remanso de paz en el corazón de la ciudad,
+                    ofreciendo a los visitantes un lugar para la oración y la contemplación.</p>
+                <div class="rating">
+                    <input type="radio" id="star5_11" name="rating" value="5">
+                    <label for="star5_11">&#9733;</label>
+                    <input type="radio" id="star4_11" name="rating" value="4">
+                    <label for="star4_11">&#9733;</label>
+                    <input type="radio" id="star3_11" name="rating" value="3">
+                    <label for="star3_11">&#9733;</label>
+                    <input type="radio" id="star2_11" name="rating" value="2">
+                    <label for="star2_11">&#9733;</label>
+                    <input type="radio" id="star1_11" name="rating" value="1">
+                    <label for="star1_11">&#9733;</label>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-md-4">
+            <div class="tarjeta-hotel">
+                <h2>Iglesia de San Gerardo</h2>
+                <p>Explora la historia y la fe en la encantadora Iglesia de San Gerardo. Con su arquitectura única y su
+                    atmósfera acogedora, esta iglesia es un lugar de culto y veneración para los fieles, así como un
+                    destino de interés para los amantes de la arquitectura religiosa.</p>
+                <div class="rating">
+                    <input type="radio" id="star5_12" name="rating" value="5">
+                    <label for="star5_12">&#9733;</label>
+                    <input type="radio" id="star4_12" name="rating" value="4">
+                    <label for="star4_12">&#9733;</label>
+                    <input type="radio" id="star3_12" name="rating" value="3">
+                    <label for="star3_12">&#9733;</label>
+                    <input type="radio" id="star2_12" name="rating" value="2">
+                    <label for="star2_12">&#9733;</label>
+                    <input type="radio" id="star1_12" name="rating" value="1">
+                    <label for="star1_12">&#9733;</label>
+                </div>
+            </div>
+        </div>
 
+    </div>
 </div>
 
 {% endblock %}

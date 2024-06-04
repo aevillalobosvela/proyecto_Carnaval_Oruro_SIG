@@ -4,10 +4,13 @@
 <div class="wrapper">
     <!-- Sidebar  -->
     <nav id="sidebar">
-        <div class="sidebar-header">
+        <div style="color: white; background-image: linear-gradient(to right, #6d0606, #691e00, #632d00, #5d3800, #564200, #514700, #4a4d00, #425200, #3b5500, #315800, #245b00, #0e5e02);"
+            class="sidebar-header text-center">
             <h3>Planificacion</h3>
         </div>
-        <div class="controls p-3">
+
+        <div style="height: 100%; background-image: linear-gradient(to bottom, #f8d1d1, #ffd6cd, #ffdcc9, #ffe3c7, #ffebc6, #fbefc6, #f5f3c7, #eff7c9, #e6f7ca, #dcf8cd, #d3f8d0, #c9f8d4);"
+            class="controls p-3">
             <div>
                 <div>
                     <h5>Hoteles</h5>
@@ -52,7 +55,8 @@
                     <h5>Lugares turisticos</h5>
                 </div>
                 <select class="form-select mb-4" id="tourismSelect" aria-label="Default select example">
-                    <option value="-17.981218340991997,-67.12250936960811">Museo Nacional Antropológico Eduardo López
+                    <option value="-17.981218340991997,-67.12250936960811">Museo Nacional Antropológico Eduardo
+                        López
                         Rivas
                     </option>
                     <option value="-17.967538060592556,-67.1123490626169">Museo Simón I. Patiño</option>
@@ -71,12 +75,13 @@
             <div class="text-center">
                 <button type="button" class="btn btn-success btn-lg" id="generateRoute">Generar Ruta</button>
             </div>
+            <div>
+                <p style="color: black; position: absolute; bottom: 0;" class="m-2">Usuario actual:
+                    {{usuario.username}}
+                </p>
+            </div>
         </div>
 
-        <div>
-            <p style="color: black; position: absolute; bottom: 0;" class="m-2">Usuario actual: {{ usuario.username}}
-            </p>
-        </div>
     </nav>
     <button type="button" id="sidebarCollapse" class="btn btn-tab">
         <i id="icon" class="fas fa-arrow-circle-left"></i>
@@ -103,7 +108,8 @@
     </div>
 </nav>
 
-<div class="container-fluid" style="background-image: linear-gradient(to right, #6d0606, #691e00, #632d00, #5d3800, #564200, #514700, #4a4d00, #425200, #3b5500, #315800, #245b00, #0e5e02);">
+<div class="container-fluid"
+    style="background-image: linear-gradient(to right, #6d0606, #691e00, #632d00, #5d3800, #564200, #514700, #4a4d00, #425200, #3b5500, #315800, #245b00, #0e5e02);">
     <div class="row">
         <div class="col-4 text-center">
             <div id="recommendation" class="text-center mx-4 mt-5 mb-3">
@@ -124,7 +130,7 @@
         </div>
         <div class="col-4">
             <div class="container text-center">
-                <h3 class="mt-3" style="color: white;" >Califica el Servicio</h3>
+                <h3 class="mt-3" style="color: white;">Califica el Servicio</h3>
                 <div class="rating">
                     <input type="radio" id="star5_need" name="rating_need" value="5" /><label class="star"
                         for="star5_need">★</label>
@@ -137,8 +143,8 @@
                     <input type="radio" id="star1_need" name="rating_need" value="1" /><label class="star"
                         for="star1_need">★</label>
                 </div>
-                <h5 style="color: white;" >Necesidades suplidas</h5>
-                
+                <h5 style="color: white;">Necesidades suplidas</h5>
+
                 <div class="rating">
                     <input type="radio" id="star5_situation" name="rating_situation" value="5" /><label class="star"
                         for="star5_situation">★</label>
@@ -151,8 +157,8 @@
                     <input type="radio" id="star1_situation" name="rating_situation" value="1" /><label class="star"
                         for="star1_situation">★</label>
                 </div>
-                <h5 style="color: white;" >Situación favorable</h5>
-                
+                <h5 style="color: white;">Situación favorable</h5>
+
                 <div class="rating">
                     <input type="radio" id="star5_experience" name="rating_experience" value="5" /><label class="star"
                         for="star5_experience">★</label>
@@ -165,8 +171,8 @@
                     <input type="radio" id="star1_experience" name="rating_experience" value="1" /><label class="star"
                         for="star1_experience">★</label>
                 </div>
-                <h5 style="color: white;" >Experiencia personal</h5>
-                
+                <h5 style="color: white;">Experiencia personal</h5>
+
                 <div class="rating">
                     <input type="radio" id="star5_satisfaction" name="rating_satisfaction" value="5" /><label
                         class="star" for="star5_satisfaction">★</label>
@@ -179,7 +185,7 @@
                     <input type="radio" id="star1_satisfaction" name="rating_satisfaction" value="1" /><label
                         class="star" for="star1_satisfaction">★</label>
                 </div>
-                <h5 style="color: white;" >Satisfacción general</h5>
+                <h5 style="color: white;">Satisfacción general</h5>
                 <div class="mb-3">
                     <button type="button" class="btn btn-info mt-4 btn-custom-save"
                         onclick="guardarCalificacion()">Guardar Calificación</button>
@@ -212,10 +218,10 @@
             <div class="container text-center">
                 <div class="m-4">
                     <button type="button" class="btn btn-lg btn-danger btn-custom-places"
-                    onclick="mostrarLugaresRecomendados()">¡Visita hoy mismo!</button>
+                        onclick="mostrarLugaresRecomendados()">¡Visita hoy mismo!</button>
                 </div>
-               
-                <div id="lugaresContainer" class="row" >
+
+                <div id="lugaresContainer" class="row">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Conoce mas</h5>

@@ -251,6 +251,17 @@ hotelLayer.addTo(map);
 foodLayer.addTo(map);
 tourismLayer.addTo(map);
 
+// Añadir control de capas al mapa
+var overlayMaps2 = {
+  'Hoteles y alojamientos':
+  hotelLayer,
+  "Restaurantes": foodLayer,
+  'Lugares turisticos':
+  tourismLayer,
+};
+
+L.control.layers(null, overlayMaps2, { collapsed: false }).addTo(map);
+
 // Generar ruta
 document.getElementById("generateRoute").addEventListener("click", function () {
   if (routingControl) {

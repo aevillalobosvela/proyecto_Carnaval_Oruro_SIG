@@ -16,6 +16,7 @@ from datetime import datetime, timedelta
 
 # Create your views here.
 
+
 def inicio(request):
     usuario = request.user
     return render(request, "inicio.html", {"usuario": usuario})
@@ -48,12 +49,17 @@ def login_user(request):
 
 
 def conoce(request):
-    return render(request, "conoce.html")
+    usuario = request.user
+    return render(request, "conoce.html", {"usuario": usuario})
 
 
 def planifica(request):
     usuario = request.user
     return render(request, "planifica.html", {"usuario": usuario})
+
+
+def aprende(request):
+    return render(request, "aprende.html")
 
 
 def registro(request):

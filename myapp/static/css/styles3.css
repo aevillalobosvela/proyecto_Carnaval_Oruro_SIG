@@ -1,0 +1,122 @@
+
+.leaflet-popup-content img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+  
+.leaflet-popup-content h3 {
+    margin-top: 0;
+}
+  
+.leaflet-popup-content p {
+    margin: 0;
+}
+
+.social-icons {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 0; 
+}
+
+.social-icons a {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #300c2a;
+    padding: 20px;
+    font: condensed 120% sans-serif;
+    color: white;    
+}
+
+.banner h1 {
+    margin: 0;
+    font-size: 70px;
+    text-align: center;
+}
+
+.banner img {
+    max-width: 100px;
+    height: auto;
+}
+
+.select-custom {
+    background-color: #380f36;
+    font: condensed 88% sans-serif;
+    color: white; 
+    width: 100%;
+    height: 65px;
+    font-size: 18px; 
+    padding: 10px; 
+    border: 1px solid #ced4da;
+    border-radius: 5px; 
+    opacity: 0.8; 
+}
+
+option {
+    background-color: #1c0015;
+    font: condensed 70% sans-serif;
+    color: white; 
+}
+
+h3 {
+    color: black;
+}
+h6 {
+    color: white;
+    font-size: 50px;
+}
+h4 {
+    color: white;
+    font: condensed 120% sans-serif;
+}
+.banner2 {
+    width: 100%;
+    margin: 0; 
+    padding: 0; 
+  }
+  
+.banner2 img {
+    width: 100%;
+    display: block; 
+}
+
+.tarjeta-hotel {
+      border: 1px solid #ccc; 
+      border-radius: 10px; 
+      padding: 20px; 
+      margin-bottom: 20px;
+      background-image: url('images/tarjetas.png');
+}
+
+.tarjeta-hotel h3 {
+      margin-top: 0; 
+      color: black;
+}
+
+.tarjeta-hotel p {
+      margin-bottom: 10px; 
+      color: black;
+}
+ 
+.rating {
+    display: inline-block;
+}
+
+.rating input {
+    display: none;
+}
+  
+.rating label {
+   cursor: pointer;
+    font-size: 30px; 
+}
+  
+.rating input:checked ~ label {
+    color: gold; 
+}
