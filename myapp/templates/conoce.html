@@ -24,63 +24,18 @@
             <div>
                 <select class="mb-2 select-custom" name="select-hoteles" id="select-hoteles">
                     <option value="-1">Seleccione un hotel:</option>
-                    <option value="-17.96557445732872, -67.10635546869543">Hostal Graciela</option>
-                    <option value="-17.96236147092776, -67.10278318404016">Hotel Glorioso</option>
-                    <option value="-17.962245388504577, -67.10661148774666">Gran Hotel Bolivia</option>
-                    <option value="-17.969128960958876, -67.11433118959974">Hotel Plaza</option>
-                    <option value="-17.966435243509885, -67.11511642884702">Hotel Briggs</option>
-                    <option value="-17.966999837934388, -67.11797146632333">HOTEL VIRGEN DEL SOCAVON</option>
-                    <option value="-17.969679495368712, -67.11468300546305">Solárium Restaurante Hotel Edén</option>
-                    <option value="-17.97066614215071, -67.11287912028908">Hotel Houston</option>
-                    <option value="-17.96133155320207, -67.10812583378078">RESIDENCIAL HINOJOSA</option>
-                    <option value="-17.97079249639655, -67.11288998959968">Hotel Sucre Palace</option>
-                    <option value="-17.9710297289956, -67.11040125520366">Gran Hotel Galaxia</option>
-                    <option value="-17.96796209935517, -67.10727228033335">Hotel Monarca</option>
                 </select>
 
                 <select class="mb-2 select-custom" name="select-restaurantes" id="select-restaurantes">
                     <option value="-1">Seleccione un restaurante:</option>
-                    <option value="-17.970316344905434, -67.11377867610823">Restaurante El Negrito</option>
-                    <option value="-17.96870930117551, -67.11460981164859">La Casona</option>
-                    <option value="-17.973590414724292, -67.1109544668418">Restaurant Nayjama</option>
-                    <option value="-17.97040545305779, -67.11318575768243">Factory Xpress</option>
-                    <option value="-17.969960995628657, -67.11012398774643">Restaurant Pagador</option>
-                    <option value="-17.97176463310805, -67.11167180731627">RESTAURANT VEGETARIANO GOVINDA</option>
-                    <option value="-17.96918993343915, -67.11670964541871">Bravo's Pizza</option>
-                    <option value="-17.95126278008152, -67.10876464048772">Charquekan Orureño "El Puente"</option>
-                    <option value="-17.96550514868362, -67.10527572080795">Churrasqueria Santa Brasa</option>
-                    <option value="-17.964040814872025, -67.10047047743406">dori pollo oruro</option>
-                    <option value="-17.96494390601734, -67.11024889908734">super hamburguesas oruro</option>
-                    <option value="-17.962150621053368, -67.10382486932191">Restaurant El Fogón</option>
-                    <option value="-17.96362586649361, -67.11157757054858">Rancheria Oruro</option>
                 </select>
 
                 <select class="mb-2 select-custom" name="select-museos" id="select-museos">
                     <option value="-1">Seleccione un museo:</option>
-                    <option value="-17.981218340991997, -67.12250936960811">Museo Nacional Antropológico Eduardo López
-                        Rivas
-                    </option>
-                    <option value="-17.967538060592556, -67.1123490626169">Museo Simón I. Patiño</option>
-                    <option value="-17.967171985345495, -67.11886950750217">Museo Sacro del Santuario del Socavón
-                    </option>
-                    <option value="-17.990566057353647, -67.13706274727136">Museo Mineralógico</option>
-                    <option value="-17.971544164910565, -67.1017033147293">Casa Arte Taller Cardozo Velasquez Oruro
-                    </option>
-                    <option value="-17.964236861414186, -67.112514718436">Museo Diocesano San Miguel Oruro</option>
-                    <option value="-17.974403851760847, -67.12051834727194">Estacion superior Teleferico Turistico
-                    </option>
-                    <option value="-17.98096464920422, -67.12270221843559">Museo Arqueológico</option>
-                    <option value="-17.97671444617219, -67.13986746261656">Esculturas Plaza Chiripujio</option>
                 </select>
 
                 <select class="mb-2 select-custom" name="select-iglesias" id="select-iglesias">
                     <option value="-1">Seleccione una iglesia:</option>
-                    <option value="-17.967410541719083, -67.11884670872529">Iglesia del Virgen del Socavón</option>
-                    <option value="-17.967189477386366, -67.11443379145307">Parroquia Santo Domingo</option>
-                    <option value="-17.960318940871762, -67.11004610309142">Iglesia de San Gerardo</option>
-                    <option value="-17.970448252650204, -67.1030149184552">Parroquia Jesús Obrero</option>
-                    <option value="-17.969286308419335, -67.1134836992319">Catedral Nuestra Señora de la Asunción
-                    </option>
                 </select>
             </div>
             <div>
@@ -105,9 +60,10 @@
     </div>
 </nav>
 
-<div class="banner2">
-    <img src="images/banner2.png" alt="">
-    <h6>NUESTRAS RECOMENDACIONES</h6>
+<div class="banner2 pb-3" style="background-image: linear-gradient(to right, #6d0606, #691e00, #632d00, #5d3800, #564200, #514700, #4a4d00, #425200, #3b5500, #315800, #245b00, #0e5e02);">
+    <img src="{% static '/img/conoceoruro/banner2.png' %}" alt="">
+    <h6 class="mt-4" style="color: white;
+    font-size: 50px;">NUESTRAS RECOMENDACIONES</h6>
 </div>
 
 <nav class="navbar navbar-expand-lg navbol" style="justify-content:space-around;">
@@ -116,10 +72,10 @@
     </div>
 </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="tarjeta-hotel">
+<div class="container-fluid " style="background-image: linear-gradient(to right top, #32027e, #40005c, #3e003e, #330027, #240116, #270318, #2a051b, #2e061d, #470036, #5a0057, #650080, #5d03b1);">
+    <div class="row mx-5 ">
+        <div class="col-md-4 ">
+            <div class="tarjeta-hotel-m mt-3 text-center text-white" style="height: 430px;">
                 <h2>Hostal Graciela</h2>
                 <p>Un lugar acogedor y céntrico, ideal para viajeros que buscan comodidad a un precio razonable.</p>
                 <p>¡Te invitamos a descansar en Hostal Graciela y disfrutar de una experiencia única!</p>
@@ -138,7 +94,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="tarjeta-hotel">
+            <div class="tarjeta-hotel-m mt-3 text-center text-white" style="height: 430px;">
                 <h2>Hotel Glorioso</h2>
                 <p>Con una ubicación privilegiada y un ambiente tranquilo, Hotel Glorioso ofrece una estancia placentera
                     para sus huéspedes.</p>
@@ -157,8 +113,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="tarjeta-hotel">
+        <div class="col-md-4 text-center text-white">
+            <div class="tarjeta-hotel-m mt-3 "  style="height: 430px;">
                 <h2>Gran Hotel Bolivia</h2>
                 <p>Con su imponente arquitectura y servicios de primera clase, Gran Hotel Bolivia es la opción perfecta
                     para aquellos que buscan lujo y comodidad.</p>
@@ -177,11 +133,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="tarjeta-hotel">
-                <h2>Restaurant Nayjama</h2>
+        <div class="col-md-4 text-center text-white">
+            <div class="tarjeta-hotel-m" style="display: flexbox; align-items: center;">
+                <h2>Restaurant Pagador</h2>
                 <p>Sumérgete en la cultura local y deleita tu paladar con los sabores tradicionales en Restaurant
-                    Nayjama.</p>
+                    Pagador.</p>
                 <div class="rating">
                     <input type="radio" id="star5_4" name="rating" value="5">
                     <label for="star5_4">&#9733;</label>
@@ -196,8 +152,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="tarjeta-hotel">
+        <div class="col-md-4 text-center text-white">
+            <div class="tarjeta-hotel-m">
                 <h2>La Casona</h2>
                 <p>Descubre la elegancia y el sabor en La Casona, donde cada plato es una experiencia culinaria única.
                 </p>
@@ -215,8 +171,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="tarjeta-hotel">
+        <div class="col-md-4 text-center text-white">
+            <div class="tarjeta-hotel-m">
                 <h2>Restaurant Nayjama</h2>
                 <p>Sumérgete en la cultura local y deleita tu paladar con los sabores tradicionales en Restaurant
                     Nayjama.</p>
@@ -234,8 +190,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="tarjeta-hotel">
+        <div class="col-md-4 text-center text-white">
+            <div class="tarjeta-hotel-g">
                 <h2>Museo Nacional Antropológico Eduardo López Rivas</h2>
                 <p>Descubre la riqueza cultural y la historia ancestral de la región en el Museo Nacional Antropológico
                     Eduardo López Rivas. Con una impresionante colección de artefactos y exhibiciones, este museo ofrece
@@ -255,8 +211,8 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="tarjeta-hotel">
+        <div class="col-md-4 text-center text-white">
+            <div class="tarjeta-hotel-g">
                 <h2>Museo Simón I. Patiño</h2>
                 <p>Sumérgete en la historia y el legado de una de las figuras más influyentes de la región en el Museo
                     Simón I. Patiño. Con una variedad de exhibiciones y artefactos históricos, este museo ofrece una
@@ -277,8 +233,8 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="tarjeta-hotel">
+        <div class="col-md-4 text-center text-white">
+            <div class="tarjeta-hotel-g">
                 <h2>Museo Sacro del Santuario del Socavón</h2>
                 <p>Explora la espiritualidad y la devoción en el Museo Sacro del Santuario del Socavón. Ubicado en el
                     corazón del santuario, este museo alberga una impresionante colección de arte sacro y reliquias
@@ -298,8 +254,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="tarjeta-hotel">
+        <div class="col-md-4 text-center text-white">
+            <div class="tarjeta-hotel-g">
                 <h2>Iglesia del Virgen del Socavón</h2>
                 <p>Sumérgete en la devoción y la espiritualidad en la majestuosa Iglesia de la Virgen del Socavón. Con
                     una arquitectura impresionante y una rica historia religiosa, esta iglesia es un lugar de encuentro
@@ -320,8 +276,8 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="tarjeta-hotel">
+        <div class="col-md-4 text-center text-white">
+            <div class="tarjeta-hotel-g">
                 <h2>Parroquia Santo Domingo</h2>
                 <p>Descubre la belleza y la serenidad en la Parroquia Santo Domingo. Con su encantadora arquitectura
                     colonial y su ambiente tranquilo, esta iglesia es un remanso de paz en el corazón de la ciudad,
@@ -341,8 +297,8 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="tarjeta-hotel">
+        <div class="col-md-4 text-center text-white">
+            <div class="tarjeta-hotel-g">
                 <h2>Iglesia de San Gerardo</h2>
                 <p>Explora la historia y la fe en la encantadora Iglesia de San Gerardo. Con su arquitectura única y su
                     atmósfera acogedora, esta iglesia es un lugar de culto y veneración para los fieles, así como un

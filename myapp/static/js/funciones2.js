@@ -253,11 +253,9 @@ tourismLayer.addTo(map);
 
 // Añadir control de capas al mapa
 var overlayMaps2 = {
-  'Hoteles y alojamientos':
-  hotelLayer,
-  "Restaurantes": foodLayer,
-  'Lugares turisticos':
-  tourismLayer,
+  "Hoteles y alojamientos": hotelLayer,
+  Restaurantes: foodLayer,
+  "Lugares turisticos": tourismLayer,
 };
 
 L.control.layers(null, overlayMaps2, { collapsed: false }).addTo(map);
@@ -279,8 +277,8 @@ document.getElementById("generateRoute").addEventListener("click", function () {
   const tourismCoords = document
     .getElementById("tourismSelect")
     .value.split(",");
-  
-    const waypoints = [
+
+  const waypoints = [
     L.latLng(userLocation),
     L.latLng(parseFloat(hotelCoords[0]), parseFloat(hotelCoords[1])),
     L.latLng(parseFloat(foodCoords[0]), parseFloat(foodCoords[1])),

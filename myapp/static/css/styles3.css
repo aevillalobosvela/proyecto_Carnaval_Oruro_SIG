@@ -86,22 +86,30 @@ h4 {
     display: block; 
 }
 
-.tarjeta-hotel {
+.tarjeta-hotel-g {
       border: 1px solid #ccc; 
       border-radius: 10px; 
       padding: 20px; 
       margin-bottom: 20px;
-      background-image: url('images/tarjetas.png');
+      height: 570px;
+}
+
+.tarjeta-hotel-m {
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    padding: 20px; 
+    margin-bottom: 20px;
+    height: 370px;
 }
 
 .tarjeta-hotel h3 {
       margin-top: 0; 
-      color: black;
+      color: rgb(255, 255, 255);
 }
 
 .tarjeta-hotel p {
       margin-bottom: 10px; 
-      color: black;
+      color: rgb(206, 204, 204);
 }
  
 .rating {
