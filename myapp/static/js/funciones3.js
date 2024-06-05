@@ -351,8 +351,6 @@ locations.forEach((location) => {
       <p style="color: black; line-height: 1.2; ">${location.description}</p>
     </div>
   `);
-
-
 });
 
 var carto = L.tileLayer(
