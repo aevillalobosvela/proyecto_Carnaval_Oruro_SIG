@@ -11,6 +11,8 @@ import pandas as pd
 from django.http import JsonResponse
 from datetime import datetime, timedelta
 from .models import puntos_recorrido
+from .models import punto_carnaval
+
 
 def inicio(request):
     usuario = request.user
@@ -19,8 +21,16 @@ def inicio(request):
 
 def obtener_puntos_recorrido(request):
     datos = puntos_recorrido.objects.all()
-    datos = [[coord.latitud_rc, coord.longitud_rc] for coord in datos]
+    res = [
+        {"latitud": coord.latitud_rc, "longitud": coord.longitud_rc} for coord in datos
+    ]
+    return JsonResponse(res, safe=False)
+
+
+def obtener_punto_carnaval(request):
+    datos = [punto_carnaval.to_dict() for punto_carnaval in punto_carnaval.objects.all()]
     return JsonResponse(datos, safe=False)
+
 
 def login_user(request):
     if request.method == "GET":

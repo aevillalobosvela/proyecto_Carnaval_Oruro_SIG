@@ -1,8 +1,10 @@
 var marker = null;
-var userLocation; 
-var selectedDestination; 
+var userLocation;
+var selectedDestination;
 var routingControl;
 var datos_recorrido;
+
+var coordenadasRecibidas = [];
 
 $(document).ready(function () {
   $("#sidebarCollapse").on("click", function () {
@@ -44,10 +46,7 @@ var usuarioIcon = L.divIcon({
 
 function onLocationFound(e) {
   userLocation = e.latlng;
-  L.marker(e.latlng)
-    .addTo(map1)
-    .bindPopup("Usted esta aqui")
-    .openPopup();
+  L.marker(e.latlng).addTo(map1).bindPopup("Usted esta aqui").openPopup();
   map1.setView(e.latlng, 15);
 }
 
@@ -96,15 +95,15 @@ final_mark.bindPopup("Final del recorrido");
 fetch("/obtener_puntos_recorrido/")
   .then((response) => response.json())
   .then((data) => {
-    var rec_carnaval = data;
+    var rec_carnaval = data.map((coord) => [coord.latitud, coord.longitud]);  
     var polylineOptions = {
-      color: "orange", // Color de la línea
-      weight: 8, // Ancho de la línea en píxeles
-      opacity: 0.7, // Opacidad de la línea
-      lineCap: "round", // Estilo del final de la línea
-      lineJoin: "round", // Estilo de la unión de líneas
+      color: "orange",
+      weight: 8,
+      opacity: 0.7,
+      lineCap: "round",
+      lineJoin: "round",
     };
-    var carnaval = L.polyline(rec_carnaval, polylineOptions).addTo(map1);
+    L.polyline(rec_carnaval, polylineOptions).addTo(map1);
   })
   .catch((error) => console.error("Error:", error));
 
@@ -132,13 +131,35 @@ var pasoIcon = L.divIcon({
   className: "paso-icon",
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("/obtener_salud/")
+    .then((response) => response.json())
+    .then((data) => {
+      var salud = data; // Asigna los datos a la variable global
+      console.log(salud);
+
+      // Iterar sobre los datos y agregar los marcadores
+      salud.forEach(function (data) {
+        var mark_salud = L.marker(data.coord, { icon: saludIcon }).addTo(
+          saludMarkers
+        );
+
+        mark_salud.on("click", function () {
+          var adjustedCoord = adjustCoordinatesToRight(data.coord, 0.003); // Ajustar 0.003 grados a la derecha
+          map1.setView(adjustedCoord, 16);
+          document.getElementById("titulo-info").innerHTML = data.titulo;
+          document.getElementById("marker-info").innerHTML = data.direccion;
+          document.getElementById("marker-image").src = data.imagen_ruta;
+          var card = document.getElementById("card-info");
+          card.style.display = "block";
+          selectedDestination = data.coord;
+        });
+      });
+    })
+    .catch((error) => console.error("Error:", error));
+});
+
 var salud = [
-  {
-    coord: [-17.95673328212476, -67.10514358751995],
-    titulo: "Puesto de Salud",
-    direccion: "Sector Avenida Heroes del Chaco",
-    imagen_ruta: "static/img/mapa/salud/salud1.jpg",
-  },
   {
     coord: [-17.96024064600984, -67.10672157609262],
     titulo: "Puesto de Salud",
@@ -552,3 +573,7 @@ var overlayMaps = {
 };
 
 L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map1);
+
+function llamar() {
+  console.log("2: " + coordenadasRecibidas);
+}
