@@ -1,7 +1,8 @@
 var marker = null;
-var userLocation; // Variable para almacenar la ubicación del usuario
-var selectedDestination; // Variable para almacenar la ubicación de destino seleccionada
+var userLocation; 
+var selectedDestination; 
 var routingControl;
+var datos_recorrido;
 
 $(document).ready(function () {
   $("#sidebarCollapse").on("click", function () {
@@ -43,15 +44,13 @@ var usuarioIcon = L.divIcon({
 
 function onLocationFound(e) {
   userLocation = e.latlng;
-  var marker = L.marker(e.latlng)
+  L.marker(e.latlng)
     .addTo(map1)
     .bindPopup("Usted esta aqui")
     .openPopup();
-  // Centrar el mapa en la ubicación del usuario
   map1.setView(e.latlng, 15);
 }
 
-// Función para manejar errores de geolocalización
 function onLocationError(e) {
   alert(e.message);
 }
@@ -94,33 +93,20 @@ var final_mark = L.marker([-17.967469390470484, -67.11855552699116]).addTo(
 );
 final_mark.bindPopup("Final del recorrido");
 
-var rec_carnaval = [
-  [-17.957698858097284, -67.10479645507664],
-  [-17.96469668892355, -67.10687022162124],
-  [-17.968979296085056, -67.10805794178015],
-  [-17.971660934457464, -67.1088268299442],
-  [-17.970104038282503, -67.11445157524199],
-  [-17.969322327621455, -67.11420033430277],
-  [-17.96907055246133, -67.11499498440033],
-  [-17.9699337237225, -67.11526711673427],
-  [-17.969099621642712, -67.11786137691192],
-  [-17.968254722820056, -67.1175735136206],
-  [-17.968051125084976, -67.11806238908132],
-  [-17.96717328392045, -67.11781577280718],
-  [-17.9670938382334, -67.11808266361845],
-  [-17.967109421355303, -67.11827014304588],
-  [-17.967469390470484, -67.11855552699116],
-];
-
-var polylineOptions = {
-  color: "orange", // Color de la línea
-  weight: 8, // Ancho de la línea en píxeles
-  opacity: 0.7, // Opacidad de la línea
-  lineCap: "round", // Estilo del final de la línea
-  lineJoin: "round", // Estilo de la unión de líneas
-};
-
-var carnaval = L.polyline(rec_carnaval, polylineOptions).addTo(map1);
+fetch("/obtener_puntos_recorrido/")
+  .then((response) => response.json())
+  .then((data) => {
+    var rec_carnaval = data;
+    var polylineOptions = {
+      color: "orange", // Color de la línea
+      weight: 8, // Ancho de la línea en píxeles
+      opacity: 0.7, // Opacidad de la línea
+      lineCap: "round", // Estilo del final de la línea
+      lineJoin: "round", // Estilo de la unión de líneas
+    };
+    var carnaval = L.polyline(rec_carnaval, polylineOptions).addTo(map1);
+  })
+  .catch((error) => console.error("Error:", error));
 
 /* -puntos de interes-------------------------------------------------------------------------------------- */
 

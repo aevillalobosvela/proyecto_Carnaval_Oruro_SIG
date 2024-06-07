@@ -1,5 +1,3 @@
-""" from .models import diario, pagomes """
-
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -10,17 +8,19 @@ from datetime import datetime
 from datetime import time
 from django.db import IntegrityError
 import pandas as pd
-from django.http import HttpResponse
+from django.http import JsonResponse
 from datetime import datetime, timedelta
-
-
-# Create your views here.
-
+from .models import puntos_recorrido
 
 def inicio(request):
     usuario = request.user
     return render(request, "inicio.html", {"usuario": usuario})
 
+
+def obtener_puntos_recorrido(request):
+    datos = puntos_recorrido.objects.all()
+    datos = [[coord.latitud_rc, coord.longitud_rc] for coord in datos]
+    return JsonResponse(datos, safe=False)
 
 def login_user(request):
     if request.method == "GET":
