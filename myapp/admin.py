@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from .models import puntos_recorrido
-from .models import salud
+from .models import punto_carnaval
 
-@admin.register(salud)
-class SaludAdmin(admin.ModelAdmin):
+@admin.register(punto_carnaval)
+class punto_carnavalAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'direccion', 'coord_lat', 'coord_lng', 'imagen_ruta')
     search_fields = ('titulo', 'direccion')
 
