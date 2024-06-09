@@ -34,7 +34,6 @@ function onLocationFound(e) {
     .addTo(map)
     .bindPopup("Usted esta aqui")
     .openPopup();
-  // Centrar el mapa en la ubicación del usuario
   map.setView(e.latlng, 15);
 }
 
@@ -47,218 +46,74 @@ map.on("locationerror", onLocationError);
 
 map.locate({ setView: true, maxZoom: 16 });
 
-/* -LUGARES - HOTELES-------------------------------------------------------------------------------------- */
+/* -LUGARES-------------------------------------------------------------------------------------- */
 
-const markers = {
-  hotels: [
-    {
-      name: "Hostal Graciela",
-      lat: -17.96557445732872,
-      lon: -67.10635546869543,
-    },
-    {
-      name: "Hotel Glorioso",
-      lat: -17.96236147092776,
-      lon: -67.10278318404016,
-    },
-    {
-      name: "Gran Hotel Bolivia",
-      lat: -17.962245388504577,
-      lon: -67.10661148774666,
-    },
-    { name: "Hotel Plaza", lat: -17.969128960958876, lon: -67.11433118959974 },
-    { name: "Hotel Briggs", lat: -17.966435243509885, lon: -67.11511642884702 },
-    {
-      name: "Hotel Virgen del Socavon",
-      lat: -17.966999837934388,
-      lon: -67.11797146632333,
-    },
-    {
-      name: "Solárium Restaurante Hotel Edén",
-      lat: -17.969679495368712,
-      lon: -67.11468300546305,
-    },
-    { name: "Hotel Houston", lat: -17.97066614215071, lon: -67.11287912028908 },
-    {
-      name: "Residencial Hinojosa",
-      lat: -17.96133155320207,
-      lon: -67.10812583378078,
-    },
-    {
-      name: "Hotel Sucre Palace",
-      lat: -17.97079249639655,
-      lon: -67.11288998959968,
-    },
-    {
-      name: "Gran Hotel Galaxia",
-      lat: -17.9710297289956,
-      lon: -67.11040125520366,
-    },
-    { name: "Hotel Monarca", lat: -17.96796209935517, lon: -67.10727228033335 },
-  ],
-  food: [
-    {
-      name: "Restaurante El Negrito",
-      lat: -17.970316344905434,
-      lon: -67.11377867610823,
-    },
-    { name: "La Casona", lat: -17.96870930117551, lon: -67.11460981164859 },
-    {
-      name: "Restaurant Nayjama",
-      lat: -17.973590414724292,
-      lon: -67.1109544668418,
-    },
-    {
-      name: "Factory Xpress",
-      lat: -17.97040545305779,
-      lon: -67.11318575768243,
-    },
-    {
-      name: "Restaurant Pagador",
-      lat: -17.969960995628657,
-      lon: -67.11012398774643,
-    },
-    {
-      name: "Restaurant Vegetariano Govinda",
-      lat: -17.97176463310805,
-      lon: -67.11167180731627,
-    },
-    { name: "Bravo's Pizza", lat: -17.96918993343915, lon: -67.11670964541871 },
-    {
-      name: 'Charquekan Orureño "El Puente"',
-      lat: -17.95126278008152,
-      lon: -67.10876464048772,
-    },
-    {
-      name: "Churrasqueria Santa Brasa",
-      lat: -17.96550514868362,
-      lon: -67.10527572080795,
-    },
-    {
-      name: "Dori pollo Oruro",
-      lat: -17.964040814872025,
-      lon: -67.10047047743406,
-    },
-    {
-      name: "Super hamburguesas Oruro",
-      lat: -17.96494390601734,
-      lon: -67.11024889908734,
-    },
-    {
-      name: "Restaurant El Fogón",
-      lat: -17.962150621053368,
-      lon: -67.10382486932191,
-    },
-    {
-      name: "Rancheria Oruro",
-      lat: -17.96362586649361,
-      lon: -67.11157757054858,
-    },
-  ],
-  tourism: [
-    {
-      name: "Museo Nacional Antropológico Eduardo López Rivas",
-      lat: -17.981218340991997,
-      lon: -67.12250936960811,
-    },
-    {
-      name: "Museo Simón I. Patiño",
-      lat: -17.967538060592556,
-      lon: -67.1123490626169,
-    },
-    {
-      name: "Museo Sacro del Santuario del Socavón",
-      lat: -17.967171985345495,
-      lon: -67.11886950750217,
-    },
-    {
-      name: "Museo Mineralógico",
-      lat: -17.990566057353647,
-      lon: -67.13706274727136,
-    },
-    {
-      name: "Casa Arte Taller Cardozo Velasquez Oruro",
-      lat: -17.971544164910565,
-      lon: -67.1017033147293,
-    },
-    {
-      name: "Museo Diocesano San Miguel Oruro",
-      lat: -17.964236861414186,
-      lon: -67.112514718436,
-    },
-    {
-      name: "Estación Superior Teleférico Turístico",
-      lat: -17.974403851760847,
-      lon: -67.12051834727194,
-    },
-    {
-      name: "Museo Arqueológico",
-      lat: -17.98096464920422,
-      lon: -67.12270221843559,
-    },
-    {
-      name: "Esculturas Plaza Chiripujio",
-      lat: -17.97671444617219,
-      lon: -67.13986746261656,
-    },
-  ],
-};
-
-// Función para seleccionar opción en el select correspondiente
-function selectOption(selectId, lat, lon) {
-  document.getElementById(selectId).value = `${lat},${lon}`;
-}
-// Definir iconos personalizados
 var hotelIcon = L.icon({
-  iconUrl: "/static/img/generaruta/hotelito.png", // URL de la imagen del ícono del hotel
-  iconSize: [40, 40], // Tamaño del ícono [ancho, alto]
-  iconAnchor: [15, 30], // Punto de anclaje del ícono [horizontal, vertical], en este caso, el centro inferior del ícono
-  popupAnchor: [0, -30], // Punto de anclaje del popup en relación con el ícono [horizontal, vertical], en este caso, justo arriba del ícono
+  iconUrl: "/static/img/generaruta/hotelito.png",
+  iconSize: [40, 40],
+  iconAnchor: [15, 30],
+  popupAnchor: [0, -30],
 });
 
 const foodIcon = L.icon({
-  iconUrl: "/static/img/generaruta/hamburguesa.png", // URL de la imagen del ícono del restaurante
-  iconSize: [40, 40], // Tamaño del ícono [ancho, alto]
-  iconAnchor: [15, 30], // Punto de anclaje del ícono [horizontal, vertical], en este caso, el centro inferior del ícono
-  popupAnchor: [0, -30], // Punto de anclaje del popup en relación con el ícono [horizontal, vertical], en este caso, justo arriba del ícono
+  iconUrl: "/static/img/generaruta/hamburguesa.png",
+  iconSize: [40, 40],
+  iconAnchor: [15, 30],
+  popupAnchor: [0, -30],
 });
 
 const tourismIcon = L.icon({
-  iconUrl: "/static/img/generaruta/turir.png", // URL de la imagen del ícono del lugar turístico
-  iconSize: [40, 40], // Tamaño del ícono [ancho, alto]
-  iconAnchor: [15, 30], // Punto de anclaje del ícono [horizontal, vertical], en este caso, el centro inferior del ícono
-  popupAnchor: [0, -30], // Punto de anclaje del popup en relación con el ícono [horizontal, vertical], en este caso, justo arriba del ícono
+  iconUrl: "/static/img/generaruta/turir.png",
+  iconSize: [40, 40],
+  iconAnchor: [15, 30],
+  popupAnchor: [0, -30],
 });
 
-// Crear marcadores con iconos personalizados y agregarlos a capas de marcadores
-const hotelMarkers = markers.hotels.map((m) =>
-  L.marker([m.lat, m.lon], { icon: hotelIcon }).bindPopup(m.name)
-);
-const foodMarkers = markers.food.map((m) =>
-  L.marker([m.lat, m.lon], { icon: foodIcon }).bindPopup(m.name)
-);
-const tourismMarkers = markers.tourism.map((m) =>
-  L.marker([m.lat, m.lon], { icon: tourismIcon }).bindPopup(m.name)
-);
+const hotelLayer = L.layerGroup();
+const foodLayer = L.layerGroup();
+const tourismLayer = L.layerGroup();
 
-// Crear capas de marcadores con marcadores personalizados
-const hotelLayer = L.layerGroup(hotelMarkers);
-const foodLayer = L.layerGroup(foodMarkers);
-const tourismLayer = L.layerGroup(tourismMarkers);
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("/obtener_punto_planifica/")
+    .then((response) => response.json())
+    .then((data) => {
+      var puntos = data;
 
-// Añadir las capas al mapa por defecto
-hotelLayer.addTo(map);
-foodLayer.addTo(map);
-tourismLayer.addTo(map);
+      puntos.forEach(function (data) {
+        if (data.titulo == "Hotel") {
+          L.marker(data.coord, { icon: hotelIcon })
+            .bindPopup(data.name)
+            .addTo(hotelLayer);
+        }
+        if (data.titulo == "Comida") {
+          L.marker(data.coord, { icon: foodIcon })
+            .bindPopup(data.name)
+            .addTo(foodLayer);
+        }
+        if (data.titulo == "Turismo") {
+          L.marker(data.coord, { icon: tourismIcon })
+            .bindPopup(data.name)
+            .addTo(tourismLayer);
+        }
+      });
+      hotelLayer.addTo(map);
+      foodLayer.addTo(map);
+      tourismLayer.addTo(map);
 
-// Añadir control de capas al mapa
-var overlayMaps2 = {
-  "Hoteles y alojamientos": hotelLayer,
-  Restaurantes: foodLayer,
-  "Lugares turisticos": tourismLayer,
-};
+      var overlayMaps2 = {
+        "Hoteles y alojamientos": hotelLayer,
+        Restaurantes: foodLayer,
+        "Lugares turisticos": tourismLayer,
+      };
 
-L.control.layers(null, overlayMaps2, { collapsed: false }).addTo(map);
+      L.control.layers(null, overlayMaps2, { collapsed: false }).addTo(map);
+    })
+    .catch((error) => console.error("Error:", error));
+});
+
+function selectOption(selectId, lat, lon) {
+  document.getElementById(selectId).value = `${lat},${lon}`;
+}
 
 // Generar ruta
 document.getElementById("generateRoute").addEventListener("click", function () {
@@ -316,9 +171,7 @@ document.getElementById("generateRoute").addEventListener("click", function () {
     showMarkers: false, // Oculta los marcadores
     routeWhileDragging: false,
   }).addTo(map);
-
-  // Ajustar el mapa para que se centre y haga zoom en la ruta generada
-  map.fitBounds(routingControl.getBounds());
+  map.flyTo(L.latLng(parseFloat(foodCoords[0]), parseFloat(foodCoords[1])), 15);
 });
 
 // Crear instancias de capas de mapa adicionales
@@ -349,53 +202,96 @@ function generateRandomRoute() {
     map.removeControl(routingControl);
   }
 
-  const randomHotel =
-    markers.hotels[Math.floor(Math.random() * markers.hotels.length)];
-  const randomFood =
-    markers.food[Math.floor(Math.random() * markers.food.length)];
-  const randomTourism =
-    markers.tourism[Math.floor(Math.random() * markers.tourism.length)];
+  var hotels = [];
+  var food = [];
+  var tourism = [];
 
-  const waypoints = [
-    L.latLng(userLocation),
-    L.latLng(randomHotel.lat, randomHotel.lon),
-    L.latLng(randomFood.lat, randomFood.lon),
-    L.latLng(randomTourism.lat, randomTourism.lon),
-  ];
+  fetch("/obtener_punto_planifica/")
+    .then((response) => response.json())
+    .then((data) => {
+      var puntoss = data;
+      puntoss.forEach(function (data) {
+        if (data.titulo == "Hotel") {
+          hotels.push(data);
+        }
+        if (data.titulo == "Comida") {
+          food.push(data);
+        }
+        if (data.titulo == "Turismo") {
+          tourism.push(data);
+        }
+      });
 
-  routingControl = L.Routing.control({
-    waypoints: waypoints,
-    router: L.Routing.graphHopper("0269abc3-031c-448e-95c7-3db60aaa6dc0", {
-      urlParameters: {
-        vehicle: "car",
-        locale: "es", // Opcional: ajusta el idioma de las instrucciones de la ruta
-      },
-    }),
-    show: true, // Oculta la ruta por defecto
-    showMarkers: false, // Oculta los marcadores
-    routeWhileDragging: false,
-  }).addTo(map);
+      const randomHotel = hotels[Math.floor(Math.random() * hotels.length)];
+      const randomFood = food[Math.floor(Math.random() * food.length)];
+      const randomTourism = tourism[Math.floor(Math.random() * tourism.length)];
+      var coordHotel = {
+        lat: randomHotel.coord[0],
+        lng: randomHotel.coord[1],
+      };
+      var coordFood = {
+        lat: randomFood.coord[0],
+        lng: randomFood.coord[1],
+      };
+      var coordTourism = {
+        lat: randomTourism.coord[0],
+        lng: randomTourism.coord[1],
+      };
+      const waypoints = [
+        L.latLng(userLocation),
+        L.latLng(coordHotel),
+        L.latLng(coordFood),
+        L.latLng(coordTourism),
+      ];
 
-  displayRecommendation(randomHotel, randomFood, randomTourism);
+      routingControl = L.Routing.control({
+        waypoints: waypoints,
+        router: L.Routing.graphHopper("0269abc3-031c-448e-95c7-3db60aaa6dc0", {
+          urlParameters: {
+            vehicle: "car",
+            locale: "es", // Opcional: ajusta el idioma de las instrucciones de la ruta
+          },
+        }),
+        show: true, // Oculta la ruta por defecto
+        showMarkers: false, // Oculta los marcadores
+        routeWhileDragging: false,
+      }).addTo(map);
+
+      displayRecommendation(
+        randomHotel,
+        randomFood,
+        randomTourism,
+        coordHotel,
+        coordFood,
+        coordTourism
+      );
+    });
 }
 
 // Función para mostrar la recomendación
-function displayRecommendation(hotel, food, tourism) {
+function displayRecommendation(
+  hotel,
+  food,
+  tourism,
+  coordhotel,
+  coordfood,
+  coordtour
+) {
   const recommendationDiv = document.getElementById("recommendation");
   recommendationDiv.innerHTML = `
-                <div class="card mx-auto"  style="width: 100%;">
-                  <div class="card-body">
-                    <h5 class="card-title">Recomendación de Ruta</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Ruta sugerida</h6>
-                    <p class="card-text"><strong>Hotel:</strong> ${hotel.name}</p>
-                    <p class="card-text"><strong>Restaurante:</strong> ${food.name}</p>
-                    <p class="card-text"><strong>Lugar Turístico:</strong> ${tourism.name}</p>
-                    <a href="#" class="card-link" onclick="goToLocation(${hotel.lat}, ${hotel.lon})">Ir al Hotel</a>
-                    <a href="#" class="card-link" onclick="goToLocation(${food.lat}, ${food.lon})">Ir al Restaurante</a>
-                    <a href="#" class="card-link" onclick="goToLocation(${tourism.lat}, ${tourism.lon})">Ir al Lugar Turístico</a>
-                  </div>
-                </div>
-            `;
+    <div class="card mx-auto"  style="width: 100%;">
+      <div class="card-body">
+          <h5 class="card-title">Recomendación de Ruta</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Ruta sugerida</h6>
+          <p class="card-text"><strong>Hotel:</strong> ${hotel.name}</p>
+          <p class="card-text"><strong>Restaurante:</strong> ${food.name}</p>
+          <p class="card-text"><strong>Lugar Turístico:</strong> ${tourism.name}</p>
+          <a href="#" class="card-link" onclick="goToLocation(${coordhotel.lat}, ${coordhotel.lng})">Ir al Hotel</a>
+          <a href="#" class="card-link" onclick="goToLocation(${coordfood.lat}, ${coordfood.lon})">Ir al Restaurante</a>
+          <a href="#" class="card-link" onclick="goToLocation(${coordtour.lat}, ${coordtour.lon})">Ir al Lugar Turístico</a>
+        </div>
+      </div>
+  `;
 }
 
 // Función para centrar el mapa en la ubicación seleccionada
@@ -445,75 +341,15 @@ function mostrarLugaresRecomendados() {
     lugarCard.classList.add("col-sm-12", "mb-4");
 
     lugarCard.innerHTML = `
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">${lugar}</h5>
-                            <p class="card-text">¡Ven a visitarnos!</p>
-                        </div>
-                    </div>
-                `;
+      <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">${lugar}</h5>
+              <p class="card-text">¡Ven a visitarnos!</p>
+          </div>
+      </div>
+    `;
 
     lugaresContainer.appendChild(lugarCard);
   });
-
   lugaresContainer.style.display = "flex";
 }
-
-/* var marker = null;
-var userLocation; // Variable para almacenar la ubicación del usuario
-var selectedDestination; // Variable para almacenar la ubicación de destino seleccionada
-var routingControl; */
-
-/* -MAPA 2-------------------------------------------------------------------------------------- */
-/* var map2 = L.map("map2", {
-  center: [-17.964138034171146, -67.10734251787665],
-  zoom: 15,
-  maxZoom: 18,
-  minZoom: 14,
-});
-
-L.tileLayer(
-  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-).addTo(map2);
-
-var osmLayer = new L.TileLayer(
-  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }
-);
-
-var miniMap = new L.Control.MiniMap(osmLayer, {
-  toggleDisplay: true,
-  minimized: false,
-}).addTo(map2);
-
-var usuarioIcon = L.divIcon({
-  html: '<i class="fa fa-map-marker fa-3x"></i>',
-  className: "usuario-icon",
-});
-
-function onLocationFound(e) {
-  userLocation = e.latlng;
-  // Agregar un marcador en la ubicación del usuario
-  var marker = L.marker(e.latlng, { icon: usuarioIcon })
-    .addTo(map2)
-    .bindPopup("Usted esta aqui")
-    .openPopup();
-  // Centrar el mapa en la ubicación del usuario
-  map2.setView(e.latlng, 15);
-}
-
-// Función para manejar errores de geolocalización
-function onLocationError(e) {
-  alert(e.message);
-}
-
-// Solicitar la ubicación del usuario
-map2.on("locationfound", onLocationFound);
-map2.on("locationerror", onLocationError);
-
-// Iniciar la solicitud de geolocalización
-map2.locate({ setView: true, maxZoom: 16 });
- */

@@ -12,7 +12,8 @@ from django.http import JsonResponse
 from datetime import datetime, timedelta
 from .models import puntos_recorrido
 from .models import punto_carnaval
-
+from .models import punto_planifica
+from .models import punto_conoce
 
 def inicio(request):
     usuario = request.user
@@ -31,6 +32,13 @@ def obtener_punto_carnaval(request):
     datos = [punto_carnaval.to_dict() for punto_carnaval in punto_carnaval.objects.all()]
     return JsonResponse(datos, safe=False)
 
+def obtener_punto_planifica(request):
+    datos = [punto_planifica.to_dict() for punto_planifica in punto_planifica.objects.all()]
+    return JsonResponse(datos, safe=False)
+
+def obtener_punto_conoce(request):
+    datos = [punto_conoce.to_dict() for punto_conoce in punto_conoce.objects.all()]
+    return JsonResponse(datos, safe=False)
 
 def login_user(request):
     if request.method == "GET":

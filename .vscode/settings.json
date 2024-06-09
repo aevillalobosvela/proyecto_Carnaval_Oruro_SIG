@@ -1,4 +1,4 @@
 {
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
-    "editor.wordWrap": "off"
+    "editor.wordWrap": "on"
 }
