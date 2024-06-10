@@ -14,6 +14,8 @@ from .models import puntos_recorrido
 from .models import punto_carnaval
 from .models import punto_planifica
 from .models import punto_conoce
+from django.views.decorators.csrf import csrf_exempt
+
 
 def inicio(request):
     usuario = request.user
@@ -29,16 +31,23 @@ def obtener_puntos_recorrido(request):
 
 
 def obtener_punto_carnaval(request):
-    datos = [punto_carnaval.to_dict() for punto_carnaval in punto_carnaval.objects.all()]
+    datos = [
+        punto_carnaval.to_dict() for punto_carnaval in punto_carnaval.objects.all()
+    ]
     return JsonResponse(datos, safe=False)
 
+
 def obtener_punto_planifica(request):
-    datos = [punto_planifica.to_dict() for punto_planifica in punto_planifica.objects.all()]
+    datos = [
+        punto_planifica.to_dict() for punto_planifica in punto_planifica.objects.all()
+    ]
     return JsonResponse(datos, safe=False)
+
 
 def obtener_punto_conoce(request):
     datos = [punto_conoce.to_dict() for punto_conoce in punto_conoce.objects.all()]
     return JsonResponse(datos, safe=False)
+
 
 def login_user(request):
     if request.method == "GET":
@@ -50,7 +59,6 @@ def login_user(request):
             password=request.POST["password"],
         )
         if user is None:
-            print(request.POST["username"])
             return render(
                 request,
                 "login_user.html",
@@ -60,10 +68,60 @@ def login_user(request):
                 },
             )
         else:
-            print("Ingresa bien")
-            print(request.POST["username"])
-            login(request, user)
-            return redirect("inicio")
+            if user.is_superuser:
+                print("Ingresa admin")
+                login(request, user)
+                return redirect("usuarios_admin")
+            else:
+                print("Ingresa bien")
+                login(request, user)
+                return redirect("inicio")
+
+
+@login_required
+def usuarios_admin(request):
+    usuario = request.user
+    usuarios = User.objects.filter(is_superuser=False)
+    return render(
+        request,
+        "usuarios_admin.html",
+        {
+            "usuario": usuario,
+            "usuarios": usuarios,
+        },
+    )
+
+
+@login_required
+def inicio_admin(request):
+
+    if request.method == "POST":
+        coord_lat = request.POST.get("coord_lat")
+        coord_lng = request.POST.get("coord_lng")
+        titulo = request.POST.get("titulo")
+        direccion = request.POST.get("direccion")
+
+    if request.POST.get("titulo") == "Puesto de Salud":
+        imagen = "static/img/mapa/salud/salud7.png"
+    if request.POST.get("titulo") == "Paso Peatonal":
+        imagen = "static/img/mapa/paso1.jpg"
+    if request.POST.get("titulo") == "Deposito residual":
+        imagen = "static/img/mapa/deposito1.jpg"
+    if request.POST.get("titulo") == "Puesto Policial":
+        imagen = "static/img/mapa/policia/policia1.jpg"
+
+        punto = punto_carnaval.objects.create(
+            coord_lat=coord_lat,
+            coord_lng=coord_lng,
+            titulo=titulo,
+            direccion=direccion,
+            imagen_ruta=imagen,
+        )
+        puntos = punto_carnaval.objects.all()
+        return render(request, "inicio_admin.html", {"puntos": puntos})
+    else:
+        puntos = punto_carnaval.objects.all()
+        return render(request, "inicio_admin.html", {"puntos": puntos})
 
 
 def conoce(request):
@@ -120,6 +178,27 @@ def registro(request):
             "registro.html",
             {"form": UserCreationForm, "error": "Los Passwords no coinciden"},
         )
+
+
+@login_required
+def eliminar_usuario(request, user_id):
+    if request.method == "POST":
+        user = get_object_or_404(User, id=user_id)
+        user.delete()
+        return JsonResponse({"status": "success"}, status=200)
+    return JsonResponse({"status": "error"}, status=400)
+
+
+@login_required
+def eliminar_punto_carnaval(request, punto_id):
+    if request.method == "POST":
+        punto = get_object_or_404(punto_carnaval, id=punto_id)
+        punto.delete()
+        return JsonResponse({"status": "success"}, status=200)
+    return JsonResponse({"status": "error"}, status=400)
+
+
+""" //---------------------------------------------------------------------------------- """
 
 
 def signup(request):

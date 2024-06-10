@@ -1,0 +1,81 @@
+{% extends 'administrador.html' %} {% block content %}
+{% load static %}
+
+<div>
+    <div class="m-5 row">
+        <div class="col-7">
+            <table id="usuariosTable" class="display" style="height: 200px;">
+                <thead>
+                    <tr>
+                        <th class="text-center">Username</th>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Ultimo ingreso</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.username }}</td>
+                        <td>{{ usuario.first_name }}</td>
+                        <td>{{ usuario.last_login }}</td>
+                        <td class="text-center">
+                            <button class="delete-btn btn btn-danger" data-id="{{ usuario.id }}">Eliminar</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-5">
+            <div class="card p-3 text-center" style="background-image: none;">
+                <h1>Panel de administracion</h1>
+                <p style="color: black;">Administra facilmente la informacion registrada de todos los aspectos del
+                    sistema. Incluyendo Usuarios, Puntos de los diferentes mapas, Coordenadas especificas, Datos de
+                    lugares, entre otros.</p>
+            </div>
+            <div class="card mt-4 p-3 text-center" style="background-image: none;">
+                <h3 style=".no-style {
+                    all: unset;
+                    display: revert;
+                }">Usuario actual: {{usuario.username}}</h3>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#usuariosTable').DataTable();
+
+            $('#usuariosTable').on('click', '.delete-btn', function () {
+                var userId = $(this).data('id');
+                if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+                    $.ajax({
+                        url: '{% url "eliminar_usuario" 0 %}'.slice(0, -2) + userId + '/',
+                        type: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        success: function (response) {
+                            if (response.status === 'success') {
+                                alert('Usuario eliminado con éxito.');
+                                location.reload();
+                            } else {
+                                alert('Hubo un error al eliminar al usuario.');
+                            }
+                        },
+                        error: function () {
+                            alert('Hubo un error al eliminar al usuario.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</div>
+
+
+
+{% endblock %}

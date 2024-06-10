@@ -24,14 +24,22 @@ urlpatterns = [
         "obtener_punto_conoce/", views.obtener_punto_conoce, name="obtener_punto_conoce"
     ),
     path("login_user/", views.login_user, name="login_user"),
+    path("usuarios_admin/", views.usuarios_admin, name="usuarios_admin"),
+    path("inicio_admin/", views.inicio_admin, name="inicio_admin"),
+    
     path("registro/", views.registro, name="registro"),
     path("conoce/", views.conoce, name="conoce"),
     path("planifica/", views.planifica, name="planifica"),
     path("aprende/", views.aprende, name="aprende"),
     path("logout/", views.signout, name="logout"),
+    
+    path('eliminar-usuario/<int:user_id>/', views.eliminar_usuario, name='eliminar_usuario'),
+    path('eliminar-punto-carnaval/<int:punto_id>/', views.eliminar_punto_carnaval, name='eliminar_punto_carnaval'),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 """  path("", views.signin, name="signin"), """
+""" path("planifica_admin/", views.planifica_admin, name="planifica_admin"),
+    path("conoce_admin/", views.conoce_admin, name="conoce_admin"), """

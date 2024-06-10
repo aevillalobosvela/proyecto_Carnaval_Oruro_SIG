@@ -1,0 +1,152 @@
+{% extends 'administrador.html' %} {% block content %}
+{% load static %}
+
+<div>
+    <div class="m-5 row">
+        <div class="col-7">
+            <table id="inicioTable" class="display">
+                <thead>
+                    <tr>
+                        <th class="text-center">Latitud</th>
+                        <th class="text-center">Longitud</th>
+                        <th class="text-center">Título</th>
+                        <th class="text-center">Dirección</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for punto in puntos %}
+                    <tr>
+                        <td>{{ punto.coord_lat }}</td>
+                        <td>{{ punto.coord_lng }}</td>
+                        <td>{{ punto.titulo }}</td>
+                        <td>{{ punto.direccion }}</td>
+                        <td class="text-center">
+                            <button class="borrar-inicio btn btn-danger" data-id="{{ punto.id }}">Eliminar</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-5">
+            <div class="container p-3" style="border: solid gray 1px; border-radius: 2%;">
+                <h1>Inserta un punto</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="id_coord_lat">Coordenada Latitud:</label>
+                            <input type="text" class="form-control" id="id_coord_lat_ini" name="coord_lat" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="id_coord_lng">Coordenada Longitud:</label>
+                            <input type="text" class="form-control" id="id_coord_lng_ini" name="coord_lng" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="id_titulo">Título:</label>
+                            <!--  <input type="select" class="form-control" > -->
+                            <select class="form-select" aria-label="Seleccionar opción" id="id_titulo_ini" name="titulo"
+                                required>
+
+                                <option selected value="Puesto de Salud">Puesto de Salud</option>
+                                <option value="Deposito residual">Deposito residual</option>
+                                <option value="Paso Peatonal">Paso Peatonal</option>
+                                <option value="Puesto Policial">Puesto Policial</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="id_direccion">Dirección:</label>
+                            <input type="text" class="form-control" id="id_direccion" name="direccion" required>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <button class="btn btn-success" type="submit">Guardar Punto</button>
+                    </div>
+                </form>
+            </div>
+            <div class="container mt-4 p-3 text-center" style="border: solid gray 1px; border-radius: 2%;">
+                <h5>Obten las coordenadas en un click</h5>
+                <div id="content" style="border: solid 1px gray;">
+                    <div style="height: 350px; cursor: context-menu;" id="map_admin1"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#inicioTable').DataTable();
+        });
+
+        $(document).ready(function () {
+
+            var map_admin1 = L.map("map_admin1", {
+                center: [-17.964138034171146, -67.10734251787665],
+                zoom: 15,
+                maxZoom: 18,
+                minZoom: 14,
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { // Carga la capa base del mapa
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map_admin1);
+
+            var osmLayer = new L.TileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                    attribution:
+                        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                }
+            );
+
+            var miniMap = new L.Control.MiniMap(osmLayer, {
+                toggleDisplay: true,
+                minimized: false,
+            }).addTo(map_admin1);
+
+            map_admin1.on('click', function (e) {
+                $('#id_coord_lat_ini').val(e.latlng.lat.toFixed(8));
+                $('#id_coord_lng_ini').val(e.latlng.lng.toFixed(8));
+            });
+        });
+
+
+        $('#inicioTable').on('click', '.borrar-inicio', function () {
+                var puntoId = $(this).data('id');
+                if (confirm('¿Estás seguro de que quieres eliminar este punto?')) {
+                    $.ajax({
+                        url: '{% url "eliminar_punto_carnaval" 0 %}'.slice(0, -2) + puntoId + '/',
+                        type: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        success: function (response) {
+                            if (response.status === 'success') {
+                                alert('Punto eliminado con éxito.');
+                                location.reload();
+                            } else {
+                                alert('Hubo un error al eliminar el punto.');
+                            }
+                        },
+                        error: function () {
+                            alert('Hubo un error al eliminar el punto.');
+                        }
+                    });
+                }
+            });
+
+    </script>
+</div>
+
+
+
+{% endblock %}
