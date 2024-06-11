@@ -78,22 +78,31 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((response) => response.json())
     .then((data) => {
       var puntos = data;
-
+      var hotelSelect = document.getElementById("hotelSelect");
+      var foodSelect = document.getElementById("foodSelect");
+      var tourismSelect = document.getElementById("tourismSelect");
       puntos.forEach(function (data) {
+        var option = document.createElement("option");
+        option.value = data.coord.join(", ");
+        option.text = data.name;
+
         if (data.titulo == "Hotel") {
           L.marker(data.coord, { icon: hotelIcon })
             .bindPopup(data.name)
             .addTo(hotelLayer);
+          hotelSelect.appendChild(option);
         }
         if (data.titulo == "Comida") {
           L.marker(data.coord, { icon: foodIcon })
             .bindPopup(data.name)
             .addTo(foodLayer);
+            foodSelect.appendChild(option);
         }
         if (data.titulo == "Turismo") {
           L.marker(data.coord, { icon: tourismIcon })
             .bindPopup(data.name)
             .addTo(tourismLayer);
+            tourismSelect.appendChild(option);
         }
       });
       hotelLayer.addTo(map);

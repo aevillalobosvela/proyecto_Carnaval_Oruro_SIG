@@ -1,0 +1,162 @@
+{% extends 'administrador.html' %} {% block content %}
+{% load static %}
+
+<div>
+    <div class="m-5 row">
+
+        <table id="conoceTable" class="display">
+            <thead>
+                <tr>
+                    <th class="text-center">Latitud</th>
+                    <th class="text-center">Longitud</th>
+                    <th class="text-center">Tipo</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Descripcion</th>
+                    <th class="text-center">Detalles</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for punto in puntos %}
+                <tr>
+                    <td>{{ punto.coord_lat }}</td>
+                    <td>{{ punto.coord_lng }}</td>
+                    <td>{{ punto.titulo }}</td>
+                    <td>{{ punto.name }}</td>
+                    <td>{{ punto.descripcion }}</td>
+                    <td>{{ punto.detalles }}</td>
+                    <td class="text-center">
+                        <button class="borrar-conoce btn btn-danger" data-id="{{ punto.id }}">Eliminar</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <div class="row m-5">
+        <div class="container p-3" style="border: solid gray 1px; border-radius: 2%;">
+            <h1>Inserta un punto</h1>
+            <form method="post">
+                {% csrf_token %}
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-4">
+                        <label for="id_coord_lat_con">Coordenada Latitud:</label>
+                        <input type="text" class="form-control" id="id_coord_lat_con" name="coord_lat" required>
+                    </div>
+                    <div class="col-4">
+                        <label for="id_coord_lng_con">Coordenada Longitud:</label>
+                        <input type="text" class="form-control" id="id_coord_lng_con" name="coord_lng" required>
+                    </div>
+                    <div class="col-4">
+                        <label for="id_titulo">Tipo:</label>
+                        <select class="form-select" aria-label="Seleccionar opción" id="id_titulo_ini" name="titulo"
+                            required>
+                            <option selected value="Museo">Museo</option>
+                            <option value="Comida">Comida</option>
+                            <option value="Iglesia">Iglesia</option>
+                            <option value="Hotel">Hotel</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-4">
+                        <label for="id_nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="id_nombre" name="nombre" required>
+                    </div>
+                    <div class="col-4">
+                        <label for="descripcion">Descripcion:</label>
+                        <textarea type="text" class="form-control" id="descripcion" name="descripcion" rows="3"
+                            required></textarea>
+                    </div>
+                    <div class="col-4">
+                        <label for="detalles">Detalles:</label>
+                        <textarea type="text" class="form-control" id="detalles" name="detalles" rows="3"
+                            required></textarea>
+                    </div>
+                </div>
+                <div class="mt-3 text-center">
+                    <button class="btn btn-success" type="submit">Guardar Punto</button>
+                </div>
+            </form>
+        </div>
+        <div class="container mt-4 p-3 text-center" style="border: solid gray 1px; border-radius: 2%;">
+            <h5>Obten las coordenadas en un click</h5>
+            <div id="content" style="border: solid 1px gray;">
+                <div style="height: 350px; cursor: context-menu;" id="map_admin3"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#conoceTable').DataTable();
+        });
+
+        $(document).ready(function () {
+
+            var map_admin3 = L.map("map_admin3", {
+                center: [-17.964138034171146, -67.10734251787665],
+                zoom: 15,
+                maxZoom: 18,
+                minZoom: 14,
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { // Carga la capa base del mapa
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map_admin3);
+
+            var osmLayer = new L.TileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                    attribution:
+                        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                }
+            );
+
+            var miniMap = new L.Control.MiniMap(osmLayer, {
+                toggleDisplay: true,
+                minimized: false,
+            }).addTo(map_admin3);
+
+            map_admin3.on('click', function (e) {
+                $('#id_coord_lat_con').val(e.latlng.lat.toFixed(8));
+                $('#id_coord_lng_con').val(e.latlng.lng.toFixed(8));
+            });
+        });
+
+
+        $('#conoceTable').on('click', '.borrar-conoce', function () {
+            var puntoId = $(this).data('id');
+            if (confirm('¿Estás seguro de que quieres eliminar este punto?')) {
+                $.ajax({
+                    url: '{% url "eliminar_punto_conoce" 0 %}'.slice(0, -2) + puntoId + '/',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            alert('Punto eliminado con éxito.');
+                            location.reload();
+                        } else {
+                            alert('Hubo un error al eliminar el punto.');
+                        }
+                    },
+                    error: function () {
+                        alert('Hubo un error al eliminar el punto.');
+                    }
+                });
+            }
+        });
+
+    </script>
+</div>
+
+
+
+{% endblock %}

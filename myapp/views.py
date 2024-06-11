@@ -124,6 +124,64 @@ def inicio_admin(request):
         return render(request, "inicio_admin.html", {"puntos": puntos})
 
 
+@login_required
+def planifica_admin(request):
+
+    if request.method == "POST":
+        coord_lat = request.POST.get("coord_lat")
+        coord_lng = request.POST.get("coord_lng")
+        titulo = request.POST.get("titulo")
+        nombre = request.POST.get("nombre")
+
+        punto = punto_planifica.objects.create(
+            coord_lat=coord_lat,
+            coord_lng=coord_lng,
+            titulo=titulo,
+            name=nombre,
+        )
+        puntos = punto_planifica.objects.all()
+        return render(request, "planifica_admin.html", {"puntos": puntos})
+    else:
+        puntos = punto_planifica.objects.all()
+        return render(request, "planifica_admin.html", {"puntos": puntos})
+
+
+@login_required
+def conoce_admin(request):
+
+    if request.method == "POST":
+        coord_lat = request.POST.get("coord_lat")
+        coord_lng = request.POST.get("coord_lng")
+        titulo = request.POST.get("titulo")
+        nombre = request.POST.get("nombre")
+        descripcion = request.POST.get("descripcion")
+        detalles = request.POST.get("detalles")
+
+        if request.POST.get("titulo") == "Hotel":
+            imagen = "/static/img/conoceoruro/hot.png"
+        if request.POST.get("titulo") == "Comida":
+            imagen = "/static/img/conoceoruro/resta.png"
+        if request.POST.get("titulo") == "Museo":
+            imagen = "/static/img/conoceoruro/mm.png"
+        if request.POST.get("titulo") == "Iglesia":
+            imagen = "/static/img/conoceoruro/i.png"
+
+        punto = punto_conoce.objects.create(
+            coord_lat=coord_lat,
+            coord_lng=coord_lng,
+            titulo=titulo,
+            name=nombre,
+            descripcion=descripcion,
+            detalles=detalles,
+            imagen_ruta=imagen,
+        )
+        puntos = punto_conoce.objects.all()
+        return render(request, "conoce_admin.html", {"puntos": puntos})
+    else:
+        puntos = punto_conoce.objects.all()
+        return render(request, "conoce_admin.html", {"puntos": puntos})
+
+
 def conoce(request):
     usuario = request.user
     return render(request, "conoce.html", {"usuario": usuario})
@@ -132,6 +190,16 @@ def conoce(request):
 def planifica(request):
     usuario = request.user
     return render(request, "planifica.html", {"usuario": usuario})
+
+@login_required
+def mis_marcadores(request):
+    usuario = request.user
+    return render(request, "mis_marcadores.html", {"usuario": usuario})
+
+@login_required
+def foro(request):
+    usuario = request.user
+    return render(request, "foro.html", {"usuario": usuario})
 
 
 def aprende(request):
@@ -193,6 +261,24 @@ def eliminar_usuario(request, user_id):
 def eliminar_punto_carnaval(request, punto_id):
     if request.method == "POST":
         punto = get_object_or_404(punto_carnaval, id=punto_id)
+        punto.delete()
+        return JsonResponse({"status": "success"}, status=200)
+    return JsonResponse({"status": "error"}, status=400)
+
+
+@login_required
+def eliminar_punto_planifica(request, punto_id):
+    if request.method == "POST":
+        punto = get_object_or_404(punto_planifica, id=punto_id)
+        punto.delete()
+        return JsonResponse({"status": "success"}, status=200)
+    return JsonResponse({"status": "error"}, status=400)
+
+
+@login_required
+def eliminar_punto_conoce(request, punto_id):
+    if request.method == "POST":
+        punto = get_object_or_404(punto_conoce, id=punto_id)
         punto.delete()
         return JsonResponse({"status": "success"}, status=200)
     return JsonResponse({"status": "error"}, status=400)
