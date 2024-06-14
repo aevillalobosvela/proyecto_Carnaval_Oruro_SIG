@@ -8,13 +8,15 @@ from datetime import datetime
 from datetime import time
 from django.db import IntegrityError
 import pandas as pd
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
 from datetime import datetime, timedelta
 from .models import puntos_recorrido
 from .models import punto_carnaval
 from .models import punto_planifica
 from .models import punto_conoce
+from .models import punto_custom
 from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ValidationError
 
 
 def inicio(request):
@@ -46,6 +48,12 @@ def obtener_punto_planifica(request):
 
 def obtener_punto_conoce(request):
     datos = [punto_conoce.to_dict() for punto_conoce in punto_conoce.objects.all()]
+    return JsonResponse(datos, safe=False)
+
+
+def obtener_punto_custom(request):
+    puntos_usuario = punto_custom.objects.filter(user=request.user)
+    datos = [punto.to_dict() for punto in puntos_usuario]
     return JsonResponse(datos, safe=False)
 
 
@@ -187,19 +195,83 @@ def conoce(request):
     return render(request, "conoce.html", {"usuario": usuario})
 
 
+def acceso_denegado(request):
+    return render(request, "acceso_denegado.html")
+
+
 def planifica(request):
     usuario = request.user
     return render(request, "planifica.html", {"usuario": usuario})
 
-@login_required
-def mis_marcadores(request):
-    usuario = request.user
-    return render(request, "mis_marcadores.html", {"usuario": usuario})
 
-@login_required
+def mis_marcadores(request):
+
+    if request.method == "POST":
+        try:
+            coord_lat = request.POST.get("coord_lat")
+            coord_lng = request.POST.get("coord_lng")
+            nombre = request.POST.get("nombre")
+            descripcion = request.POST.get("descripcion")
+
+            punto = punto_custom.objects.create(
+                user=request.user,
+                coord_lat=coord_lat,
+                coord_lng=coord_lng,
+                name=nombre,
+                descripcion=descripcion,
+            )
+            usuario = request.user
+            return render(request, "mis_marcadores.html", {"usuario": usuario})
+        except ValidationError as ve:
+            usuario = request.user
+            return render(request, "mis_marcadores.html", {"usuario": usuario})
+        except ValueError:
+            usuario = request.user
+            return render(request, "mis_marcadores.html", {"usuario": usuario})
+        except Exception as e:
+            usuario = request.user
+            return render(request, "mis_marcadores.html", {"usuario": usuario})
+    else:
+        if not request.user.is_authenticated:
+            return render(request, "acceso_denegado.html")
+        else:
+            usuario = request.user
+            return render(request, "mis_marcadores.html", {"usuario": usuario})
+
+
 def foro(request):
-    usuario = request.user
-    return render(request, "foro.html", {"usuario": usuario})
+
+    if request.method == "POST":
+        try:
+            coord_lat = request.POST.get("coord_lat")
+            coord_lng = request.POST.get("coord_lng")
+            nombre = request.POST.get("nombre")
+            descripcion = request.POST.get("descripcion")
+
+            punto = punto_custom.objects.create(
+                user=request.user,
+                coord_lat=coord_lat,
+                coord_lng=coord_lng,
+                name=nombre,
+                descripcion=descripcion,
+            )
+            usuario = request.user
+            return render(request, "mis_marcadores.html", {"usuario": usuario})
+        except ValidationError as ve:
+            usuario = request.user
+            return render(request, "mis_marcadores.html", {"usuario": usuario})
+        except ValueError:
+            usuario = request.user
+            return render(request, "mis_marcadores.html", {"usuario": usuario})
+        except Exception as e:
+            usuario = request.user
+            return render(request, "mis_marcadores.html", {"usuario": usuario})
+    else:
+        if not request.user.is_authenticated:
+            return render(request, "acceso_denegado.html")
+        else:
+            usuario = request.user
+            return render(request, "foro.html", {"usuario": usuario})
 
 
 def aprende(request):
@@ -282,6 +354,24 @@ def eliminar_punto_conoce(request, punto_id):
         punto.delete()
         return JsonResponse({"status": "success"}, status=200)
     return JsonResponse({"status": "error"}, status=400)
+
+
+def eliminar_punto_custom(request, punto_id):
+    punto = get_object_or_404(punto_custom, pk=punto_id)
+    # Verificar que el usuario tenga permisos para eliminar este punto
+    if punto.user == request.user:
+        punto.delete()
+        return JsonResponse({"status": "success"})
+    else:
+        return HttpResponseForbidden("No tienes permisos para realizar esta acción.")
+
+
+""" def eliminar_punto_custom(request, punto_id):
+    if request.method == "POST":
+        punto = get_object_or_404(punto_custom, id=punto_id)
+        punto.delete()
+        return JsonResponse({"status": "success"}, status=200)
+    return JsonResponse({"status": "error"}, status=400) """
 
 
 """ //---------------------------------------------------------------------------------- """

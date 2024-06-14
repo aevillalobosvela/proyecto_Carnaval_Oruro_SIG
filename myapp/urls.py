@@ -23,6 +23,9 @@ urlpatterns = [
     path(
         "obtener_punto_conoce/", views.obtener_punto_conoce, name="obtener_punto_conoce"
     ),
+    path(
+        "obtener_punto_custom/", views.obtener_punto_custom, name="obtener_punto_custom"
+    ),
     path("login_user/", views.login_user, name="login_user"),
     path("usuarios_admin/", views.usuarios_admin, name="usuarios_admin"),
     path("inicio_admin/", views.inicio_admin, name="inicio_admin"),
@@ -34,6 +37,7 @@ urlpatterns = [
     path("aprende/", views.aprende, name="aprende"),
     path("mis_marcadores/", views.mis_marcadores, name="mis_marcadores"),
     path("foro/", views.foro, name="foro"),
+    path("acceso_denegado/", views.acceso_denegado, name="acceso_denegado"),
     path("logout/", views.signout, name="logout"),
     path(
         "eliminar-usuario/<int:user_id>/",
@@ -54,6 +58,11 @@ urlpatterns = [
         "eliminar-punto-conoce<int:punto_id>/",
         views.eliminar_punto_conoce,
         name="eliminar_punto_conoce",
+    ),
+    path(
+        "mis_marcadores/eliminar_punto_custom/<int:punto_id>/",
+        views.eliminar_punto_custom,
+        name="eliminar_punto_custom",
     ),
 ]
 

@@ -54,3 +54,18 @@ class punto_conoce(models.Model):
             "detalles": self.detalles,
             "imagen_ruta": self.imagen_ruta,
         }
+        
+class punto_custom(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    coord_lat = models.FloatField()
+    coord_lng = models.FloatField()
+    name = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=255)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "coord": [self.coord_lat, self.coord_lng],
+            "name": self.name,
+            "descripcion": self.descripcion,
+        }

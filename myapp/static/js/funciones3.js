@@ -45,6 +45,7 @@ document
 document
   .getElementById("select-iglesias")
   .addEventListener("change", moveToLocation);
+  
 document.addEventListener("DOMContentLoaded", function () {
   var Hoteles = [];
   var Comidas = [];

@@ -4,7 +4,13 @@ from .models import puntos_recorrido
 from .models import punto_carnaval
 from .models import punto_planifica
 from .models import punto_conoce
+from .models import punto_custom
 
+@admin.register(punto_custom)
+class punto_customAdmin(admin.ModelAdmin):
+    list_display = ('name', 'descripcion', 'coord_lat', 'coord_lng')
+    search_fields = ('name', 'descripcion')
+    
 @admin.register(punto_conoce)
 class punto_conoceAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'name', 'descripcion', 'coord_lat', 'coord_lng', 'imagen_ruta')
