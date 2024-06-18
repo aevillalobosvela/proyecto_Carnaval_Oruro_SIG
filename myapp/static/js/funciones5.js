@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let marker = L.marker(data.coord, { icon: markerIcon }).addTo(map5);
 
         marker.on("click", function () {
+          var listaComentarios = document.getElementById("lista_comentarios");
+          listaComentarios.innerHTML = "";
           var id_punto = document.getElementById("id_punto");
           id_punto.value = data.id;
 
@@ -35,8 +37,18 @@ document.addEventListener("DOMContentLoaded", function () {
               var comentarios = datas;
               comentarios.forEach(function (comen) {
                 if (comen.punto_id == data.id) {
-                  console.log("SI");
-                } 
+                  var comentarioDiv = document.createElement("div");
+                  comentarioDiv.classList.add("comentario");
+                  // Construir el HTML del comentario
+                  comentarioDiv.innerHTML = `
+                  <div class="card" style="margin: 20px; background-image: none; background-color: transparent; color: white; border: 1px solid white; border-radius: 10px; padding: 10px;">
+                    <p style="margin: 1px; font-weight: bold; text-align: left;">${comen.usuario} - ${formatearFecha(comen.fecha_hora)}</p>
+                    <p style="margin: 1px; text-align: left;">${comen.comentario_user}</p>
+                </div>
+                    `;
+                  // Agregar el comentario al contenedor
+                  listaComentarios.appendChild(comentarioDiv);
+                }
               });
             });
           showLocationCard(data);
@@ -44,6 +56,17 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 });
+
+function formatearFecha(fechaISO) {
+  var fecha = new Date(fechaISO);
+  var opcionesFecha = { year: "numeric", month: "long", day: "numeric" };
+  var opcionesHora = { hour: "numeric", minute: "numeric", second: "numeric" };
+  var fechaFormateada =
+    fecha.toLocaleDateString("es-ES", opcionesFecha) +
+    " " +
+    fecha.toLocaleTimeString("es-ES", opcionesHora);
+  return fechaFormateada;
+}
 
 function showLocationCard(location) {
   var elemento = document.getElementById("formulario");
