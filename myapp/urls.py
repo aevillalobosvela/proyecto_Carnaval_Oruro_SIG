@@ -26,6 +26,7 @@ urlpatterns = [
     path(
         "obtener_punto_custom/", views.obtener_punto_custom, name="obtener_punto_custom"
     ),
+    path("obtener_comentario/", views.obtener_comentario, name="obtener_comentario"),
     path("login_user/", views.login_user, name="login_user"),
     path("usuarios_admin/", views.usuarios_admin, name="usuarios_admin"),
     path("inicio_admin/", views.inicio_admin, name="inicio_admin"),

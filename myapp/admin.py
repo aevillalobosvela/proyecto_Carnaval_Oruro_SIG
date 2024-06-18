@@ -5,7 +5,13 @@ from .models import punto_carnaval
 from .models import punto_planifica
 from .models import punto_conoce
 from .models import punto_custom
+from .models import comentario
 
+@admin.register(comentario)
+class comentarioAdmin(admin.ModelAdmin):
+    list_display = ('usuario', 'punto','comentario_user', 'fecha_hora')
+    search_fields = ('comentario_user', 'fecha_hora')
+    
 @admin.register(punto_custom)
 class punto_customAdmin(admin.ModelAdmin):
     list_display = ('name', 'descripcion', 'coord_lat', 'coord_lng')

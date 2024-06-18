@@ -3,54 +3,62 @@
 
 <div class="wrapper">
     <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div style="color: white; background-image: linear-gradient(to right, #6d0606, #691e00, #632d00, #5d3800, #564200, #514700, #4a4d00, #425200, #3b5500, #315800, #245b00, #0e5e02);"
+    <div style="width: 100%; border-right: solid 1px rgb(158, 157, 157);">
+        <div style="height: 8%; color: white; background-image: linear-gradient(to right, #6d0606, #691e00, #632d00, #5d3800, #564200, #514700, #4a4d00, #425200, #3b5500, #315800, #245b00, #0e5e02);"
             class="sidebar-header text-center">
-            <h3>Foro</h3>
+            <h3 class="pt-1">Foro</h3>
         </div>
 
-        <div style="height: 100%; background-image: linear-gradient(to bottom, #f8d1d1, #ffd6cd, #ffdcc9, #ffe3c7, #ffebc6, #fbefc6, #f5f3c7, #eff7c9, #e6f7ca, #dcf8cd, #d3f8d0, #c9f8d4);"
+        <div style="height: 92%;  background-image: linear-gradient(to bottom, #f8d1d1, #ffd6cd, #ffdcc9, #ffe3c7, #ffebc6, #fbefc6, #f5f3c7, #eff7c9, #e6f7ca, #dcf8cd, #d3f8d0, #c9f8d4);"
             class="controls p-3">
-            <div>
-                <div>
-                    <h5>Hoteles</h5>
+            <div class="container mt-2">
+                <div id="location-card-container">
+                    <h5>Selecciona un lugar</h5>
                 </div>
-                <select class="form-select mb-4" id="hotelSelect" aria-label="Default select example">
-                </select>
-            </div>
-            <div>
-                <div>
-                    <h5>Restaurante</h5>
+                <div class="mt-1" id="formulario" style="display: none;">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="comments-section row px-2">
+                            <textarea type="text" class="form-control" id="comment-input" name="comentario_user"
+                                placeholder="Escribe un comentario..." rows="3" required></textarea>
+                        </div>
+                        <div class="text-center mt-2">
+                            <button type="submit" class="btn btn-warning" id="submit-comment">Guardar
+                                comentario</button>
+                            <button style="display: none;" class="btn btn-warning" id="routeButton">Guardar
+                            </button>
+                        </div>
+                        <div class="text-right">
+                            <input style="width: 10px;" type="text" class="form-control" id="id_punto" name="id_punto">
+                        </div>
+                    </form>
                 </div>
-                <select class="form-select mb-4" id="foodSelect" aria-label="Default select example">
-                </select>
             </div>
-            <div>
-                <div>
-                    <h5>Lugares turisticos</h5>
-                </div>
-                <select class="form-select mb-4" id="tourismSelect" aria-label="Default select example">
-                </select>
-            </div>
-            <div class="text-center">
-                <button type="button" class="btn btn-success btn-lg" id="generateRoute">Generar Ruta</button>
-            </div>
+
             <div>
                 <p style="color: black; position: absolute; bottom: 0;" class="m-2">Usuario actual:
                     {{usuario.username}}
                 </p>
             </div>
         </div>
-
-    </nav>
-    <button type="button" id="sidebarCollapse" class="btn btn-tab">
-        <i id="icon" class="fas fa-arrow-circle-left"></i>
-    </button>
-
+    </div>
     <div id="content">
-        <div style="height: 100%;" id="map"></div>
+        <div style="height: 100%;" id="map5"></div>
     </div>
 </div>
 
+<nav class="navbar navbar-expand-lg navbol" style="justify-content:space-around;">
+    <div class="container-fluid mx-1">
+        </button>
+    </div>
+</nav>
+
+<div class="container-fluid "
+    style="background-image: linear-gradient(to right top, #32027e, #40005c, #3e003e, #330027, #240116, #270318, #2a051b, #2e061d, #470036, #5a0057, #650080, #5d03b1);">
+    <div class="row mx-5 text-center text-white">
+        <h1 style="margin-top: 25px; margin-bottom: 20px;">COMENTARIOS</h1>
+        <div id="lista_comentarios" style="display: none;">AA</div>
+    </div>
+</div>
 
 {% endblock %}

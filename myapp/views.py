@@ -15,6 +15,7 @@ from .models import punto_carnaval
 from .models import punto_planifica
 from .models import punto_conoce
 from .models import punto_custom
+from .models import comentario
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 
@@ -55,6 +56,12 @@ def obtener_punto_custom(request):
     puntos_usuario = punto_custom.objects.filter(user=request.user)
     datos = [punto.to_dict() for punto in puntos_usuario]
     return JsonResponse(datos, safe=False)
+
+
+def obtener_comentario(request):
+    datos = comentario.objects.all()
+    datos_dict = [comentario.to_dict() for comentario in datos]
+    return JsonResponse(datos_dict, safe=False)
 
 
 def login_user(request):
@@ -243,29 +250,26 @@ def foro(request):
 
     if request.method == "POST":
         try:
-            coord_lat = request.POST.get("coord_lat")
-            coord_lng = request.POST.get("coord_lng")
-            nombre = request.POST.get("nombre")
-            descripcion = request.POST.get("descripcion")
-
-            punto = punto_custom.objects.create(
-                user=request.user,
-                coord_lat=coord_lat,
-                coord_lng=coord_lng,
-                name=nombre,
-                descripcion=descripcion,
+            comentario_user = request.POST.get("comentario_user")
+            id_punto = request.POST.get("id_punto")
+            punto = punto_conoce.objects.get(id=id_punto)
+            comentario_user = comentario.objects.create(
+                usuario=request.user,
+                punto=punto,
+                comentario_user=comentario_user,
+                fecha_hora=timezone.now(),
             )
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario})
+            return render(request, "foro.html", {"usuario": usuario})
         except ValidationError as ve:
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario})
+            return render(request, "foro.html", {"usuario": usuario})
         except ValueError:
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario})
+            return render(request, "foro.html", {"usuario": usuario})
         except Exception as e:
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario})
+            return render(request, "foro.html", {"usuario": usuario})
     else:
         if not request.user.is_authenticated:
             return render(request, "acceso_denegado.html")
