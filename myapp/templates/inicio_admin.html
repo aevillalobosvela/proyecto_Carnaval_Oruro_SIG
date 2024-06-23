@@ -78,10 +78,36 @@
                     <div style="height: 350px; cursor: context-menu;" id="map_admin1"></div>
                 </div>
             </div>
+            <div class="m-3 mx-auto text-center">
+                <button class="btn btn-info btn-lg" id="mod_ruta" data-bs-toggle="modal"
+                    data-bs-target="#myModal">Modificar ruta del carnaval</button>
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Seleccione la nueva ruta</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div style="height: 350px; cursor: context-menu;" id="map_admin1_modal"></div>
+                            <div>
+                                <p style="color: black; margin: 0%;">Esto eliminara la ruta anterior</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="saveRouteButton">Guardar ruta</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
-
+    <script type="text/javascript">
+        var csrfToken = '{{ csrf_token }}';
+      </script>
     <script>
         $(document).ready(function () {
             $('#inicioTable').DataTable();
@@ -95,10 +121,20 @@
                 maxZoom: 18,
                 minZoom: 14,
             });
+            var map_admin1_modal = L.map("map_admin1_modal", {
+                center: [-17.964138034171146, -67.10734251787665],
+                zoom: 15,
+                maxZoom: 18,
+                minZoom: 14,
+            });
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { // Carga la capa base del mapa
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map_admin1);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { // Carga la capa base del mapa
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map_admin1_modal);
 
             var osmLayer = new L.TileLayer(
                 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -117,32 +153,93 @@
                 $('#id_coord_lat_ini').val(e.latlng.lat.toFixed(8));
                 $('#id_coord_lng_ini').val(e.latlng.lng.toFixed(8));
             });
+
+            var points = [];
+            var polyline;
+
+            function updatePolyline() {
+                if (polyline) {
+                    polyline.setLatLngs(points);
+                } else {
+                    polyline = L.polyline(points, {
+                        color: 'orange',
+                        weight: 8,
+                        opacity: 0.7,
+                        lineCap: 'round',
+                        lineJoin: 'round',
+                    }).addTo(map_admin1_modal);
+                }
+            }
+
+            map_admin1_modal.on('click', function (e) {
+                var latLng = e.latlng;
+                points.push([latLng.lat, latLng.lng]);
+                updatePolyline();
+            });
+
+            $('#myModal').on('shown.bs.modal', function () {
+                points = [];
+                map_admin1_modal.invalidateSize();
+                updatePolyline();
+            });
+
+            $('#saveRouteButton').on('click', function () {
+                if (points.length < 2) {
+                    alert("Seleccione varios puntos")
+                }
+                else {
+                    var puntos = points.map(function (point) {
+                        return { latitud: point[0], longitud: point[1] };
+                    });
+
+                    // Send points to the server
+                    fetch('/actualizar_ruta/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': csrfToken
+                        },
+                        body: JSON.stringify({ puntos: puntos })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === "success") {
+                                alert("Ruta guardada exitosamente.");
+                            } else {
+                                alert("Error al guardar la ruta: " + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                        });
+                }
+            });
         });
 
 
         $('#inicioTable').on('click', '.borrar-inicio', function () {
-                var puntoId = $(this).data('id');
-                if (confirm('¿Estás seguro de que quieres eliminar este punto?')) {
-                    $.ajax({
-                        url: '{% url "eliminar_punto_carnaval" 0 %}'.slice(0, -2) + puntoId + '/',
-                        type: 'POST',
-                        headers: {
-                            'X-CSRFToken': '{{ csrf_token }}'
-                        },
-                        success: function (response) {
-                            if (response.status === 'success') {
-                                alert('Punto eliminado con éxito.');
-                                location.reload();
-                            } else {
-                                alert('Hubo un error al eliminar el punto.');
-                            }
-                        },
-                        error: function () {
+            var puntoId = $(this).data('id');
+            if (confirm('¿Estás seguro de que quieres eliminar este punto?')) {
+                $.ajax({
+                    url: '{% url "eliminar_punto_carnaval" 0 %}'.slice(0, -2) + puntoId + '/',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            alert('Punto eliminado con éxito.');
+                            location.reload();
+                        } else {
                             alert('Hubo un error al eliminar el punto.');
                         }
-                    });
-                }
-            });
+                    },
+                    error: function () {
+                        alert('Hubo un error al eliminar el punto.');
+                    }
+                });
+            }
+        });
 
     </script>
 </div>

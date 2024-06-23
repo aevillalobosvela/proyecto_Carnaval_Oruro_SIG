@@ -82,15 +82,6 @@ function adjustCoordinatesToRight(coords, offset) {
 }
 
 /* -LINEA PRINCIPAL-------------------------------------------------------------------------------------- */
-var inicio_mark = L.marker([-17.957698858097284, -67.10479645507664]).addTo(
-  map1
-);
-inicio_mark.bindPopup("Inicio del recorrido");
-
-var final_mark = L.marker([-17.967469390470484, -67.11855552699116]).addTo(
-  map1
-);
-final_mark.bindPopup("Final del recorrido");
 
 fetch("/obtener_puntos_recorrido/")
   .then((response) => response.json())
@@ -104,6 +95,14 @@ fetch("/obtener_puntos_recorrido/")
       lineJoin: "round",
     };
     L.polyline(rec_carnaval, polylineOptions).addTo(map1);
+    if (rec_carnaval.length > 0) {
+      var firstPoint = rec_carnaval[0];
+      L.marker(firstPoint).addTo(map1).bindPopup("Inicio del recorrido");
+
+      // Añade un marcador en el último punto
+      var lastPoint = rec_carnaval[rec_carnaval.length - 1];
+      L.marker(lastPoint).addTo(map1).bindPopup("Fin del recorrido");
+    }
   })
   .catch((error) => console.error("Error:", error));
 

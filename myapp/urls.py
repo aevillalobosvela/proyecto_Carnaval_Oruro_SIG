@@ -65,6 +65,7 @@ urlpatterns = [
         views.eliminar_punto_custom,
         name="eliminar_punto_custom",
     ),
+    path('actualizar_ruta/', views.actualizar_ruta, name='actualizar_ruta'),
 ]
 
 if settings.DEBUG:

@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -368,6 +369,31 @@ def eliminar_punto_custom(request, punto_id):
         return JsonResponse({"status": "success"})
     else:
         return HttpResponseForbidden("No tienes permisos para realizar esta acción.")
+
+
+@csrf_exempt
+def actualizar_ruta(request):
+    if request.method == "POST":
+        try:
+            # Parse the JSON data from the request
+            data = json.loads(request.body)
+            puntos = data.get("puntos", [])
+
+            # Delete all existing points
+            puntos_recorrido.objects.all().delete()
+
+            # Create new points
+            for punto in puntos:
+                puntos_recorrido.objects.create(
+                    latitud_rc=punto["latitud"], longitud_rc=punto["longitud"]
+                )
+
+            return JsonResponse({"status": "success"}, status=200)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+    return JsonResponse(
+        {"status": "error", "message": "Invalid request method"}, status=400
+    )
 
 
 """ def eliminar_punto_custom(request, punto_id):
