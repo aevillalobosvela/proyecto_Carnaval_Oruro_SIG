@@ -17,6 +17,8 @@ from .models import punto_planifica
 from .models import punto_conoce
 from .models import punto_custom
 from .models import comentario
+from .models import calificacion
+from .forms import calificacionForm
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 
@@ -369,6 +371,38 @@ def eliminar_punto_custom(request, punto_id):
         return JsonResponse({"status": "success"})
     else:
         return HttpResponseForbidden("No tienes permisos para realizar esta acción.")
+
+
+@login_required
+def calificar_servicio(request):
+    user = request.user
+    # Verificar si el usuario ya tiene una calificación
+    try:
+        calificacion_existente = calificacion.objects.get(user=user)
+        initial_data = {
+            "rating_need": calificacion_existente.rating_need,
+            "rating_situation": calificacion_existente.rating_situation,
+            "rating_experience": calificacion_existente.rating_experience,
+            "rating_satisfaction": calificacion_existente.rating_satisfaction,
+        }
+    except calificacion.DoesNotExist:
+        initial_data = None
+
+    if request.method == "POST":
+        # Si el usuario envía el formulario, actualizar o crear la calificación
+        form = calificacionForm(request.POST, instance=calificacion_existente)
+        if form.is_valid():
+            calificacion_u = form.save(commit=False)
+            calificacion_u.user = user
+            calificacion_u.save()
+            return redirect(
+                "planifica"
+            )  # Redireccionar a la misma página después de guardar
+    else:
+        # Si es un GET request, mostrar el formulario con la calificación existente (si hay)
+        form = calificacionForm(initial=initial_data)
+
+    return render(request, "planifica.html", {"form": form,"usuario": user})
 
 
 @csrf_exempt

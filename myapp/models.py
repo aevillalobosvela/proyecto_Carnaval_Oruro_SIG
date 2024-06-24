@@ -88,3 +88,13 @@ class comentario(models.Model):
             "comentario_user": self.comentario_user,
             "fecha_hora": self.fecha_hora,
         }
+
+class calificacion(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating_need = models.IntegerField(null=True, blank=True)
+    rating_situation = models.IntegerField(null=True, blank=True)
+    rating_experience = models.IntegerField(null=True, blank=True)
+    rating_satisfaction = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f"calificación de {self.user.username}"
