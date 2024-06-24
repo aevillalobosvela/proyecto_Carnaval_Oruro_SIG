@@ -95,7 +95,7 @@
                     {% csrf_token %}
                     <h3 class="mt-3" style="color: white;">Califica el Servicio</h3>
                     <div class="rating">
-                        <input type="radio" id="star5_need" name="rating_need" value="5" {% if form.initial.rating_need == 5 %} checked {% endif %} />
+                        <input required type="radio" id="star5_need" name="rating_need" value="5" {% if form.initial.rating_need == 5 %} checked {% endif %} />
                         <label class="star" for="star5_need">★</label>
                         <input type="radio" id="star4_need" name="rating_need" value="4" {% if form.initial.rating_need == 4 %} checked {% endif %} />
                         <label class="star" for="star4_need">★</label>
@@ -108,7 +108,7 @@
                     </div>
                     <h5 style="color: white;">Necesidades suplidas</h5>
                     <div class="rating">
-                        <input type="radio" id="star5_situation" name="rating_situation" value="5" {% if form.initial.rating_situation == 5 %} checked {% endif %} />
+                        <input required type="radio" id="star5_situation" name="rating_situation" value="5" {% if form.initial.rating_situation == 5 %} checked {% endif %} />
                         <label class="star" for="star5_situation">★</label>
                         <input type="radio" id="star4_situation" name="rating_situation" value="4" {% if form.initial.rating_situation == 4 %} checked {% endif %} />
                         <label class="star" for="star4_situation">★</label>
@@ -121,7 +121,7 @@
                     </div>
                     <h5 style="color: white;">Situación favorable</h5>
                     <div class="rating">
-                        <input type="radio" id="star5_experience" name="rating_experience" value="5" {% if form.initial.rating_experience == 5 %} checked {% endif %} />
+                        <input required type="radio" id="star5_experience" name="rating_experience" value="5" {% if form.initial.rating_experience == 5 %} checked {% endif %} />
                         <label class="star" for="star5_experience">★</label>
                         <input type="radio" id="star4_experience" name="rating_experience" value="4" {% if form.initial.rating_experience == 4 %} checked {% endif %} />
                         <label class="star" for="star4_experience">★</label>
@@ -134,7 +134,7 @@
                     </div>
                     <h5 style="color: white;">Experiencia personal</h5>
                     <div class="rating">
-                        <input type="radio" id="star5_satisfaction" name="rating_satisfaction" value="5" {% if form.initial.rating_satisfaction == 5 %} checked {% endif %} />
+                        <input required type="radio" id="star5_satisfaction" name="rating_satisfaction" value="5" {% if form.initial.rating_satisfaction == 5 %} checked {% endif %} />
                         <label class="star" for="star5_satisfaction">★</label>
                         <input type="radio" id="star4_satisfaction" name="rating_satisfaction" value="4" {% if form.initial.rating_satisfaction == 4 %} checked {% endif %} />
                         <label class="star" for="star4_satisfaction">★</label>

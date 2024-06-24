@@ -19,8 +19,25 @@
                     <form method="post">
                         {% csrf_token %}
                         <div class="comments-section row px-2">
-                            <textarea type="text" class="form-control" id="comment-input" name="comentario_user"
-                                placeholder="Escribe un comentario..." rows="3" required></textarea>
+                            <div class="col-7"><textarea type="text" class="form-control" id="comment-input"
+                                    name="comentario_user" placeholder="Escribe un comentario..." rows="3"
+                                    required></textarea></div>
+
+                            <div class="col-5 text-center">
+                                <h3>Califica el lugar</h3>
+                                <div class="rating">
+                                    <input required type="radio" id="star5_rating" name="rating" value="5" />
+                                    <label class="star" for="star5_rating">★</label>
+                                    <input type="radio" id="star4_rating" name="rating" value="4" />
+                                    <label class="star" for="star4_rating">★</label>
+                                    <input type="radio" id="star3_rating" name="rating" value="3" />
+                                    <label class="star" for="star3_rating">★</label>
+                                    <input type="radio" id="star2_rating" name="rating" value="2" />
+                                    <label class="star" for="star2_rating">★</label>
+                                    <input type="radio" id="star1_rating" name="rating" value="1" />
+                                    <label class="star" for="star1_rating">★</label>
+                                </div>
+                            </div>
                         </div>
                         <div class="text-center mt-2">
                             <button type="submit" class="btn btn-warning" id="submit-comment">Guardar

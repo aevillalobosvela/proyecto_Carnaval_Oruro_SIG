@@ -9,7 +9,7 @@ from .models import comentario
 
 @admin.register(comentario)
 class comentarioAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'punto','comentario_user', 'fecha_hora')
+    list_display = ('usuario', 'punto','comentario_user', 'fecha_hora','rating')
     search_fields = ('comentario_user', 'fecha_hora')
     
 @admin.register(punto_custom)

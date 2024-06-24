@@ -13,6 +13,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // Definir ubicaciones con detalles adicionales
 
 document.addEventListener("DOMContentLoaded", function () {
+  var promedio = 0;
   fetch("/obtener_punto_conoce/")
     .then((response) => response.json())
     .then((data) => {
@@ -30,28 +31,40 @@ document.addEventListener("DOMContentLoaded", function () {
           listaComentarios.innerHTML = "";
           var id_punto = document.getElementById("id_punto");
           id_punto.value = data.id;
-
+          var prom_rating = 0;
           fetch("/obtener_comentario/")
             .then((response) => response.json())
             .then((datas) => {
               var comentarios = datas;
+              let valores = [];
+              promedio = 0;
               comentarios.forEach(function (comen) {
                 if (comen.punto_id == data.id) {
+                  prom_rating += comen.rating;
+                  valores.push(comen.rating);
                   var comentarioDiv = document.createElement("div");
                   comentarioDiv.classList.add("comentario");
                   // Construir el HTML del comentario
                   comentarioDiv.innerHTML = `
                   <div class="card" style="margin: 20px; background-image: none; background-color: transparent; color: white; border: 1px solid white; border-radius: 10px; padding: 10px;">
-                    <p style="margin: 1px; font-weight: bold; text-align: left;">${comen.usuario} - ${formatearFecha(comen.fecha_hora)}</p>
-                    <p style="margin: 1px; text-align: left;">${comen.comentario_user}</p>
+                    <p style="margin: 1px; font-weight: bold; text-align: left;">${
+                      comen.usuario
+                    } - ${formatearFecha(comen.fecha_hora)} - Calificacion: ${
+                    comen.rating
+                  }/5</p>
+                    <p style="margin: 1px; text-align: left;">${
+                      comen.comentario_user
+                    }</p>
                 </div>
                     `;
                   // Agregar el comentario al contenedor
                   listaComentarios.appendChild(comentarioDiv);
                 }
               });
+              promedio = prom_rating / valores.length;
+              console.log(promedio);
+              showLocationCard(data, promedio);
             });
-          showLocationCard(data);
         });
       });
     });
@@ -68,7 +81,10 @@ function formatearFecha(fechaISO) {
   return fechaFormateada;
 }
 
-function showLocationCard(location) {
+function showLocationCard(location, promedio) {
+  if (promedio == NaN) {
+    promedio = 0;
+  }
   var elemento = document.getElementById("formulario");
   if (elemento.style.display === "none") {
     elemento.style.display = "block"; // Muestra el elemento
@@ -84,6 +100,7 @@ function showLocationCard(location) {
     <div class="card" style="background-image: none;">
         <div class="card-header text-center">
             <h3>${location.name}</h3>
+            <h5>Calificacion: ${promedio}</h5>
         </div>
         <div class="row pt-4 px-4">
             <div class="col-5 text-center">
@@ -91,6 +108,7 @@ function showLocationCard(location) {
             </div>
             <div class="col-7">
                 <p style="color: black; font-size:14px">${location.descripcion}</p>
+
             </div>
         </div>
     </div>

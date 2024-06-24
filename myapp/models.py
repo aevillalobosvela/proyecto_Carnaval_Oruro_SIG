@@ -79,6 +79,7 @@ class comentario(models.Model):
     punto = models.ForeignKey(punto_conoce, on_delete=models.CASCADE)
     comentario_user = models.TextField()
     fecha_hora = models.DateTimeField(auto_now_add=True)
+    rating = models.IntegerField(blank=True, null=True)
 
     def to_dict(self):
         return {
@@ -87,6 +88,7 @@ class comentario(models.Model):
             "punto_id": self.punto.id,
             "comentario_user": self.comentario_user,
             "fecha_hora": self.fecha_hora,
+            "rating": self.rating,
         }
 
 class calificacion(models.Model):

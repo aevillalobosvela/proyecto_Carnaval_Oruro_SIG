@@ -21,6 +21,7 @@ from .models import calificacion
 from .forms import calificacionForm
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
+from django.db.models import Avg
 
 
 def inicio(request):
@@ -100,12 +101,27 @@ def login_user(request):
 def usuarios_admin(request):
     usuario = request.user
     usuarios = User.objects.filter(is_superuser=False)
+    promedios = calificacion.objects.aggregate(
+        promedio_need = Avg("rating_need"),
+        promedio_situation = Avg("rating_situation"),
+        promedio_experience = Avg("rating_experience"),
+        promedio_satisfaction = Avg("rating_satisfaction"),
+    )
+   
+    promedio_need = round(promedios['promedio_need'], 1)
+    promedio_situation = round(promedios['promedio_situation'], 1)
+    promedio_experience = round(promedios['promedio_experience'], 1)
+    promedio_satisfaction = round(promedios['promedio_satisfaction'], 1)
     return render(
         request,
         "usuarios_admin.html",
         {
             "usuario": usuario,
             "usuarios": usuarios,
+            "promedio_need": promedio_need,
+            "promedio_situation": promedio_situation,
+            "promedio_experience": promedio_experience,
+            "promedio_satisfaction": promedio_satisfaction,
         },
     )
 
@@ -217,7 +233,7 @@ def planifica(request):
         initial_data = None
         form = calificacionForm(initial=initial_data)
         return render(request, "planifica.html", {"form": form})
-    
+
     if request.method == "POST":
         print("Entra post")
         rating_need = request.POST.get("rating_need")
@@ -231,9 +247,9 @@ def planifica(request):
         calificacionu.rating_experience = rating_experience
         calificacionu.rating_satisfaction = rating_satisfaction
         calificacionu.save()
-        
-        return redirect('planifica')
-    
+
+        return redirect("planifica")
+
     # Verificar si el usuario ya tiene una calificación
     else:
         try:
@@ -245,10 +261,10 @@ def planifica(request):
                 "rating_satisfaction": calificacion_existente.rating_satisfaction,
             }
         except calificacion.DoesNotExist:
-            initial_data = None 
+            initial_data = None
         # Si es un GET request, mostrar el formulario con la calificación existente (si hay)
         form = calificacionForm(initial=initial_data)
-        return render(request, "planifica.html", {"form": form,"usuario": usuario})
+        return render(request, "planifica.html", {"form": form, "usuario": usuario})
 
 
 def mis_marcadores(request):
@@ -292,12 +308,14 @@ def foro(request):
         try:
             comentario_user = request.POST.get("comentario_user")
             id_punto = request.POST.get("id_punto")
+            ratingu = request.POST.get("rating")
             punto = punto_conoce.objects.get(id=id_punto)
             comentario_user = comentario.objects.create(
                 usuario=request.user,
                 punto=punto,
                 comentario_user=comentario_user,
                 fecha_hora=timezone.now(),
+                rating=ratingu,
             )
             usuario = request.user
             return render(request, "foro.html", {"usuario": usuario})
