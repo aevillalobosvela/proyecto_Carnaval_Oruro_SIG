@@ -210,8 +210,45 @@ def acceso_denegado(request):
 
 
 def planifica(request):
+    print("entrando")
     usuario = request.user
-    return render(request, "planifica.html", {"usuario": usuario})
+    if not request.user.is_authenticated:
+        print("entra sin user")
+        initial_data = None
+        form = calificacionForm(initial=initial_data)
+        return render(request, "planifica.html", {"form": form})
+    
+    if request.method == "POST":
+        print("Entra post")
+        rating_need = request.POST.get("rating_need")
+        rating_situation = request.POST.get("rating_situation")
+        rating_experience = request.POST.get("rating_experience")
+        rating_satisfaction = request.POST.get("rating_satisfaction")
+
+        calificacionu, created = calificacion.objects.get_or_create(user=usuario)
+        calificacionu.rating_need = rating_need
+        calificacionu.rating_situation = rating_situation
+        calificacionu.rating_experience = rating_experience
+        calificacionu.rating_satisfaction = rating_satisfaction
+        calificacionu.save()
+        
+        return redirect('planifica')
+    
+    # Verificar si el usuario ya tiene una calificación
+    else:
+        try:
+            calificacion_existente = calificacion.objects.get(user=usuario)
+            initial_data = {
+                "rating_need": calificacion_existente.rating_need,
+                "rating_situation": calificacion_existente.rating_situation,
+                "rating_experience": calificacion_existente.rating_experience,
+                "rating_satisfaction": calificacion_existente.rating_satisfaction,
+            }
+        except calificacion.DoesNotExist:
+            initial_data = None 
+        # Si es un GET request, mostrar el formulario con la calificación existente (si hay)
+        form = calificacionForm(initial=initial_data)
+        return render(request, "planifica.html", {"form": form,"usuario": usuario})
 
 
 def mis_marcadores(request):
@@ -371,38 +408,6 @@ def eliminar_punto_custom(request, punto_id):
         return JsonResponse({"status": "success"})
     else:
         return HttpResponseForbidden("No tienes permisos para realizar esta acción.")
-
-
-@login_required
-def calificar_servicio(request):
-    user = request.user
-    # Verificar si el usuario ya tiene una calificación
-    try:
-        calificacion_existente = calificacion.objects.get(user=user)
-        initial_data = {
-            "rating_need": calificacion_existente.rating_need,
-            "rating_situation": calificacion_existente.rating_situation,
-            "rating_experience": calificacion_existente.rating_experience,
-            "rating_satisfaction": calificacion_existente.rating_satisfaction,
-        }
-    except calificacion.DoesNotExist:
-        initial_data = None
-
-    if request.method == "POST":
-        # Si el usuario envía el formulario, actualizar o crear la calificación
-        form = calificacionForm(request.POST, instance=calificacion_existente)
-        if form.is_valid():
-            calificacion_u = form.save(commit=False)
-            calificacion_u.user = user
-            calificacion_u.save()
-            return redirect(
-                "planifica"
-            )  # Redireccionar a la misma página después de guardar
-    else:
-        # Si es un GET request, mostrar el formulario con la calificación existente (si hay)
-        form = calificacionForm(initial=initial_data)
-
-    return render(request, "planifica.html", {"form": form,"usuario": user})
 
 
 @csrf_exempt

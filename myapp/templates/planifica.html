@@ -90,67 +90,67 @@
         </div>
         <div class="col-4">
             <div class="container text-center">
-                <h3 class="mt-3" style="color: white;">Califica el Servicio</h3>
-                <div class="rating">
-                    <input type="radio" id="star5_need" name="rating_need" value="5" /><label class="star"
-                        for="star5_need">★</label>
-                    <input type="radio" id="star4_need" name="rating_need" value="4" /><label class="star"
-                        for="star4_need">★</label>
-                    <input type="radio" id="star3_need" name="rating_need" value="3" /><label class="star"
-                        for="star3_need">★</label>
-                    <input type="radio" id="star2_need" name="rating_need" value="2" /><label class="star"
-                        for="star2_need">★</label>
-                    <input type="radio" id="star1_need" name="rating_need" value="1" /><label class="star"
-                        for="star1_need">★</label>
-                </div>
-                <h5 style="color: white;">Necesidades suplidas</h5>
-
-                <div class="rating">
-                    <input type="radio" id="star5_situation" name="rating_situation" value="5" /><label class="star"
-                        for="star5_situation">★</label>
-                    <input type="radio" id="star4_situation" name="rating_situation" value="4" /><label class="star"
-                        for="star4_situation">★</label>
-                    <input type="radio" id="star3_situation" name="rating_situation" value="3" /><label class="star"
-                        for="star3_situation">★</label>
-                    <input type="radio" id="star2_situation" name="rating_situation" value="2" /><label class="star"
-                        for="star2_situation">★</label>
-                    <input type="radio" id="star1_situation" name="rating_situation" value="1" /><label class="star"
-                        for="star1_situation">★</label>
-                </div>
-                <h5 style="color: white;">Situación favorable</h5>
-
-                <div class="rating">
-                    <input type="radio" id="star5_experience" name="rating_experience" value="5" /><label class="star"
-                        for="star5_experience">★</label>
-                    <input type="radio" id="star4_experience" name="rating_experience" value="4" /><label class="star"
-                        for="star4_experience">★</label>
-                    <input type="radio" id="star3_experience" name="rating_experience" value="3" /><label class="star"
-                        for="star3_experience">★</label>
-                    <input type="radio" id="star2_experience" name="rating_experience" value="2" /><label class="star"
-                        for="star2_experience">★</label>
-                    <input type="radio" id="star1_experience" name="rating_experience" value="1" /><label class="star"
-                        for="star1_experience">★</label>
-                </div>
-                <h5 style="color: white;">Experiencia personal</h5>
-
-                <div class="rating">
-                    <input type="radio" id="star5_satisfaction" name="rating_satisfaction" value="5" /><label
-                        class="star" for="star5_satisfaction">★</label>
-                    <input type="radio" id="star4_satisfaction" name="rating_satisfaction" value="4" /><label
-                        class="star" for="star4_satisfaction">★</label>
-                    <input type="radio" id="star3_satisfaction" name="rating_satisfaction" value="3" /><label
-                        class="star" for="star3_satisfaction">★</label>
-                    <input type="radio" id="star2_satisfaction" name="rating_satisfaction" value="2" /><label
-                        class="star" for="star2_satisfaction">★</label>
-                    <input type="radio" id="star1_satisfaction" name="rating_satisfaction" value="1" /><label
-                        class="star" for="star1_satisfaction">★</label>
-                </div>
-                <h5 style="color: white;">Satisfacción general</h5>
-                <div class="mb-3">
-                    <button type="button" class="btn btn-info mt-4 btn-custom-save"
-                        onclick="guardarCalificacion()">Guardar Calificación</button>
-                </div>
-
+                {% if usuario %}
+                <form method="post">
+                    {% csrf_token %}
+                    <h3 class="mt-3" style="color: white;">Califica el Servicio</h3>
+                    <div class="rating">
+                        <input type="radio" id="star5_need" name="rating_need" value="5" {% if form.initial.rating_need == 5 %} checked {% endif %} />
+                        <label class="star" for="star5_need">★</label>
+                        <input type="radio" id="star4_need" name="rating_need" value="4" {% if form.initial.rating_need == 4 %} checked {% endif %} />
+                        <label class="star" for="star4_need">★</label>
+                        <input type="radio" id="star3_need" name="rating_need" value="3" {% if form.initial.rating_need == 3 %} checked {% endif %} />
+                        <label class="star" for="star3_need">★</label>
+                        <input type="radio" id="star2_need" name="rating_need" value="2" {% if form.initial.rating_need == 2 %} checked {% endif %} />
+                        <label class="star" for="star2_need">★</label>
+                        <input type="radio" id="star1_need" name="rating_need" value="1" {% if form.initial.rating_need == 1 %} checked {% endif %} />
+                        <label class="star" for="star1_need">★</label>
+                    </div>
+                    <h5 style="color: white;">Necesidades suplidas</h5>
+                    <div class="rating">
+                        <input type="radio" id="star5_situation" name="rating_situation" value="5" {% if form.initial.rating_situation == 5 %} checked {% endif %} />
+                        <label class="star" for="star5_situation">★</label>
+                        <input type="radio" id="star4_situation" name="rating_situation" value="4" {% if form.initial.rating_situation == 4 %} checked {% endif %} />
+                        <label class="star" for="star4_situation">★</label>
+                        <input type="radio" id="star3_situation" name="rating_situation" value="3" {% if form.initial.rating_situation == 3 %} checked {% endif %} />
+                        <label class="star" for="star3_situation">★</label>
+                        <input type="radio" id="star2_situation" name="rating_situation" value="2" {% if form.initial.rating_situation == 2 %} checked {% endif %} />
+                        <label class="star" for="star2_situation">★</label>
+                        <input type="radio" id="star1_situation" name="rating_situation" value="1" {% if form.initial.rating_situation == 1 %} checked {% endif %} />
+                        <label class="star" for="star1_situation">★</label>
+                    </div>
+                    <h5 style="color: white;">Situación favorable</h5>
+                    <div class="rating">
+                        <input type="radio" id="star5_experience" name="rating_experience" value="5" {% if form.initial.rating_experience == 5 %} checked {% endif %} />
+                        <label class="star" for="star5_experience">★</label>
+                        <input type="radio" id="star4_experience" name="rating_experience" value="4" {% if form.initial.rating_experience == 4 %} checked {% endif %} />
+                        <label class="star" for="star4_experience">★</label>
+                        <input type="radio" id="star3_experience" name="rating_experience" value="3" {% if form.initial.rating_experience == 3 %} checked {% endif %} />
+                        <label class="star" for="star3_experience">★</label>
+                        <input type="radio" id="star2_experience" name="rating_experience" value="2" {% if form.initial.rating_experience == 2 %} checked {% endif %} />
+                        <label class="star" for="star2_experience">★</label>
+                        <input type="radio" id="star1_experience" name="rating_experience" value="1" {% if form.initial.rating_experience == 1 %} checked {% endif %} />
+                        <label class="star" for="star1_experience">★</label>
+                    </div>
+                    <h5 style="color: white;">Experiencia personal</h5>
+                    <div class="rating">
+                        <input type="radio" id="star5_satisfaction" name="rating_satisfaction" value="5" {% if form.initial.rating_satisfaction == 5 %} checked {% endif %} />
+                        <label class="star" for="star5_satisfaction">★</label>
+                        <input type="radio" id="star4_satisfaction" name="rating_satisfaction" value="4" {% if form.initial.rating_satisfaction == 4 %} checked {% endif %} />
+                        <label class="star" for="star4_satisfaction">★</label>
+                        <input type="radio" id="star3_satisfaction" name="rating_satisfaction" value="3" {% if form.initial.rating_satisfaction == 3 %} checked {% endif %} />
+                        <label class="star" for="star3_satisfaction">★</label>
+                        <input type="radio" id="star2_satisfaction" name="rating_satisfaction" value="2" {% if form.initial.rating_satisfaction == 2 %} checked {% endif %} />
+                        <label class="star" for="star2_satisfaction">★</label>
+                        <input type="radio" id="star1_satisfaction" name="rating_satisfaction" value="1" {% if form.initial.rating_satisfaction == 1 %} checked {% endif %} />
+                        <label class="star" for="star1_satisfaction">★</label>
+                    </div>
+                    <h5 style="color: white;">Satisfacción general</h5>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-info mt-4 btn-custom-save">Guardar Calificación</button>
+                    </div>
+                </form>
+                {% endif %}
             </div>
 
             <!-- Modal -->
