@@ -133,14 +133,14 @@ def inicio_admin(request):
         titulo = request.POST.get("titulo")
         direccion = request.POST.get("direccion")
 
-    if request.POST.get("titulo") == "Puesto de Salud":
-        imagen = "static/img/mapa/salud/salud7.png"
-    if request.POST.get("titulo") == "Paso Peatonal":
-        imagen = "static/img/mapa/paso1.jpg"
-    if request.POST.get("titulo") == "Deposito residual":
-        imagen = "static/img/mapa/deposito1.jpg"
-    if request.POST.get("titulo") == "Puesto Policial":
-        imagen = "static/img/mapa/policia/policia1.jpg"
+        if request.POST.get("titulo") == "Puesto de Salud":
+            imagen = "static/img/mapa/salud/salud7.png"
+        if request.POST.get("titulo") == "Paso Peatonal":
+            imagen = "static/img/mapa/paso1.jpg"
+        if request.POST.get("titulo") == "Deposito residual":
+            imagen = "static/img/mapa/deposito1.jpg"
+        if request.POST.get("titulo") == "Puesto Policial":
+            imagen = "static/img/mapa/policia/policia1.jpg"
 
         punto = punto_carnaval.objects.create(
             coord_lat=coord_lat,

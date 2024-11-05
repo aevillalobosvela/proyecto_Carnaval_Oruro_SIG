@@ -45,18 +45,11 @@ body {
 .navbol {
   background-image: linear-gradient(
     to bottom,
-    #d82828,
-    #e45518,
-    #ea7a00,
-    #eb9d00,
-    #e7be00,
-    #d7c906,
-    #c6d31a,
-    #b2dc2e,
-    #95d12e,
-    #77c62f,
-    #57bb31,
-    #2faf34
+    #250101,
+    #510813,
+    #830519,
+    #b7041a,
+    #eb1212
   );
 }
 
@@ -71,7 +64,6 @@ body {
 }
 
 /* ---------------------------------------------------------------------------------- */
-
 
 /* ---------------------------------------------------------------------------------- */
 
@@ -137,17 +129,9 @@ a:focus {
 .btn-tab {
   border-radius: 0 !important;
   padding: 5px !important;
-  background-image: linear-gradient(
-    to bottom,
-    #eb9d00,
-    #e7be00,
-    #d7c906,
-    #c6d31a,
-    #b2dc2e,
-    #95d12e,
-    #77c62f
-  ) !important;
+  background-image: linear-gradient(to bottom, #173e49, #0f416b, #583576, #940454, #a40c0c) !important;
   transition: right 0.3s ease;
+  border: 0px !important;
 }
 
 /* ---------------------------------------------------
