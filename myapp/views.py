@@ -100,16 +100,16 @@ def usuarios_admin(request):
     usuario = request.user
     usuarios = User.objects.filter(is_superuser=False)
     promedios = calificacion.objects.aggregate(
-        promedio_need = Avg("rating_need"),
-        promedio_situation = Avg("rating_situation"),
-        promedio_experience = Avg("rating_experience"),
-        promedio_satisfaction = Avg("rating_satisfaction"),
+        promedio_need=Avg("rating_need"),
+        promedio_situation=Avg("rating_situation"),
+        promedio_experience=Avg("rating_experience"),
+        promedio_satisfaction=Avg("rating_satisfaction"),
     )
-   
-    promedio_need = round(promedios['promedio_need'], 1)
-    promedio_situation = round(promedios['promedio_situation'], 1)
-    promedio_experience = round(promedios['promedio_experience'], 1)
-    promedio_satisfaction = round(promedios['promedio_satisfaction'], 1)
+
+    promedio_need = round(promedios["promedio_need"], 1)
+    promedio_situation = round(promedios["promedio_situation"], 1)
+    promedio_experience = round(promedios["promedio_experience"], 1)
+    promedio_satisfaction = round(promedios["promedio_satisfaction"], 1)
     return render(
         request,
         "usuarios_admin.html",
