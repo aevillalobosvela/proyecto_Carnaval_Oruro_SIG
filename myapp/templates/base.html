@@ -68,24 +68,67 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-3">
+
+                        {% if active_page == 'inicio' %} <li class=" nav-item mx-3 mt-2 text-white text-center">
+                            <a style="font-size: 18px; color:rgb(255, 255, 255) " class="fontbolnav" href="/"><b>Ruta principal</b></a>
+                        </li>
+                        {% else %}
                         <li class=" nav-item mx-3 mt-2 text-white text-center">
                             <a style="font-size: 13px;" class="fontbolnav" href="/"><b>Ruta principal</b></a>
                         </li>
-                        <li class=" nav-item mx-3 mt-2 text-white text-center">
-                            <a style="font-size: 13px;" class="fontbolnav" href="/planifica/"><b>Planifica tu dia</b></a>
+                        {% endif %}
+                        
+
+                        {% if active_page == 'planifica' %} <li class=" nav-item mx-3 mt-2 text-white text-center ">
+                            <a style="font-size: 18px; color:rgb(255, 255, 255) " class="fontbolnav" href="/planifica/"><b>Planifica tu dia</b></a>
                         </li>
-                        <li class=" nav-item mx-3 mt-2 text-white text-center">
+                        {% else %}
+                        <li class=" nav-item mx-3 mt-2 text-white text-center ">
+                            <a style="font-size: 13px ;  " class="fontbolnav" href="/planifica/"><b>Planifica tu dia</b></a>
+                        </li>
+                        {% endif %}
+
+
+                        {% if active_page == 'conoce' %} <li class=" nav-item mx-3 mt-2 text-white text-center ">
+                            <a style="font-size: 18px; color:rgb(255, 255, 255)" class="fontbolnav" href="/conoce/"><b>Conoce lugares</b></a>
+                        </li>
+                        {% else %}
+                        <li class=" nav-item mx-3 mt-2 text-white text-center ">
                             <a style="font-size: 13px;" class="fontbolnav" href="/conoce/"><b>Conoce lugares</b></a>
                         </li>
+                        {% endif %}
+
+
+                        {% if active_page == 'mis_marcadores' %}    <li class=" nav-item mx-3 mt-2 text-white text-center">
+                            <a style="font-size: 18px; color:rgb(255, 255, 255)" class="fontbolnav" href="/mis_marcadores/"><b>Mis marcadores</b></a>
+                        </li>
+                        {% else %}
                         <li class=" nav-item mx-3 mt-2 text-white text-center">
                             <a style="font-size: 13px;" class="fontbolnav" href="/mis_marcadores/"><b>Mis marcadores</b></a>
                         </li>
+                        {% endif %}
+
+
+                        {% if active_page == 'foro' %}  <li class=" nav-item mx-3 mt-2 text-white text-center">
+                            <a style="font-size: 18px; color:rgb(255, 255, 255)" class="fontbolnav" href="/foro/"><b>Foro de opinion</b></a>
+                        </li>
+                        {% else %}
                         <li class=" nav-item mx-3 mt-2 text-white text-center">
                             <a style="font-size: 13px;" class="fontbolnav" href="/foro/"><b>Foro de opinion</b></a>
                         </li>
+                        {% endif %}
+                     
+                       
+                        {% if active_page == 'aprende' %}   <li class=" nav-item mx-3 mt-2 text-white text-center">
+                            <a style="font-size: 18px; color:rgb(255, 255, 255)" class="fontbolnav" href="/aprende/"><b>Aprende de la fiesta</b></a>
+                        </li>
+                        {% else %}
                         <li class=" nav-item mx-3 mt-2 text-white text-center">
                             <a style="font-size: 13px;" class="fontbolnav" href="/aprende/"><b>Aprende de la fiesta</b></a>
                         </li>
+                        {% endif %}
+ 
+                      
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         {% if user.is_authenticated %}

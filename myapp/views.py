@@ -24,7 +24,7 @@ from django.db.models import Avg
 
 def inicio(request):
     usuario = request.user
-    return render(request, "inicio.html", {"usuario": usuario})
+    return render(request, "inicio.html", {"usuario": usuario,'active_page': 'inicio'})
 
 
 def obtener_puntos_recorrido(request):
@@ -216,7 +216,7 @@ def conoce_admin(request):
 
 def conoce(request):
     usuario = request.user
-    return render(request, "conoce.html", {"usuario": usuario})
+    return render(request, "conoce.html", {"usuario": usuario,'active_page': 'conoce'})
 
 
 def acceso_denegado(request):
@@ -230,7 +230,7 @@ def planifica(request):
         print("entra sin user")
         initial_data = None
         form = calificacionForm(initial=initial_data)
-        return render(request, "planifica.html", {"form": form})
+        return render(request, "planifica.html", {"form": form,'active_page': 'planifica'})
 
     if request.method == "POST":
         print("Entra post")
@@ -262,7 +262,7 @@ def planifica(request):
             initial_data = None
         # Si es un GET request, mostrar el formulario con la calificación existente (si hay)
         form = calificacionForm(initial=initial_data)
-        return render(request, "planifica.html", {"form": form, "usuario": usuario})
+        return render(request, "planifica.html", {"form": form, "usuario": usuario,'active_page': 'planifica'})
 
 
 def mis_marcadores(request):
@@ -282,22 +282,22 @@ def mis_marcadores(request):
                 descripcion=descripcion,
             )
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario})
+            return render(request, "mis_marcadores.html", {"usuario": usuario,'active_page': 'mis_marcadores'})
         except ValidationError as ve:
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario})
+            return render(request, "mis_marcadores.html", {"usuario": usuario,'active_page': 'mis_marcadores'})
         except ValueError:
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario})
+            return render(request, "mis_marcadores.html", {"usuario": usuario,'active_page': 'mis_marcadores'})
         except Exception as e:
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario})
+            return render(request, "mis_marcadores.html", {"usuario": usuario,'active_page': 'mis_marcadores'})
     else:
         if not request.user.is_authenticated:
             return render(request, "acceso_denegado.html")
         else:
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario})
+            return render(request, "mis_marcadores.html", {"usuario": usuario,'active_page': 'mis_marcadores'})
 
 
 def foro(request):
@@ -316,26 +316,26 @@ def foro(request):
                 rating=ratingu,
             )
             usuario = request.user
-            return render(request, "foro.html", {"usuario": usuario})
+            return render(request, "foro.html", {"usuario": usuario,'active_page': 'foro'})
         except ValidationError as ve:
             usuario = request.user
-            return render(request, "foro.html", {"usuario": usuario})
+            return render(request, "foro.html", {"usuario": usuario,'active_page': 'foro'})
         except ValueError:
             usuario = request.user
-            return render(request, "foro.html", {"usuario": usuario})
+            return render(request, "foro.html", {"usuario": usuario,'active_page': 'foro'})
         except Exception as e:
             usuario = request.user
-            return render(request, "foro.html", {"usuario": usuario})
+            return render(request, "foro.html", {"usuario": usuario,'active_page': 'foro'})
     else:
         if not request.user.is_authenticated:
             return render(request, "acceso_denegado.html")
         else:
             usuario = request.user
-            return render(request, "foro.html", {"usuario": usuario})
+            return render(request, "foro.html", {"usuario": usuario,'active_page': 'foro'})
 
 
 def aprende(request):
-    return render(request, "aprende.html")
+    return render(request, "aprende.html", {'active_page': 'aprende'})
 
 
 def registro(request):
