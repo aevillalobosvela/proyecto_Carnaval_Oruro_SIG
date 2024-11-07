@@ -192,18 +192,6 @@ var carto = L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
 );
 
-// Añadir capas de mapa al control de capas
-var baseLayers = {
-  "Google Maps": google,
-  OpenTopoMap: opentopomap,
-  "Carto Light": carto,
-};
-
-// Añadir control de capas al mapa
-L.control.layers(baseLayers).addTo(map);
-
-// Establecer una capa de mapa predeterminada
-carto.addTo(map);
 
 // Función para generar una ruta aleatoria
 function generateRandomRoute() {

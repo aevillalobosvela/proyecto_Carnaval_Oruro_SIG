@@ -71,6 +71,12 @@ function generateRoute() {
   }
   routingControl = L.Routing.control({
     waypoints: [userLocation, selectedDestination],
+    router: L.Routing.graphHopper("0269abc3-031c-448e-95c7-3db60aaa6dc0", {
+      urlParameters: {
+        vehicle: "foot",
+        locale: "es", // Opcional: ajusta el idioma de las instrucciones de la ruta
+      },
+    }),
     routeWhileDragging: true,
   }).addTo(map1);
 }

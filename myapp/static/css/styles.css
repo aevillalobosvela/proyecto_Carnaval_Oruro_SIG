@@ -45,11 +45,18 @@ body {
 .navbol {
   background-image: linear-gradient(
     to bottom,
-    #250101,
-    #510813,
-    #830519,
-    #b7041a,
-    #eb1212
+    #a80a0a,
+    #b43d00,
+    #bc5e00,
+    #c17c00,
+    #c49900,
+    #b9a300,
+    #abac00,
+    #9bb500,
+    #7fac00,
+    #63a300,
+    #429a01,
+    #10900a
   );
 }
 
@@ -61,6 +68,11 @@ body {
 
 .fontbolnav:hover {
   color: rgb(255, 255, 255);
+}
+
+.no-hover:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 /* ---------------------------------------------------------------------------------- */
@@ -129,7 +141,14 @@ a:focus {
 .btn-tab {
   border-radius: 0 !important;
   padding: 5px !important;
-  background-image: linear-gradient(to bottom, #173e49, #0f416b, #583576, #940454, #a40c0c) !important;
+  background-image: linear-gradient(
+    to bottom,
+    #173e49,
+    #0f416b,
+    #583576,
+    #940454,
+    #a40c0c
+  ) !important;
   transition: right 0.3s ease;
   border: 0px !important;
 }

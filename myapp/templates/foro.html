@@ -1,81 +1,146 @@
-{% extends 'base.html' %} {% block content %}
-{% load static %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 
 <div class="wrapper">
-    <!-- Sidebar  -->
-    <div style="width: 100%; border-right: solid 1px rgb(158, 157, 157);">
-        <div style="height: 8%; color: white; background-image: linear-gradient(to right, #6d0606, #691e00, #632d00, #5d3800, #564200, #514700, #4a4d00, #425200, #3b5500, #315800, #245b00, #0e5e02);"
-            class="sidebar-header text-center">
-            <h3 class="pt-1">Foro</h3>
-        </div>
-
-        <div style="height: 92%;  background-image: linear-gradient(to bottom, #f8d1d1, #ffd6cd, #ffdcc9, #ffe3c7, #ffebc6, #fbefc6, #f5f3c7, #eff7c9, #e6f7ca, #dcf8cd, #d3f8d0, #c9f8d4);"
-            class="controls p-3">
-            <div class="container mt-2">
-                <div id="location-card-container">
-                    <h5>Selecciona un lugar</h5>
-                </div>
-                <div class="mt-1" id="formulario" style="display: none;">
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="comments-section row px-2">
-                            <div class="col-7"><textarea type="text" class="form-control" id="comment-input"
-                                    name="comentario_user" placeholder="Escribe un comentario..." rows="3"
-                                    required></textarea></div>
-
-                            <div class="col-5 text-center">
-                                <h3>Califica el lugar</h3>
-                                <div class="rating">
-                                    <input required type="radio" id="star5_rating" name="rating" value="5" />
-                                    <label class="star" for="star5_rating">★</label>
-                                    <input type="radio" id="star4_rating" name="rating" value="4" />
-                                    <label class="star" for="star4_rating">★</label>
-                                    <input type="radio" id="star3_rating" name="rating" value="3" />
-                                    <label class="star" for="star3_rating">★</label>
-                                    <input type="radio" id="star2_rating" name="rating" value="2" />
-                                    <label class="star" for="star2_rating">★</label>
-                                    <input type="radio" id="star1_rating" name="rating" value="1" />
-                                    <label class="star" for="star1_rating">★</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center mt-2">
-                            <button type="submit" class="btn btn-warning" id="submit-comment">Guardar
-                                comentario</button>
-                            <button style="display: none;" class="btn btn-warning" id="routeButton">Guardar
-                            </button>
-                        </div>
-                        <div class="text-right">
-                            <input style="width: 10px;" type="text" class="form-control" id="id_punto" name="id_punto">
-                        </div>
-                    </form>
-                </div>
+  <!-- Sidebar  -->
+  <div style="width: 100%; border-right: solid 1px rgb(158, 157, 157)">
+    <div
+      style="
+        height: 100%;
+       background-image: linear-gradient(to bottom, #1c4950, #133f4c, #103447, #122a3f, #161f36);
+      "
+      class="controls p-3"
+    >
+      <div class="container mt-2">
+        <div class="row">
+          <div class="col-7 text-white">
+            <div id="location-card-container">
+              <h5>Selecciona un lugar</h5>
             </div>
-
-            <div>
-                <p style="color: black; position: absolute; bottom: 0;" class="m-2">Usuario actual:
-                    {{usuario.username}}
-                </p>
+          </div>
+          <div class="col-5">
+            <div class="mt-1" id="formulario" style="display: none">
+              <form method="post">
+                {% csrf_token %}
+                <div class=" text-center text-white comments-section row px-2 mb-2">
+                  <h3 >¿Como fue tu experiencia?</h3>
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    id="comment-input"
+                    name="comentario_user"
+                    placeholder="Escribe un comentario..."
+                    rows="7 "
+                    required
+                  ></textarea>
+                </div>
+                <div class="mt-2 row text-center">
+                  <div class="rating">
+                    <input
+                      required
+                      type="radio"
+                      id="star5_rating"
+                      name="rating"
+                      value="5"
+                    />
+                    <label class="star" for="star5_rating">★</label>
+                    <input
+                      type="radio"
+                      id="star4_rating"
+                      name="rating"
+                      value="4"
+                    />
+                    <label class="star" for="star4_rating">★</label>
+                    <input
+                      type="radio"
+                      id="star3_rating"
+                      name="rating"
+                      value="3"
+                    />
+                    <label class="star" for="star3_rating">★</label>
+                    <input
+                      type="radio"
+                      id="star2_rating"
+                      name="rating"
+                      value="2"
+                    />
+                    <label class="star" for="star2_rating">★</label>
+                    <input
+                      type="radio"
+                      id="star1_rating"
+                      name="rating"
+                      value="1"
+                    />
+                    <label class="star" for="star1_rating">★</label>
+                  </div>
+                </div>
+                <div class="text-center mt-2">
+                  <button
+                    type="submit"
+                    class="btn btn-warning"
+                    id="submit-comment"
+                  >
+                    Guardar comentario
+                  </button>
+                  <button
+                    style="display: none"
+                    class="btn btn-warning"
+                    id="routeButton"
+                  >
+                    Guardar
+                  </button>
+                </div>
+                <div class="text-right">
+                  <input
+                    style="width: 10px"
+                    type="text"
+                    class="form-control"
+                    id="id_punto"
+                    name="id_punto"
+                  />
+                </div>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div id="content">
-        <div style="height: 100%;" id="map5"></div>
-    </div>
+  </div>
+  <div id="content">
+    <div style="height: 100%" id="map5"></div>
+  </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navbol" style="justify-content:space-around;">
-    <div class="container-fluid mx-1">
-        </button>
-    </div>
+<nav
+  class="navbar navbar-expand-lg navbol"
+  style="justify-content: space-around"
+>
+  <div class="container-fluid mx-1"></div>
 </nav>
 
-<div class="container-fluid "
-    style="background-image: linear-gradient(to right top, #32027e, #40005c, #3e003e, #330027, #240116, #270318, #2a051b, #2e061d, #470036, #5a0057, #650080, #5d03b1);">
-    <div class="row mx-5 text-center text-white">
-        <h1 style="margin-top: 25px; margin-bottom: 20px;">COMENTARIOS</h1>
-        <div id="lista_comentarios"></div>
-    </div>
+<div
+  class="container-fluid"
+  style="
+    background-image: linear-gradient(
+      to right top,
+      #32027e,
+      #40005c,
+      #3e003e,
+      #330027,
+      #240116,
+      #270318,
+      #2a051b,
+      #2e061d,
+      #470036,
+      #5a0057,
+      #650080,
+      #5d03b1
+    );
+  "
+>
+  <div class="row mx-5 text-center text-white">
+    <h1 style="margin-top: 25px; margin-bottom: 20px">COMENTARIOS</h1>
+    <div id="lista_comentarios"></div>
+  </div>
 </div>
 
 {% endblock %}

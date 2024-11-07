@@ -4,15 +4,9 @@
 <div class="wrapper">
     <!-- Sidebar  -->
     <nav id="sidebar">
-        <div style="color: white; display: flex; align-items: center; background-image: linear-gradient(to right, #6d0606, #691e00, #632d00, #5d3800, #564200, #514700, #4a4d00, #425200, #3b5500, #315800, #245b00, #0e5e02);"
-            class="sidebar-header text-center">
-            <img src="{% static '/img/conoceoruro/logo.jpeg' %}" alt="Imagen izquierda" width="80"
-                style="border-radius: 10%;">
-            <h3 class="text-center">Conoce mas de Oruro</h3>
-        </div>
+       
 
-        <div style="height: 77%; background-image: url('/static/img/conoceoruro/m.png'); background-size: cover;
-        background-position: center;" class="controls p-3">
+        <div  style="height: 100%; background-image: linear-gradient(to bottom, #1c4950, #133f4c, #103447, #122a3f, #161f36);"  class="controls p-3">
             <div class="text-center mb-3">
                 <form class="d-flex" role="search" id="search-form">
                     <input class="form-control me-2" type="search" placeholder="Busca tu lugar" aria-label="Search"
@@ -22,19 +16,19 @@
             </div>
 
             <div>
-                <select class="mb-2 select-custom" name="select-hoteles" id="select-hoteles">
+                <select class="form-select mb-4 mt-4" name="select-hoteles" id="select-hoteles">
                     <option value="-1">Seleccione un hotel:</option>
                 </select>
 
-                <select class="mb-2 select-custom" name="select-restaurantes" id="select-restaurantes">
+                <select class="mb-4 form-select" name="select-restaurantes" id="select-restaurantes">
                     <option value="-1">Seleccione un restaurante:</option>
                 </select>
 
-                <select class="mb-2 select-custom" name="select-museos" id="select-museos">
+                <select class="mb-4 form-select" name="select-museos" id="select-museos">
                     <option value="-1">Seleccione un museo:</option>
                 </select>
 
-                <select class="mb-2 select-custom" name="select-iglesias" id="select-iglesias">
+                <select class="mb-4 form-select" name="select-iglesias" id="select-iglesias">
                     <option value="-1">Seleccione una iglesia:</option>
                 </select>
             </div>
@@ -46,7 +40,7 @@
         </div>
     </nav>
     <button type="button" id="sidebarCollapse" class="btn btn-tab">
-        <i id="icon" class="fas fa-arrow-circle-left"></i>
+        <i id="icon" class="text-white fas fa-arrow-circle-left"></i>
     </button>
 
     <div id="content">

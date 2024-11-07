@@ -97,19 +97,16 @@ function showLocationCard(location, promedio) {
   card.className = "location-card";
 
   let cardContent = `
-    <div class="card" style="background-image: none;">
+    <div class="card no-hover" style="background-image: none;transform: none; box-shadow: none; ">
         <div class="card-header text-center">
             <h3>${location.name}</h3>
-            <h5>Calificacion: ${promedio}</h5>
+            <h5>Calificacion: ${promedio}/5</h5>
+        </div>
+        <div class="mx-auto row pt-4 px-4 text-center" style="width: 200px;">
+             <img src="${location.imagen_ruta}" alt="${location.name}" width="30%">
         </div>
         <div class="row pt-4 px-4">
-            <div class="col-5 text-center">
-                <img src="${location.imagen_ruta}" alt="${location.name}" width="160px">
-            </div>
-            <div class="col-7">
-                <p style="color: black; font-size:14px">${location.descripcion}</p>
-
-            </div>
+             <p style="color: black; font-size:14px">${location.descripcion}</p>
         </div>
     </div>
     `;
