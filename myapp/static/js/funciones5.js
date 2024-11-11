@@ -1,3 +1,10 @@
+$(document).ready(function () {
+  $("#sidebarCollapse2").on("click", function () {
+    $("#sidebar2").toggleClass("active");
+    $("#icon").toggleClass("fa-arrow-circle-left fa-arrow-circle-right");
+  });
+});
+
 var map5 = L.map("map5", {
   center: [-17.964138034171146, -67.10734251787665],
   zoom: 14,
@@ -46,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   comentarioDiv.classList.add("comentario");
                   // Construir el HTML del comentario
                   comentarioDiv.innerHTML = `
-                  <div class="card" style="margin: 20px; background-image: none; background-color: transparent; color: white; border: 1px solid white; border-radius: 10px; padding: 10px;">
+                  <div class="card" style="margin: 20px; background-image: none; background-color: transparent; color: white; border: 1px solid white; border-radius: 10px; padding: 10px;background-image: none;transform: none; box-shadow: none">
                     <p style="margin: 1px; font-weight: bold; text-align: left;">${
                       comen.usuario
                     } - ${formatearFecha(comen.fecha_hora)} - Calificacion: ${
@@ -105,7 +112,7 @@ function showLocationCard(location, promedio) {
         <div class="mx-auto row pt-4 px-4 text-center" style="width: 200px;">
              <img src="${location.imagen_ruta}" alt="${location.name}" width="30%">
         </div>
-        <div class="row pt-4 px-4">
+        <div class="row pt-4 px-4" style="max-height: 150px; overflow-y: auto;">
              <p style="color: black; font-size:14px">${location.descripcion}</p>
         </div>
     </div>

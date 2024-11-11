@@ -45,12 +45,17 @@ document
 document
   .getElementById("select-iglesias")
   .addEventListener("change", moveToLocation);
-  
+
 document.addEventListener("DOMContentLoaded", function () {
   var Hoteles = [];
   var Comidas = [];
   var Museos = [];
   var Iglesias = [];
+
+  var hotelMarkers = L.layerGroup();
+  var comidaMarkers = L.layerGroup();
+  var museoMarkers = L.layerGroup();
+  var iglesiaMarkers = L.layerGroup();
 
   fetch("/obtener_punto_conoce/")
     .then((response) => response.json())
@@ -85,6 +90,15 @@ document.addEventListener("DOMContentLoaded", function () {
           Iglesias.push(data);
         }
       });
+
+      var overlayMaps3 = {
+        Hoteles: Hoteles,
+        Restaurante: Comidas,
+        Museos: Museos,
+        Iglesias: Iglesias,
+      };
+
+      L.control.layers(null, overlayMaps3, { collapsed: false }).addTo(map2);
       addOptionsToSelect("select-hoteles", Hoteles, "Hotel");
       addOptionsToSelect("select-restaurantes", Comidas, "Comida");
       addOptionsToSelect("select-museos", Museos, "Museo");
@@ -100,19 +114,6 @@ var google = L.tileLayer("https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}");
 var osm = L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
 
 // Crear un control de capas para los mapas base
-var mapasBase = {
-  Carto: carto,
-  OpenStreet: osm,
-  Google: google,
-};
-
-// Crear un control de capas para los mapas base
-L.control
-  .layers(mapasBase, null, {
-    position: "topright",
-    collapsed: false,
-  })
-  .addTo(map2);
 
 function addOptionsToSelect(selectId, locations, category) {
   let select = document.getElementById(selectId);
@@ -153,10 +154,10 @@ function searchLocation(event) {
           let latLng = data.coord;
           let lat = parseFloat(data.coord[0]);
           let lng = parseFloat(data.coord[1]);
-      
+
           let offsetLat = 0.0012;
           let adjustedLat = lat + offsetLat;
-      
+
           latLng2 = [adjustedLat, lng];
           map2.flyTo(latLng2, 18);
 

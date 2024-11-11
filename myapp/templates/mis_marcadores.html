@@ -1,66 +1,93 @@
-{% extends 'base.html' %} {% block content %}
-{% load static %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 
 <div class="wrapper">
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-       
-
-        <div style="height: 100%; background-image: linear-gradient(to bottom, #f8d1d1, #ffd6cd, #ffdcc9, #ffe3c7, #ffebc6, #fbefc6, #f5f3c7, #eff7c9, #e6f7ca, #dcf8cd, #d3f8d0, #c9f8d4);"
-            class="controls p-3">
-            <div>
-                <div>
-                    <h5 class="text-center" 
-                    ;">Guarda un lugar en un solo click</h5>
-                </div>
-            </div>
-            <form method="post">
-                {% csrf_token %}
-                {% if error %}
-                <div class="alert alert-danger" role="alert">
-                    {{ error }}
-                </div>
-                {% endif %}
-                <div class="row px-2">
-                    <label for="id_nombre">Nombre:</label>
-                    <input type="text" class="form-control" id="mi_nombre" name="nombre" required>
-                </div>
-                <div class="row px-2">
-                    <label for="descripcion">Descripcion:</label>
-                    <textarea type="text" class="form-control" id="mi_descripcion" name="descripcion" rows="3"
-                        required></textarea>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <label for="mi_id_coord_lat">Latitud:</label>
-                        <input type="text" class="form-control" id="mi_id_coord_lat" name="coord_lat" required>
-                    </div>
-                    <div class="col-6">
-                        <label for="mi_id_coord_lng">Longitud:</label>
-                        <input type="text" class="form-control" id="mi_id_coord_lng" name="coord_lng" required>
-                    </div>
-                </div>
-
-                <div class="mt-3 text-center">
-                    <button class="btn btn-success" type="submit">Guardar Lugar</button>
-                </div>
-            </form>
-            <div>
-                <p style="color: black; position: absolute; bottom: 0;" class="m-2">Usuario actual:
-                    {{usuario.username}}
-                </p>
-            </div>
+  <!-- Sidebar  -->
+  <nav id="sidebar">
+    <div
+      class="text-white controls p-3"
+      style="
+        height: 100%;
+        background-image: linear-gradient(
+          to bottom,
+          #1c4950,
+          #133f4c,
+          #103447,
+          #122a3f,
+          #161f36
+        );
+      "
+    >
+      <div>
+        <div>
+          <h5 class="text-center" ;>Guarda un lugar en un solo click</h5>
+        </div>
+      </div>
+      <form method="post">
+        {% csrf_token %} {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+        {% endif %}
+        <div class="row px-2">
+          <label for="id_nombre">Nombre:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="mi_nombre"
+            name="nombre"
+            required
+          />
+        </div>
+        <div class="row px-2">
+          <label for="descripcion">Descripcion:</label>
+          <textarea
+            type="text"
+            class="form-control"
+            id="mi_descripcion"
+            name="descripcion"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="mi_id_coord_lat">Latitud:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="mi_id_coord_lat"
+              name="coord_lat"
+              required
+            />
+          </div>
+          <div class="col-6">
+            <label for="mi_id_coord_lng">Longitud:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="mi_id_coord_lng"
+              name="coord_lng"
+              required
+            />
+          </div>
         </div>
 
-    </nav>
-    <button type="button" id="sidebarCollapse" class="btn btn-tab">
-        <i id="icon" class="text-white fas fa-arrow-circle-left"></i>
-    </button>
-
-    <div id="content">
-        <div style="height: 100%;" id="map3"></div>
+        <div class="mt-3 text-center">
+          <button class="btn btn-success" type="submit">Guardar Lugar</button>
+        </div>
+      </form>
+      <div>
+        <p style="color: rgb(233, 233, 233); position: absolute; bottom: 0" class="m-2">
+          Usuario actual: {{usuario.username}}
+        </p>
+      </div>
     </div>
-</div>
+  </nav>
+  <button type="button" id="sidebarCollapse" class="btn btn-tab">
+    <i id="icon" class="text-white fas fa-arrow-circle-left"></i>
+  </button>
 
+  <div id="content">
+    <div style="height: 100%" id="map3"></div>
+  </div>
+</div>
 
 {% endblock %}

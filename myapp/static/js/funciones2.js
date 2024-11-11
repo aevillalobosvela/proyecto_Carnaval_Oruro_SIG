@@ -3,6 +3,34 @@ var control = null;
 var routingControl = null;
 let routeLayer = null;
 
+function mostrarHotel() {
+  document.getElementById("select-hoteles").style.display = "block";
+  document.getElementById("select-restaurantes").style.display = "none";
+  document.getElementById("select-museos").style.display = "none";
+  document.getElementById("select-iglesias").style.display = "none";
+}
+
+function mostrarRest() {
+  document.getElementById("select-hoteles").style.display = "none";
+  document.getElementById("select-restaurantes").style.display = "block";
+  document.getElementById("select-museos").style.display = "none";
+  document.getElementById("select-iglesias").style.display = "none";
+}
+
+function mostrarMuseo() {
+  document.getElementById("select-hoteles").style.display = "none";
+  document.getElementById("select-restaurantes").style.display = "none";
+  document.getElementById("select-museos").style.display = "block";
+  document.getElementById("select-iglesias").style.display = "none";
+}
+
+function mostrarIglesia() {
+  document.getElementById("select-hoteles").style.display = "none";
+  document.getElementById("select-restaurantes").style.display = "none";
+  document.getElementById("select-museos").style.display = "none";
+  document.getElementById("select-iglesias").style.display = "block";
+}
+
 // Inicializa el mapa
 var map = L.map("map", {
   center: [-17.964138034171146, -67.10734251787665],
@@ -96,13 +124,13 @@ document.addEventListener("DOMContentLoaded", function () {
           L.marker(data.coord, { icon: foodIcon })
             .bindPopup(data.name)
             .addTo(foodLayer);
-            foodSelect.appendChild(option);
+          foodSelect.appendChild(option);
         }
         if (data.titulo == "Turismo") {
           L.marker(data.coord, { icon: tourismIcon })
             .bindPopup(data.name)
             .addTo(tourismLayer);
-            tourismSelect.appendChild(option);
+          tourismSelect.appendChild(option);
         }
       });
       hotelLayer.addTo(map);
@@ -183,6 +211,65 @@ document.getElementById("generateRoute").addEventListener("click", function () {
   map.flyTo(L.latLng(parseFloat(foodCoords[0]), parseFloat(foodCoords[1])), 15);
 });
 
+// Generar ruta a pie
+document.getElementById("generateRoutePie").addEventListener("click", function () {
+  if (routingControl) {
+    map.removeControl(routingControl);
+  }
+
+  // Elimina la capa de marcadores anterior si existe
+  if (routeLayer) {
+    map.removeLayer(routeLayer);
+  }
+
+  control = null;
+  const hotelCoords = document.getElementById("hotelSelect").value.split(",");
+  const foodCoords = document.getElementById("foodSelect").value.split(",");
+  const tourismCoords = document
+    .getElementById("tourismSelect")
+    .value.split(",");
+
+  const waypoints = [
+    L.latLng(userLocation),
+    L.latLng(parseFloat(hotelCoords[0]), parseFloat(hotelCoords[1])),
+    L.latLng(parseFloat(foodCoords[0]), parseFloat(foodCoords[1])),
+    L.latLng(parseFloat(tourismCoords[0]), parseFloat(tourismCoords[1])),
+  ];
+
+  // Crear marcadores con iconos personalizados
+  const hotelMarker = L.marker(
+    [parseFloat(hotelCoords[0]), parseFloat(hotelCoords[1])],
+    { icon: hotelIcon }
+  ).bindPopup("Hotel");
+  const foodMarker = L.marker(
+    [parseFloat(foodCoords[0]), parseFloat(foodCoords[1])],
+    { icon: foodIcon }
+  ).bindPopup("Restaurante");
+  const tourismMarker = L.marker(
+    [parseFloat(tourismCoords[0]), parseFloat(tourismCoords[1])],
+    { icon: tourismIcon }
+  ).bindPopup("Lugar Turístico");
+
+  // Añadir marcadores a la capa de la ruta
+  routeLayer = L.layerGroup([hotelMarker, foodMarker, tourismMarker]).addTo(
+    map
+  );
+
+  routingControl = L.Routing.control({
+    waypoints: waypoints,
+    router: L.Routing.graphHopper("0269abc3-031c-448e-95c7-3db60aaa6dc0", {
+      urlParameters: {
+        vehicle: "foot",
+        locale: "es", // Opcional: ajusta el idioma de las instrucciones de la ruta
+      },
+    }),
+    show: true, // Oculta la ruta por defecto
+    showMarkers: false, // Oculta los marcadores
+    routeWhileDragging: false,
+  }).addTo(map);
+  map.flyTo(L.latLng(parseFloat(foodCoords[0]), parseFloat(foodCoords[1])), 15);
+});
+
 // Crear instancias de capas de mapa adicionales
 var google = L.tileLayer("https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}");
 var opentopomap = L.tileLayer(
@@ -191,7 +278,6 @@ var opentopomap = L.tileLayer(
 var carto = L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
 );
-
 
 // Función para generar una ruta aleatoria
 function generateRandomRoute() {

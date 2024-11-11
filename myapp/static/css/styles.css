@@ -75,6 +75,8 @@ body {
   box-shadow: none;
 }
 
+
+
 /* ---------------------------------------------------------------------------------- */
 
 /* ---------------------------------------------------------------------------------- */
@@ -121,6 +123,27 @@ a:focus {
   height: calc(100% - 89.375px);
 }
 
+@media (max-width: 768px) { /* Ajusta el tamaño máximo según tu necesidad */
+  .wrapper-foro {
+    display: flex;
+    height: calc(100% - 89.375px);
+  };
+  .area-row{
+    height: 200px;
+  }
+}
+
+/* Altura de 100% en pantallas medianas y grandes */
+@media (min-width: 769px) {
+  .wrapper-foro {
+    display: flex;
+    height: calc(100% - 89.375px);
+  }
+  .area-row{
+    height: 200px;
+  }
+}
+
 #sidebar {
   width: 400px;
   background: #ffffff;
@@ -151,6 +174,23 @@ a:focus {
   ) !important;
   transition: right 0.3s ease;
   border: 0px !important;
+}
+
+#sidebar2 {
+  width: 1000px;
+  background: #0c3153;
+  color: #000000;
+  transition: all 0.3s;
+  border-right: solid 1px #000000;
+}
+
+#sidebar2.active {
+  margin-left: -977px;
+}
+
+#sidebar2 .sidebar-header {
+  padding: 20px;
+  background: #ffffff;
 }
 
 /* ---------------------------------------------------
