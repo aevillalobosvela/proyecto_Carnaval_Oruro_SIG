@@ -85,7 +85,6 @@ h2 {
 
 .card {
     width: 100%;
-    background-image: url('/static/img/generaruta/turismo.jpg'); /* Reemplaza con la ruta de tu imagen */
     background-color: rgba(255, 255, 255, 0.1);
     background-size: cover; /* Asegura que la imagen cubra toda la tarjeta */
     background-position: center; /* Centra la imagen */

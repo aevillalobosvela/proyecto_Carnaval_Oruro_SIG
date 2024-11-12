@@ -164,14 +164,7 @@ a:focus {
 .btn-tab {
   border-radius: 0 !important;
   padding: 5px !important;
-  background-image: linear-gradient(
-    to bottom,
-    #173e49,
-    #0f416b,
-    #583576,
-    #940454,
-    #a40c0c
-  ) !important;
+  background-color: #2d3e64  !important;
   transition: right 0.3s ease;
   border: 0px !important;
 }

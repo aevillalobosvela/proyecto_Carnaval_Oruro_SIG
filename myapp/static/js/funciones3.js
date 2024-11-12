@@ -91,14 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      var overlayMaps3 = {
-        Hoteles: Hoteles,
-        Restaurante: Comidas,
-        Museos: Museos,
-        Iglesias: Iglesias,
-      };
-
-      L.control.layers(null, overlayMaps3, { collapsed: false }).addTo(map2);
       addOptionsToSelect("select-hoteles", Hoteles, "Hotel");
       addOptionsToSelect("select-restaurantes", Comidas, "Comida");
       addOptionsToSelect("select-museos", Museos, "Museo");
