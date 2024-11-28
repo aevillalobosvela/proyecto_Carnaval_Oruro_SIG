@@ -4,7 +4,7 @@
 <script>
 
     document.getElementById('miBoton').addEventListener('click', function () {
-        var usuario = "{{ usuario.username }}";
+        var usuario = "{{ usuariso.username }}";
         Swal.fire({
             title: '¡Hola ' + usuario + '!',
             icon: 'error',
