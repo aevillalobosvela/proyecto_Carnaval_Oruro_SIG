@@ -1,4 +1,4 @@
-{% extends 'administrador.html' %} {% block content %}
+{% extends 'admin/administrador.html' %} {% block content %}
 {% load static %}
 
 <div>
@@ -29,7 +29,7 @@
                 </tbody>
             </table>
         </div>
-      <div class="col-5">
+        <div class="col-5">
             <div class="container p-3" style="border: solid gray 1px; border-radius: 2%;">
                 <h1>Inserta un punto</h1>
                 <form method="post">
@@ -75,7 +75,7 @@
                     <div style="height: 350px; cursor: context-menu;" id="map_admin2"></div>
                 </div>
             </div>
-        </div> 
+        </div>
 
     </div>
 
@@ -118,28 +118,28 @@
 
 
         $('#planificaTable').on('click', '.borrar-planifica', function () {
-                var puntoId = $(this).data('id');
-                if (confirm('¿Estás seguro de que quieres eliminar este punto?')) {
-                    $.ajax({
-                        url: '{% url "eliminar_punto_planifica" 0 %}'.slice(0, -2) + puntoId + '/',
-                        type: 'POST',
-                        headers: {
-                            'X-CSRFToken': '{{ csrf_token }}'
-                        },
-                        success: function (response) {
-                            if (response.status === 'success') {
-                                alert('Punto eliminado con éxito.');
-                                location.reload();
-                            } else {
-                                alert('Hubo un error al eliminar el punto.');
-                            }
-                        },
-                        error: function () {
+            var puntoId = $(this).data('id');
+            if (confirm('¿Estás seguro de que quieres eliminar este punto?')) {
+                $.ajax({
+                    url: '{% url "eliminar_punto_planifica" 0 %}'.slice(0, -2) + puntoId + '/',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            alert('Punto eliminado con éxito.');
+                            location.reload();
+                        } else {
                             alert('Hubo un error al eliminar el punto.');
                         }
-                    });
-                }
-            });
+                    },
+                    error: function () {
+                        alert('Hubo un error al eliminar el punto.');
+                    }
+                });
+            }
+        });
 
     </script>
 </div>

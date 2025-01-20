@@ -1,4 +1,4 @@
-{% extends 'administrador.html' %} {% block content %}
+{% extends 'admin/administrador.html' %} {% block content %}
 {% load static %}
 
 <div>
@@ -107,7 +107,7 @@
     </div>
     <script type="text/javascript">
         var csrfToken = '{{ csrf_token }}';
-      </script>
+    </script>
     <script>
         $(document).ready(function () {
             $('#inicioTable').DataTable();
