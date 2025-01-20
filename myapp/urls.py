@@ -4,7 +4,27 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    #
+    # Rutas basicas de acceso #
+    #
     path("", views.inicio, name="inicio"),
+    path("login_user/", views.login_user, name="login_user"),
+    path("registro/", views.registro, name="registro"),
+    path("conoce/", views.conoce, name="conoce"),
+    path("planifica/", views.planifica, name="planifica"),
+    path("aprende/", views.aprende, name="aprende"),
+    path("mis_marcadores/", views.mis_marcadores, name="mis_marcadores"),
+    path("foro/", views.foro, name="foro"),
+    #
+    # Rutas de administrador #
+    #
+    path("usuarios_admin/", views.usuarios_admin, name="usuarios_admin"),
+    path("inicio_admin/", views.inicio_admin, name="inicio_admin"),
+    path("planifica_admin/", views.planifica_admin, name="planifica_admin"),
+    path("conoce_admin/", views.conoce_admin, name="conoce_admin"),
+    #
+    # Rutas de obtencion de datos #
+    #
     path(
         "obtener_puntos_recorrido/",
         views.obtener_puntos_recorrido,
@@ -27,19 +47,9 @@ urlpatterns = [
         "obtener_punto_custom/", views.obtener_punto_custom, name="obtener_punto_custom"
     ),
     path("obtener_comentario/", views.obtener_comentario, name="obtener_comentario"),
-    path("login_user/", views.login_user, name="login_user"),
-    path("usuarios_admin/", views.usuarios_admin, name="usuarios_admin"),
-    path("inicio_admin/", views.inicio_admin, name="inicio_admin"),
-    path("planifica_admin/", views.planifica_admin, name="planifica_admin"),
-    path("conoce_admin/", views.conoce_admin, name="conoce_admin"),
-    path("registro/", views.registro, name="registro"),
-    path("conoce/", views.conoce, name="conoce"),
-    path("planifica/", views.planifica, name="planifica"),
-    path("aprende/", views.aprende, name="aprende"),
-    path("mis_marcadores/", views.mis_marcadores, name="mis_marcadores"),
-    path("foro/", views.foro, name="foro"),
-    path("acceso_denegado/", views.acceso_denegado, name="acceso_denegado"),
-    path("logout/", views.signout, name="logout"),
+    #
+    # Rutas de gestion de informacion #
+    #
     path(
         "eliminar-usuario/<int:user_id>/",
         views.eliminar_usuario,
@@ -65,7 +75,12 @@ urlpatterns = [
         views.eliminar_punto_custom,
         name="eliminar_punto_custom",
     ),
-    path('actualizar_ruta/', views.actualizar_ruta, name='actualizar_ruta'),
+    path("actualizar_ruta/", views.actualizar_ruta, name="actualizar_ruta"),
+    #
+    # Otras rutas #
+    #
+    path("acceso_denegado/", views.acceso_denegado, name="acceso_denegado"),
+    path("logout/", views.signout, name="logout"),
 ]
 
 if settings.DEBUG:

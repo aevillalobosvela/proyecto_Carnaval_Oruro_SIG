@@ -1,4 +1,4 @@
-**Alertas mensaje v23
+**Alertas mensaje v234
 
 <button id="miBoton">Mostrar Alerta</button>
 <script>

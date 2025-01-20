@@ -5,17 +5,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.utils import timezone
-from datetime import datetime
 from django.db import IntegrityError
 from django.http import JsonResponse, HttpResponseForbidden
-from datetime import datetime
-from .models import puntos_recorrido
-from .models import punto_carnaval
-from .models import punto_planifica
-from .models import punto_conoce
-from .models import punto_custom
-from .models import comentario
-from .models import calificacion
+from .models import puntos_recorrido, punto_carnaval, punto_planifica
+from .models import calificacion, punto_conoce, punto_custom, comentario
 from .forms import calificacionForm
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
@@ -24,7 +17,7 @@ from django.db.models import Avg
 
 def inicio(request):
     usuario = request.user
-    return render(request, "inicio.html", {"usuario": usuario,'active_page': 'inicio'})
+    return render(request, "inicio.html", {"usuario": usuario, "active_page": "inicio"})
 
 
 def obtener_puntos_recorrido(request):
@@ -95,130 +88,6 @@ def login_user(request):
                 return redirect("inicio")
 
 
-@login_required
-def usuarios_admin(request):
-    usuario = request.user
-    usuarios = User.objects.filter(is_superuser=False)
-    promedios = calificacion.objects.aggregate(
-        promedio_need=Avg("rating_need"),
-        promedio_situation=Avg("rating_situation"),
-        promedio_experience=Avg("rating_experience"),
-        promedio_satisfaction=Avg("rating_satisfaction"),
-    )
-
-    promedio_need = round(promedios["promedio_need"], 1)
-    promedio_situation = round(promedios["promedio_situation"], 1)
-    promedio_experience = round(promedios["promedio_experience"], 1)
-    promedio_satisfaction = round(promedios["promedio_satisfaction"], 1)
-    return render(
-        request,
-        "usuarios_admin.html",
-        {
-            "usuario": usuario,
-            "usuarios": usuarios,
-            "promedio_need": promedio_need,
-            "promedio_situation": promedio_situation,
-            "promedio_experience": promedio_experience,
-            "promedio_satisfaction": promedio_satisfaction,
-        },
-    )
-
-
-@login_required
-def inicio_admin(request):
-
-    if request.method == "POST":
-        coord_lat = request.POST.get("coord_lat")
-        coord_lng = request.POST.get("coord_lng")
-        titulo = request.POST.get("titulo")
-        direccion = request.POST.get("direccion")
-
-        if request.POST.get("titulo") == "Puesto de Salud":
-            imagen = "static/img/mapa/salud/salud7.png"
-        if request.POST.get("titulo") == "Paso Peatonal":
-            imagen = "static/img/mapa/paso1.jpg"
-        if request.POST.get("titulo") == "Deposito residual":
-            imagen = "static/img/mapa/deposito1.jpg"
-        if request.POST.get("titulo") == "Puesto Policial":
-            imagen = "static/img/mapa/policia/policia1.jpg"
-
-        punto = punto_carnaval.objects.create(
-            coord_lat=coord_lat,
-            coord_lng=coord_lng,
-            titulo=titulo,
-            direccion=direccion,
-            imagen_ruta=imagen,
-        )
-        puntos = punto_carnaval.objects.all()
-        return render(request, "inicio_admin.html", {"puntos": puntos})
-    else:
-        puntos = punto_carnaval.objects.all()
-        return render(request, "inicio_admin.html", {"puntos": puntos})
-
-
-@login_required
-def planifica_admin(request):
-
-    if request.method == "POST":
-        coord_lat = request.POST.get("coord_lat")
-        coord_lng = request.POST.get("coord_lng")
-        titulo = request.POST.get("titulo")
-        nombre = request.POST.get("nombre")
-
-        punto = punto_planifica.objects.create(
-            coord_lat=coord_lat,
-            coord_lng=coord_lng,
-            titulo=titulo,
-            name=nombre,
-        )
-        puntos = punto_planifica.objects.all()
-        return render(request, "planifica_admin.html", {"puntos": puntos})
-    else:
-        puntos = punto_planifica.objects.all()
-        return render(request, "planifica_admin.html", {"puntos": puntos})
-
-
-@login_required
-def conoce_admin(request):
-
-    if request.method == "POST":
-        coord_lat = request.POST.get("coord_lat")
-        coord_lng = request.POST.get("coord_lng")
-        titulo = request.POST.get("titulo")
-        nombre = request.POST.get("nombre")
-        descripcion = request.POST.get("descripcion")
-        detalles = request.POST.get("detalles")
-
-        if request.POST.get("titulo") == "Hotel":
-            imagen = "/static/img/conoceoruro/hot.png"
-        if request.POST.get("titulo") == "Comida":
-            imagen = "/static/img/conoceoruro/resta.png"
-        if request.POST.get("titulo") == "Museo":
-            imagen = "/static/img/conoceoruro/mm.png"
-        if request.POST.get("titulo") == "Iglesia":
-            imagen = "/static/img/conoceoruro/i.png"
-
-        punto = punto_conoce.objects.create(
-            coord_lat=coord_lat,
-            coord_lng=coord_lng,
-            titulo=titulo,
-            name=nombre,
-            descripcion=descripcion,
-            detalles=detalles,
-            imagen_ruta=imagen,
-        )
-        puntos = punto_conoce.objects.all()
-        return render(request, "conoce_admin.html", {"puntos": puntos})
-    else:
-        puntos = punto_conoce.objects.all()
-        return render(request, "conoce_admin.html", {"puntos": puntos})
-
-
-def conoce(request):
-    usuario = request.user
-    return render(request, "conoce.html", {"usuario": usuario,'active_page': 'conoce'})
-
-
 def acceso_denegado(request):
     return render(request, "acceso_denegado.html")
 
@@ -230,7 +99,9 @@ def planifica(request):
         print("entra sin user")
         initial_data = None
         form = calificacionForm(initial=initial_data)
-        return render(request, "planifica.html", {"form": form,'active_page': 'planifica'})
+        return render(
+            request, "planifica.html", {"form": form, "active_page": "planifica"}
+        )
 
     if request.method == "POST":
         print("Entra post")
@@ -262,7 +133,16 @@ def planifica(request):
             initial_data = None
         # Si es un GET request, mostrar el formulario con la calificación existente (si hay)
         form = calificacionForm(initial=initial_data)
-        return render(request, "planifica.html", {"form": form, "usuario": usuario,'active_page': 'planifica'})
+        return render(
+            request,
+            "planifica.html",
+            {"form": form, "usuario": usuario, "active_page": "planifica"},
+        )
+
+
+def conoce(request):
+    usuario = request.user
+    return render(request, "conoce.html", {"usuario": usuario, "active_page": "conoce"})
 
 
 def mis_marcadores(request):
@@ -282,22 +162,42 @@ def mis_marcadores(request):
                 descripcion=descripcion,
             )
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario,'active_page': 'mis_marcadores'})
+            return render(
+                request,
+                "mis_marcadores.html",
+                {"usuario": usuario, "active_page": "mis_marcadores"},
+            )
         except ValidationError as ve:
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario,'active_page': 'mis_marcadores'})
+            return render(
+                request,
+                "mis_marcadores.html",
+                {"usuario": usuario, "active_page": "mis_marcadores"},
+            )
         except ValueError:
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario,'active_page': 'mis_marcadores'})
+            return render(
+                request,
+                "mis_marcadores.html",
+                {"usuario": usuario, "active_page": "mis_marcadores"},
+            )
         except Exception as e:
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario,'active_page': 'mis_marcadores'})
+            return render(
+                request,
+                "mis_marcadores.html",
+                {"usuario": usuario, "active_page": "mis_marcadores"},
+            )
     else:
         if not request.user.is_authenticated:
             return render(request, "acceso_denegado.html")
         else:
             usuario = request.user
-            return render(request, "mis_marcadores.html", {"usuario": usuario,'active_page': 'mis_marcadores'})
+            return render(
+                request,
+                "mis_marcadores.html",
+                {"usuario": usuario, "active_page": "mis_marcadores"},
+            )
 
 
 def foro(request):
@@ -316,26 +216,36 @@ def foro(request):
                 rating=ratingu,
             )
             usuario = request.user
-            return render(request, "foro.html", {"usuario": usuario,'active_page': 'foro'})
+            return render(
+                request, "foro.html", {"usuario": usuario, "active_page": "foro"}
+            )
         except ValidationError as ve:
             usuario = request.user
-            return render(request, "foro.html", {"usuario": usuario,'active_page': 'foro'})
+            return render(
+                request, "foro.html", {"usuario": usuario, "active_page": "foro"}
+            )
         except ValueError:
             usuario = request.user
-            return render(request, "foro.html", {"usuario": usuario,'active_page': 'foro'})
+            return render(
+                request, "foro.html", {"usuario": usuario, "active_page": "foro"}
+            )
         except Exception as e:
             usuario = request.user
-            return render(request, "foro.html", {"usuario": usuario,'active_page': 'foro'})
+            return render(
+                request, "foro.html", {"usuario": usuario, "active_page": "foro"}
+            )
     else:
         if not request.user.is_authenticated:
             return render(request, "acceso_denegado.html")
         else:
             usuario = request.user
-            return render(request, "foro.html", {"usuario": usuario,'active_page': 'foro'})
+            return render(
+                request, "foro.html", {"usuario": usuario, "active_page": "foro"}
+            )
 
 
 def aprende(request):
-    return render(request, "aprende.html", {'active_page': 'aprende'})
+    return render(request, "aprende.html", {"active_page": "aprende"})
 
 
 def registro(request):
@@ -418,7 +328,6 @@ def eliminar_punto_conoce(request, punto_id):
 
 def eliminar_punto_custom(request, punto_id):
     punto = get_object_or_404(punto_custom, pk=punto_id)
-    # Verificar que el usuario tenga permisos para eliminar este punto
     if punto.user == request.user:
         punto.delete()
         return JsonResponse({"status": "success"})
@@ -430,14 +339,9 @@ def eliminar_punto_custom(request, punto_id):
 def actualizar_ruta(request):
     if request.method == "POST":
         try:
-            # Parse the JSON data from the request
             data = json.loads(request.body)
             puntos = data.get("puntos", [])
-
-            # Delete all existing points
             puntos_recorrido.objects.all().delete()
-
-            # Create new points
             for punto in puntos:
                 puntos_recorrido.objects.create(
                     latitud_rc=punto["latitud"], longitud_rc=punto["longitud"]
@@ -451,108 +355,123 @@ def actualizar_ruta(request):
     )
 
 
-""" def eliminar_punto_custom(request, punto_id):
+@login_required
+def usuarios_admin(request):
+    usuario = request.user
+    usuarios = User.objects.filter(is_superuser=False)
+    promedios = calificacion.objects.aggregate(
+        promedio_need=Avg("rating_need"),
+        promedio_situation=Avg("rating_situation"),
+        promedio_experience=Avg("rating_experience"),
+        promedio_satisfaction=Avg("rating_satisfaction"),
+    )
+
+    promedio_need = round(promedios["promedio_need"], 1)
+    promedio_situation = round(promedios["promedio_situation"], 1)
+    promedio_experience = round(promedios["promedio_experience"], 1)
+    promedio_satisfaction = round(promedios["promedio_satisfaction"], 1)
+    return render(
+        request,
+        "admin/usuarios_admin.html",
+        {
+            "usuario": usuario,
+            "usuarios": usuarios,
+            "promedio_need": promedio_need,
+            "promedio_situation": promedio_situation,
+            "promedio_experience": promedio_experience,
+            "promedio_satisfaction": promedio_satisfaction,
+        },
+    )
+
+
+@login_required
+def inicio_admin(request):
+
     if request.method == "POST":
-        punto = get_object_or_404(punto_custom, id=punto_id)
-        punto.delete()
-        return JsonResponse({"status": "success"}, status=200)
-    return JsonResponse({"status": "error"}, status=400) """
+        coord_lat = request.POST.get("coord_lat")
+        coord_lng = request.POST.get("coord_lng")
+        titulo = request.POST.get("titulo")
+        direccion = request.POST.get("direccion")
 
+        if request.POST.get("titulo") == "Puesto de Salud":
+            imagen = "static/img/mapa/salud/salud7.png"
+        if request.POST.get("titulo") == "Paso Peatonal":
+            imagen = "static/img/mapa/paso1.jpg"
+        if request.POST.get("titulo") == "Deposito residual":
+            imagen = "static/img/mapa/deposito1.jpg"
+        if request.POST.get("titulo") == "Puesto Policial":
+            imagen = "static/img/mapa/policia/policia1.jpg"
 
-""" //---------------------------------------------------------------------------------- """
-
-
-def signup(request):
-    if request.method == "GET":
-        return render(request, "signup.html", {"form": UserCreationForm})
-    else:
-        print(request.POST)
-        try:
-            if request.POST["is_superuser"] == "on":
-                superusuario = True
-        except:
-            superusuario = False
-        if request.POST["password1"] == request.POST["password2"]:
-            try:
-                user = User.objects.create_user(
-                    username=request.POST["username"],
-                    password=request.POST["password1"],
-                    first_name=request.POST["first_name"],
-                    last_name=request.POST["last_name"],
-                    email=request.POST["email"],
-                    fec_nac=request.POST["fec_nac"],
-                    salario=request.POST["salario"],
-                    is_superuser=superusuario,
-                )
-                user.save()
-                login(request, user)
-                return redirect("signin")
-            except IntegrityError:
-                return render(
-                    request,
-                    "signup.html",
-                    {"form": UserCreationForm, "error": "Usuario ya registrado"},
-                )
-            except ValueError:
-                return render(
-                    request,
-                    "signup.html",
-                    {"form": UserCreationForm, "error": "Datos no validos"},
-                )
-            except:
-                return render(
-                    request,
-                    "signup.html",
-                    {"form": UserCreationForm, "error": "Error en el registro"},
-                )
-        return render(
-            request,
-            "signup.html",
-            {"form": UserCreationForm, "error": "Los Passwords no coinciden"},
+        punto = punto_carnaval.objects.create(
+            coord_lat=coord_lat,
+            coord_lng=coord_lng,
+            titulo=titulo,
+            direccion=direccion,
+            imagen_ruta=imagen,
         )
-
-
-def signin(request):
-    if request.method == "GET":
-        return render(request, "signin.html", {"form": AuthenticationForm})
+        puntos = punto_carnaval.objects.all()
+        return render(request, "admin/inicio_admin.html", {"puntos": puntos})
     else:
-        user = authenticate(
-            request,
-            username=request.POST["username"],
-            password=request.POST["password"],
+        puntos = punto_carnaval.objects.all()
+        return render(request, "admin/inicio_admin.html", {"puntos": puntos})
+
+
+@login_required
+def planifica_admin(request):
+
+    if request.method == "POST":
+        coord_lat = request.POST.get("coord_lat")
+        coord_lng = request.POST.get("coord_lng")
+        titulo = request.POST.get("titulo")
+        nombre = request.POST.get("nombre")
+
+        punto = punto_planifica.objects.create(
+            coord_lat=coord_lat,
+            coord_lng=coord_lng,
+            titulo=titulo,
+            name=nombre,
         )
-        if user is None:
-            print(request.POST["username"])
-            return render(
-                request,
-                "signin.html",
-                {
-                    "form": AuthenticationForm,
-                    "error": "Usuario o Password incorrecto(s)",
-                },
-            )
-        else:
-            login(request, user)
-            if user.is_superuser == True:
-                return redirect("control")
-            else:
-                return redirect("marcar")
+        puntos = punto_planifica.objects.all()
+        return render(request, "admin/planifica_admin.html", {"puntos": puntos})
+    else:
+        puntos = punto_planifica.objects.all()
+        return render(request, "admin/planifica_admin.html", {"puntos": puntos})
 
 
-def about(request):
-    return render(request, "about.html")
+@login_required
+def conoce_admin(request):
 
+    if request.method == "POST":
+        coord_lat = request.POST.get("coord_lat")
+        coord_lng = request.POST.get("coord_lng")
+        titulo = request.POST.get("titulo")
+        nombre = request.POST.get("nombre")
+        descripcion = request.POST.get("descripcion")
+        detalles = request.POST.get("detalles")
 
-def control(request):
-    usuario = request.user
-    empleados = User.objects.filter(is_superuser=False)
-    return render(request, "control.html", {"usuario": usuario, "empleados": empleados})
+        if request.POST.get("titulo") == "Hotel":
+            imagen = "/static/img/conoceoruro/hot.png"
+        if request.POST.get("titulo") == "Comida":
+            imagen = "/static/img/conoceoruro/resta.png"
+        if request.POST.get("titulo") == "Museo":
+            imagen = "/static/img/conoceoruro/mm.png"
+        if request.POST.get("titulo") == "Iglesia":
+            imagen = "/static/img/conoceoruro/i.png"
 
-
-def marcar(request):
-    ahora = datetime.now()
-    usuario = request.user
-    return render(request, "marcar.html", {"usuario": usuario, "fec_hora": ahora})
+        punto = punto_conoce.objects.create(
+            coord_lat=coord_lat,
+            coord_lng=coord_lng,
+            titulo=titulo,
+            name=nombre,
+            descripcion=descripcion,
+            detalles=detalles,
+            imagen_ruta=imagen,
+        )
+        puntos = punto_conoce.objects.all()
+        return render(request, "admin/conoce_admin.html", {"puntos": puntos})
+    else:
+        puntos = punto_conoce.objects.all()
+        return render(request, "admin/conoce_admin.html", {"puntos": puntos})
 
 
 def signout(request):
