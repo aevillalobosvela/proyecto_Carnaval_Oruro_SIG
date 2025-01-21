@@ -1,7 +1,5 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
-<div
-  class="container-fluid p-0"
-  style="
+<div class="container-fluid p-0" style="
     background-image: linear-gradient(
       to right top,
       #205054,
@@ -17,195 +15,117 @@
       #75092e,
       #851717
     );
-  "
->
+  ">
   <div id="carouselExampleCaptions" class="p-0 carousel slide container-fluid">
     <div class="carousel-indicators">
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="0"
-        class="active"
-        aria-current="true"
-        aria-label="Slide 1"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="1"
-        aria-label="Slide 2"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="2"
-        aria-label="Slide 3"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="3"
-        aria-label="Slide 4"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="4"
-        aria-label="Slide 5"
-      ></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+        aria-label="Slide 4"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+        aria-label="Slide 5"></button>
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img
-          src="{% static '/img/oruro3.jpg' %}"
-          class="d-block w-100"
-          height="50%"
-          alt="..."
-        />
+        <img src="{% static '/img/informacion/oruro3.jpg' %}" class="d-block w-100" height="50%" alt="..." />
         <div class="carousel-caption d-none d-md-block">
-          <h2
-            style="
+          <h2 style="
               text-shadow: -2px -2px 0 #796703, 2px -2px 0 #796703,
                 -2px 2px 0 #796703, 2px 2px 0 #796703;
-            "
-          >
+            ">
             Misticismo y Tradición
           </h2>
-          <h4
-            style="
+          <h4 style="
               text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
                 2px 2px 0 #000;
               color: rgb(204, 204, 204);
-            "
-          >
+            ">
             Historias hechas realidad mediante la danza
           </h4>
         </div>
       </div>
       <div class="carousel-item">
-        <img
-          src="{% static '/img/oruro2.jpg' %}"
-          class="d-block w-100 h-50"
-          alt="..."
-        />
+        <img src="{% static '/img/informacion/oruro2.jpg' %}" class="d-block w-100 h-50" alt="..." />
         <div class="carousel-caption d-none d-md-block">
-          <h2
-            style="
+          <h2 style="
               text-shadow: -2px -2px 0 #b45303, 2px -2px 0 #b45303,
                 -2px 2px 0 #b45303, 2px 2px 0 #b45303;
-            "
-          >
+            ">
             Cultura ancestral
           </h2>
-          <h4
-            style="
+          <h4 style="
               text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
                 2px 2px 0 #000;
               color: rgb(204, 204, 204);
-            "
-          >
+            ">
             Testimonio vivo de pueblos y personas
           </h4>
         </div>
       </div>
       <div class="carousel-item">
-        <img
-          src="{% static '/img/oruro1.jpg' %}"
-          width="100%"
-          height="10%"
-          class="d-block w-100"
-          alt="..."
-        />
+        <img src="{% static '/img/oruro1.jpg' %}" width="100%" height="10%" class="d-block w-100" alt="..." />
         <div class="carousel-caption d-none d-md-block">
-          <h2
-            style="
+          <h2 style="
               text-shadow: -2px -2px 0 #003877, 2px -2px 0 #003877,
                 -2px 2px 0 #003877, 2px 2px 0 #003877;
-            "
-          >
+            ">
             Pasiones entregadas
           </h2>
-          <h4
-            style="
+          <h4 style="
               text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
                 2px 2px 0 #000;
               color: rgb(204, 204, 204);
-            "
-          >
+            ">
             Un pueblo que siente y se expresa
           </h4>
         </div>
       </div>
       <div class="carousel-item">
-        <img
-          src="{% static '/img/oruro4.jpg' %}"
-          width="1000"
-          height="10%"
-          class="d-block w-100"
-          alt="..."
-        />
+        <img src="{% static '/img/oruro4.jpg' %}" width="1000" height="10%" class="d-block w-100" alt="..." />
         <div class="carousel-caption d-none d-md-block">
-          <h2
-            style="
+          <h2 style="
               text-shadow: -2px -2px 0 #976201, 2px -2px 0 #976201,
                 -2px 2px 0 #976201, 2px 2px 0 #976201;
-            "
-          >
+            ">
             Fiesta incomparable
           </h2>
-          <h4
-            style="
+          <h4 style="
               text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
                 2px 2px 0 #000;
               color: rgb(204, 204, 204);
-            "
-          >
+            ">
             Un evento de alegría y festejo
           </h4>
         </div>
       </div>
       <div class="carousel-item">
-        <img
-          src="{% static '/img/oruro5.jpg' %}"
-          class="d-block w-100"
-          alt="..."
-        />
+        <img src="{% static '/img/oruro5.jpg' %}" class="d-block w-100" alt="..." />
         <div class="carousel-caption d-none d-md-block">
-          <h2
-            style="
+          <h2 style="
               text-shadow: -2px -2px 0 #91036d, 2px -2px 0 #91036d,
                 -2px 2px 0 #91036d, 2px 2px 0 #91036d;
-            "
-          >
+            ">
             Vive la experiencia
           </h2>
-          <h4
-            style="
+          <h4 style="
               text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
                 2px 2px 0 #000;
               color: rgb(204, 204, 204);
-            "
-          >
+            ">
             Colores y sentimientos vivos
           </h4>
         </div>
       </div>
     </div>
-    <button
-      class="carousel-control-prev"
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide="prev"
-    >
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button
-      class="carousel-control-next"
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide="next"
-    >
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
@@ -215,13 +135,7 @@
     <!-- Three columns of text below the carousel -->
     <div class="row">
       <div class="col-lg-4 text-center">
-        <img
-          style="border-radius: 50%"
-          src="{% static '/img/conoce/f1.jpg' %}"
-          width="190"
-          height="190"
-          alt=""
-        />
+        <img style="border-radius: 50%" src="{% static '/img/conoce/f1.jpg' %}" width="190" height="190" alt="" />
         <h2 class="fw-normal text-white">Planifique su llegada</h2>
         <p>
           Encuentre los sitios para su estadía, alimentacion, recreacion, etc.
@@ -231,13 +145,7 @@
       </div>
       <!-- /.col-lg-4 -->
       <div class="col-lg-4 text-center">
-        <img
-          style="border-radius: 50%"
-          src="{% static '/img/conoce/f2.jpg' %}"
-          width="190"
-          height="190"
-          alt=""
-        />
+        <img style="border-radius: 50%" src="{% static '/img/conoce/f2.jpg' %}" width="190" height="190" alt="" />
         <h2 class="fw-normal text-white">Disfrute de la ciudad</h2>
         <p>
           Encuentre y visite los muchos puntos turisticos de la ciudad de Oruro
@@ -247,24 +155,15 @@
       </div>
       <!-- /.col-lg-4 -->
       <div class="col-lg-4 text-center">
-        <img
-          style="border-radius: 50%"
-          src="{% static '/img/conoce/f3.jpg' %}"
-          width="190"
-          height="190"
-          alt=""
-        />
+        <img style="border-radius: 50%" src="{% static '/img/conoce/f3.jpg' %}" width="190" height="190" alt="" />
         <h2 class="fw-normal text-white">Cree buenos recuerdos</h2>
         <p>
           Que los buenos momentos le sean constantes, le deseamos lo mejor y que
           viva las emociones de la fiesta mas grande de la region
         </p>
         <p>
-          <a
-            class="btn btn-success"
-            href="https://open.spotify.com/intl-es/track/1kFRzBh5SVlbDNrFu0oiGF?si=08bc937e01ce42cd"
-            >Ver más »</a
-          >
+          <a class="btn btn-success"
+            href="https://open.spotify.com/intl-es/track/1kFRzBh5SVlbDNrFu0oiGF?si=08bc937e01ce42cd">Ver más »</a>
         </p>
       </div>
       <!-- /.col-lg-4 -->
@@ -295,12 +194,7 @@
         </p>
       </div>
       <div class="col-md-5">
-        <img
-          src="{% static '/img/conoce/c1.jpg' %}"
-          width="500"
-          height="500"
-          alt=""
-        />
+        <img src="{% static '/img/conoce/c1.jpg' %}" width="500" height="500" alt="" />
       </div>
     </div>
 
@@ -325,12 +219,7 @@
         </p>
       </div>
       <div class="col-md-5 order-md-1">
-        <img
-          src="{% static '/img/conoce/c2.jpg' %}"
-          width="450"
-          height="450"
-          alt=""
-        />
+        <img src="{% static '/img/conoce/c2.jpg' %}" width="450" height="450" alt="" />
       </div>
     </div>
 
@@ -362,12 +251,7 @@
         </p>
       </div>
       <div class="col-md-5">
-        <img
-          src="{% static '/img/conoce/c3.jpg' %}"
-          width="500"
-          height="500"
-          alt=""
-        />
+        <img src="{% static '/img/conoce/c3.jpg' %}" width="500" height="500" alt="" />
       </div>
     </div>
 
@@ -381,23 +265,12 @@
     <div class="row mx-auto text-center">
       <div class="col-12 col-md-6 mt-3">
         <a
-          href="https://www.minculturas.gob.bo/carnaval-de-oruro-22-anos-declarado-como-obra-maestra-del-patrimonio-oral-e-intangible-de-la-humanidad/"
-        >
-          <img
-            src="{% static '/img/1logo.png' %}"
-            width="200"
-            height="200"
-            alt=""
-        /></a>
+          href="https://www.minculturas.gob.bo/carnaval-de-oruro-22-anos-declarado-como-obra-maestra-del-patrimonio-oral-e-intangible-de-la-humanidad/">
+          <img src="{% static '/img/logos/EPB.png' %}" width="200" height="200" alt="" /></a>
       </div>
       <div class="col-12 col-md-6 mb-5 mt-3">
         <a href="https://gamo.gob.bo/aplicacion-del-carnaval-de-oruro/">
-          <img
-            src="{% static '/img/2logo.png' %}"
-            width="200"
-            height="200"
-            alt=""
-        /></a>
+          <img src="{% static '/img/logos/GAMO.png' %}" width="200" height="200" alt="" /></a>
       </div>
     </div>
   </div>
