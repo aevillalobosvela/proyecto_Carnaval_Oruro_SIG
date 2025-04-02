@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block content %}
+{% load static %}
+
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+
+        <div
+            style="height: 100%; background-image: linear-gradient(to bottom, #1c4950, #133f4c, #103447, #122a3f, #161f36);">
+            <div class="p-3 text-center text-white">
+                <h5>¿Que esstas buscando?</h5>
+                <h5>Selecciona un elemento</h5>
+            </div>
+
+            <div id="card-info" class="card mx-auto" style="width: 16rem; display: none;">
+                <img class="card-img-top" id="marker-image" src="" alt="imagen" height="140" width="100%" />
+                <div class="card-body">
+                    <h5 class="card-title" id="titulo-info"></h5>
+                    <div id="marker-info"></div>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-success btn-sm" id="routeButton">¿Como llegar?</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p style="color: rgb(255, 255, 255); position: absolute; bottom: 0;" class="m-2">Usuario actual:
+                    {{usuario.username}}
+                </p>
+            </div>
+        </div>
+
+
+    </nav>
+    <button type="button" id="sidebarCollapse" class="btn btn-tab">
+        <i id="icon" class="text-white fas fa-arrow-circle-left"></i>
+    </button>
+
+    <div id="content">
+        <div style="height: 100%;" id="map1"></div>
+    </div>
+</div>
+
+
+{% endblock %}

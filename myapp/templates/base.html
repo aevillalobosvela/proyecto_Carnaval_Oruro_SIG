@@ -55,11 +55,13 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg mainnav" style="justify-content: space-around">
+    <nav class="navbar navbar-expand-lg navbol" style="justify-content: space-around">
       <div class="container-fluid mx-1">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           <img id="" src="{% static '/img/logos/logo2.png' %}" alt="" draggable="false" height="70" /></a>
-        <h2 style="color: rgb(255, 255, 255)">OruApp</h2>
+        <a href="/">
+          <h2 style="color: rgb(0, 0, 0)">OruApp</h2>
+        </a>
         <button class="text-white navbar-toggler" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
           aria-label="Toggle navigation">
@@ -67,18 +69,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mx-3">
-            {% if active_page == 'inicio' %}
+            {% if active_page == 'ruta' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px; color: rgb(255, 255, 255)" class="fontbolnav" href="/"><b>Ruta
+              <a style="font-size: 18px;" class="fontbolnav" href="/ruta"><b>Ruta
                   principal</b></a>
             </li>
             {% else %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 13px" class="fontbolnav" href="/"><b>Ruta principal</b></a>
+              <a style="font-size: 13px" class="fontbolnav" href="/ruta"><b>Ruta principal</b></a>
             </li>
             {% endif %} {% if active_page == 'planifica' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px; color: rgb(255, 255, 255)" class="fontbolnav" href="/planifica/"><b>Planifica
+              <a style="font-size: 18px;" class="fontbolnav" href="/planifica/"><b>Planifica
                   tu dia</b></a>
             </li>
             {% else %}
@@ -87,7 +89,7 @@
             </li>
             {% endif %} {% if active_page == 'conoce' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px; color: rgb(255, 255, 255)" class="fontbolnav" href="/conoce/"><b>Conoce
+              <a style="font-size: 18px;" class="fontbolnav" href="/conoce/"><b>Conoce
                   lugares</b></a>
             </li>
             {% else %}
@@ -96,7 +98,7 @@
             </li>
             {% endif %} {% if active_page == 'mis_marcadores' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px; color: rgb(255, 255, 255)" class="fontbolnav" href="/mis_marcadores/"><b>Mis
+              <a style="font-size: 18px;" class="fontbolnav" href="/mis_marcadores/"><b>Mis
                   marcadores</b></a>
             </li>
             {% else %}
@@ -105,7 +107,7 @@
             </li>
             {% endif %} {% if active_page == 'foro' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px; color: rgb(255, 255, 255)" class="fontbolnav" href="/foro/"><b>Foro de
+              <a style="font-size: 18px;" class="fontbolnav" href="/foro/"><b>Foro de
                   opinion</b></a>
             </li>
             {% else %}
@@ -114,7 +116,7 @@
             </li>
             {% endif %} {% if active_page == 'aprende' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px; color: rgb(255, 255, 255)" class="fontbolnav" href="/aprende/"><b>Aprende de la
+              <a style="font-size: 18px;" class="fontbolnav" href="/aprende/"><b>Aprende de la
                   fiesta</b></a>
             </li>
             {% else %}
@@ -143,19 +145,45 @@
         </div>
       </div>
     </nav>
-    <nav class="navbar navbar-expand-lg navbol" style="justify-content: space-around">
-      <div class="container-fluid mx-1"></div>
-    </nav>
   </header>
 
   {% block content %} {% endblock %}
-  <footer class="bg-body-tertiary text-center text-lg-start">
-    <div class="text-center p-3" style="background-color: rgba(99, 51, 51, 0.05)">
-      <p></p>
-      <a class="text-body" href="https://www.fni.uto.edu.bo/index.php/nosotros/mision-vision">© 2024 Copyright: Facultad
-        Nacional de Ingenieria</a>
+
+  <footer class="text-center text-white" style="background-color: #f1f1f1;">
+    <!-- Grid container -->
+    <div class="container pt-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+
+        <!-- Twitter -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+
+        <!-- Google -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+
+        <!-- Instagram -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+
+      </section>
+      <!-- Section: Social media -->
     </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
   </footer>
+
+  <!-- End of .container -->
 </body>
 <script src="{% static '/js/funciones.js' %}"></script>
 <script src="{% static '/js/funciones2.js' %}"></script>

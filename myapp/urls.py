@@ -9,6 +9,7 @@ urlpatterns = [
     #
     path("", views.inicio, name="inicio"),
     path("login_user/", views.login_user, name="login_user"),
+    path("ruta/", views.ruta, name="ruta"),
     path("registro/", views.registro, name="registro"),
     path("conoce/", views.conoce, name="conoce"),
     path("planifica/", views.planifica, name="planifica"),

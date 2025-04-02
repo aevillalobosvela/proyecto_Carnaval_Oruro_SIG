@@ -92,6 +92,11 @@ def acceso_denegado(request):
     return render(request, "acceso_denegado.html")
 
 
+def ruta(request):
+    usuario = request.user
+    return render(request, "ruta.html", {"usuario": usuario, "active_page": "ruta"})
+
+
 def planifica(request):
     print("entrando")
     usuario = request.user
