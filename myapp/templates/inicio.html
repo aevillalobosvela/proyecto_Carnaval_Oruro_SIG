@@ -44,14 +44,14 @@
 <div class="text-center my-5">
     <h1>Explora Nuestras <br>Diferentes Funciones</h1>
 </div>
-<div class="mx-auto text-center">
-    <a class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
+<div class="mx-auto text-center aparecer">
+    <a href="/ruta" class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
         <i class="fa fa-map-o fa-3x d-block mt-5"></i>Ruta del<br>Carnaval</a>
-    <a class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
+    <a href="/conoce" class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
         <i class="fa fa-university fa-3x d-block  mt-5"></i>Conoce la<br>ciudad</a>
-    <a class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
+    <a href="/mis_marcadores" class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
         <i class="fa fa-map-marker fa-3x d-block  mt-5"></i>Mis Marcadores</a>
-    <a class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
+    <a href="/foro" class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
         <i class="fa fa-users fa-3x d-block  mt-5"></i>Foro de<br>opinion</a>
 </div>
 <div class="container">
@@ -60,7 +60,7 @@
     <div class="row featurette">
         <div class="col-md-7 text-center d-flex align-items-center justify-content-center">
             <div> <!-- Nuevo div envolvente -->
-                <h2 class="featurette-heading fw-normal lh-1 mb-3">
+                <h2 class="featurette-heading fw-normal lh-1 mb-3" style="color: rgb(55, 145, 55);">
                     El Carnaval de Oruro.
                     <span class="text-muted">Místico y Mágico</span>
                 </h2>
@@ -75,7 +75,7 @@
         </div>
 
         <div class="col-md-5">
-            <img class="img-animada" src="{% static '/img/informacion/c1.jpg' %}" width="400" height="400" alt="" />
+            <img class="aparecer" src="{% static '/img/informacion/c1.jpg' %}" width="400" height="400" alt="" />
         </div>
     </div>
 
@@ -83,9 +83,9 @@
 
     <div class="row featurette">
         <div class="col-md-7 order-md-2 text-center">
-            <h2 class="featurette-heading fw-normal lh-1 mt-5">
+            <h2 class="featurette-heading fw-normal lh-1 mt-5" style="color: rgb(55, 145, 55);">
                 La Ciudad de Oruro.
-                <span>Hogar de la fiesta</span>
+                <span class="text-muted">Hogar de la fiesta</span>
             </h2>
             <br />
             <p class="lead">
@@ -98,7 +98,7 @@
             </p>
         </div>
         <div class="col-md-5 order-md-1">
-            <img class="img-animada" src="{% static '/img/informacion/c2.jpg' %}" width="400" height="400" alt="" />
+            <img class="aparecer" src="{% static '/img/informacion/c2.jpg' %}" width="400" height="400" alt="" />
         </div>
     </div>
 
@@ -107,7 +107,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const images = document.querySelectorAll(".img-animada");
+        const elementos = document.querySelectorAll(".aparecer");
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -118,7 +118,7 @@
             });
         }, { threshold: 0.5 }); // Se activa cuando el 50% de la imagen es visible
 
-        images.forEach(image => observer.observe(image));
+        elementos.forEach(elemento => observer.observe(elemento));
     });
 </script>
 
