@@ -49,6 +49,45 @@ body {
   box-shadow: none;
 }
 
+.carousel-caption-demo {
+  top: 40%; /* Ajusta este valor según lo necesites */
+  bottom: auto;
+  transform: translateY(0);
+}
+
+.texto-principal-crr {
+  font-size: 80px;
+  font-weight: lighter;
+}
+
+.quitar-radius {
+  border-radius: 0 !important;
+}
+
+.boton-inicio {
+  border-radius: 0 !important;
+  margin-top: 15px;
+  width: 220px;
+  height: 220px;
+  align-items: center;
+}
+.boton-inicio:hover {
+  border-radius: 0 !important;
+  margin-top: 15px;
+  color: white !important;
+  background-color: rgb(55, 145, 55) !important;
+}
+
+.img-animada {
+  opacity: 0;
+  transform: translateY(50px); /* Empieza más abajo */
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.img-animada.visible {
+  opacity: 1;
+  transform: translateY(0); /* Se mueve a su posición normal */
+}
 /* ---------------------------------------------------------------------------------- */
 
 /* ---------------------------------------------------------------------------------- */
@@ -67,7 +106,6 @@ p {
   font-size: 1.1em;
   font-weight: 300;
   line-height: 1.7em;
-  color: #dfdcdc;
 }
 
 a,

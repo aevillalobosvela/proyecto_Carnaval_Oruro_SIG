@@ -5,30 +5,26 @@
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="4000">
             <img src="{% static '/img/inicio/imginicio1.jpg' %}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Vive el Carnaval</h5>
+            <div class="carousel-caption carousel-caption-demo  d-none d-md-block">
+                <h5 class="texto-principal-crr ">Vive el Carnaval</h5>
                 <p>Explora puntos de ayuda para mejorar tu experiencia</p>
-                <button href="/ruta" type="button" class="btn btn-danger">
-                    Ir ahora
-                </button>
+                <a href="/ruta" class="btn btn-danger mt-2 quitar-radius">Ir ahora →</a>
             </div>
         </div>
         <div class="carousel-item">
             <img src="{% static '/img/inicio/imginicio2.jpg' %}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Explora la Ciudad</h5>
+            <div class="carousel-caption carousel-caption-demo d-none d-md-block">
+                <h5 class="texto-principal-crr ">Explora la Ciudad</h5>
                 <p>Conoce lugares importantes durante tu visita</p>
-                <a href="/ruta" class="btn btn-warning mt-2">Ir ahora</a>
+                <a href="/conoce" class="btn btn-warning mt-2  quitar-radius">Ir ahora →</a>
             </div>
         </div>
         <div class="carousel-item">
             <img src="{% static '/img/inicio/imginicio3.jpeg' %}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Crea Marcadores</h5>
+            <div class="carousel-caption carousel-caption-demo d-none d-md-block">
+                <h5 class="texto-principal-crr ">Crea Marcadores</h5>
                 <p>Guarda tus propios puntos y compartelos con los demas</p>
-                <button href="/mis_marcadores" type="button" class="btn btn-success">
-                    Ir ahora
-                </button>
+                <a href="/mis_marcadores" class="btn btn-success mt-2 quitar-radius">Ir ahora →</a>
             </div>
         </div>
     </div>
@@ -45,6 +41,85 @@
     </button>
 </div>
 
+<div class="text-center my-5">
+    <h1>Explora Nuestras <br>Diferentes Funciones</h1>
+</div>
+<div class="mx-auto text-center">
+    <a class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
+        <i class="fa fa-map-o fa-3x d-block mt-5"></i>Ruta del<br>Carnaval</a>
+    <a class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
+        <i class="fa fa-university fa-3x d-block  mt-5"></i>Conoce la<br>ciudad</a>
+    <a class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
+        <i class="fa fa-map-marker fa-3x d-block  mt-5"></i>Mis Marcadores</a>
+    <a class="btn btn-lg btn-light text-center mx-auto boton-inicio" onclick="mostrarRest()">
+        <i class="fa fa-users fa-3x d-block  mt-5"></i>Foro de<br>opinion</a>
+</div>
+<div class="container">
+    <hr class="featurette-divider" />
 
+    <div class="row featurette">
+        <div class="col-md-7 text-center d-flex align-items-center justify-content-center">
+            <div> <!-- Nuevo div envolvente -->
+                <h2 class="featurette-heading fw-normal lh-1 mb-3">
+                    El Carnaval de Oruro.
+                    <span class="text-muted">Místico y Mágico</span>
+                </h2>
+                <p class="lead">
+                    El Carnaval de Oruro es uno de los más hermosos y singulares de todo
+                    el mundo. Todos los años, grupos folklóricos de bailarines de todas
+                    partes de Bolivia y el mundo se reúnen en Oruro para rendir tributo
+                    con su música y danza a la Virgen de la Candelaria, también llamada
+                    del Socavón.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <img class="img-animada" src="{% static '/img/informacion/c1.jpg' %}" width="400" height="400" alt="" />
+        </div>
+    </div>
+
+    <hr class="featurette-divider" />
+
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2 text-center">
+            <h2 class="featurette-heading fw-normal lh-1 mt-5">
+                La Ciudad de Oruro.
+                <span>Hogar de la fiesta</span>
+            </h2>
+            <br />
+            <p class="lead">
+                En el carnaval de Oruro aun conviven la religión pagana y
+                católica, mostrando ante el mundo su sincretismo religioso único, tres
+                días antes al sábado de peregrinación hacia el santuario del socavón
+                por parte de los 48 conjuntos, la gente visita al cóndor y una semana
+                después la a la víbora al sur de la ciudad, el sapo al norte y al este
+                los arenales (hormigas).
+            </p>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img class="img-animada" src="{% static '/img/informacion/c2.jpg' %}" width="400" height="400" alt="" />
+        </div>
+    </div>
+
+    <hr class="featurette-divider" />
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const images = document.querySelectorAll(".img-animada");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target); // Deja de observar cuando ya apareció
+                }
+            });
+        }, { threshold: 0.5 }); // Se activa cuando el 50% de la imagen es visible
+
+        images.forEach(image => observer.observe(image));
+    });
+</script>
 
 {% endblock %}
