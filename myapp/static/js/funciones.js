@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
           pasoMarkers,
       };
 
-      L.control.layers(null, overlayMaps, { collapsed: false, position: 'bottomright' }).addTo(map1);
+      L.control.layers(null, overlayMaps, { collapsed: true, position: 'bottomright' }).addTo(map1);
     })
     .catch((error) => console.error("Error:", error));
 });
