@@ -55,73 +55,69 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbol" style="justify-content: space-around">
-      <div class="container-fluid mx-1">
+    <nav class="navbar navbar-expand-lg navbol justify-content-center">
+      <div class="container ">
         <a class="navbar-brand" href="/">
-          <img id="" src="{% static '/img/logos/logo2.png' %}" alt="" draggable="false" height="70" /></a>
-        <a href="/">
-          <h2 style="color: rgb(0, 0, 0)">OruApp</h2>
-        </a>
+          <img id="" src="{% static '/img/logos/logo2.png' %}" alt="" draggable="false" height="50" /></a>
+        <div class="me-3">
+          <a href="/">
+            <h2 style="color: rgb(240, 238, 238)">OruApp</h2>
+          </a>
+        </div>
         <button class="text-white navbar-toggler" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
           aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-3">
+          <ul class="navbar-nav mx-auto text-center">
             {% if active_page == 'ruta' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px;" class="fontbolnav" href="/ruta"><b>Ruta
-                  principal</b></a>
+              <a style="font-size: 18px;" class="fontbolnav" href="/ruta"><b>RUTA</b></a>
             </li>
             {% else %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 13px" class="fontbolnav" href="/ruta"><b>Ruta principal</b></a>
+              <a style="font-size: 13px" class="fontbolnav" href="/ruta"><b>RUTA</b></a>
             </li>
             {% endif %} {% if active_page == 'planifica' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px;" class="fontbolnav" href="/planifica/"><b>Planifica
-                  tu dia</b></a>
+              <a style="font-size: 18px;" class="fontbolnav" href="/planifica/"><b>PLANIFICACION</b></a>
             </li>
             {% else %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 13px" class="fontbolnav" href="/planifica/"><b>Planifica tu dia</b></a>
+              <a style="font-size: 13px" class="fontbolnav" href="/planifica/"><b>PLANIFICACION</b></a>
             </li>
             {% endif %} {% if active_page == 'conoce' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px;" class="fontbolnav" href="/conoce/"><b>Conoce
-                  lugares</b></a>
+              <a style="font-size: 18px;" class="fontbolnav" href="/conoce/"><b>CONOCE</b></a>
             </li>
             {% else %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 13px" class="fontbolnav" href="/conoce/"><b>Conoce lugares</b></a>
+              <a style="font-size: 13px" class="fontbolnav" href="/conoce/"><b>CONOCE</b></a>
             </li>
             {% endif %} {% if active_page == 'mis_marcadores' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px;" class="fontbolnav" href="/mis_marcadores/"><b>Mis
-                  marcadores</b></a>
+              <a style="font-size: 18px;" class="fontbolnav" href="/mis_marcadores/"><b>MARCADORES</b></a>
             </li>
             {% else %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 13px" class="fontbolnav" href="/mis_marcadores/"><b>Mis marcadores</b></a>
+              <a style="font-size: 13px" class="fontbolnav" href="/mis_marcadores/"><b>MARCADORES</b></a>
             </li>
             {% endif %} {% if active_page == 'foro' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px;" class="fontbolnav" href="/foro/"><b>Foro de
-                  opinion</b></a>
+              <a style="font-size: 18px;" class="fontbolnav" href="/foro/"><b>FORO</b></a>
             </li>
             {% else %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 13px" class="fontbolnav" href="/foro/"><b>Foro de opinion</b></a>
+              <a style="font-size: 13px" class="fontbolnav" href="/foro/"><b>FORO</b></a>
             </li>
             {% endif %} {% if active_page == 'aprende' %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 18px;" class="fontbolnav" href="/aprende/"><b>Aprende de la
-                  fiesta</b></a>
+              <a style="font-size: 18px;" class="fontbolnav" href="/aprende/"><b>APRENDE</b></a>
             </li>
             {% else %}
             <li class="nav-item mx-3 mt-2 text-white text-center">
-              <a style="font-size: 13px" class="fontbolnav" href="/aprende/"><b>Aprende de la fiesta</b></a>
+              <a style="font-size: 13px" class="fontbolnav" href="/aprende/"><b>APRENDE</b></a>
             </li>
             {% endif %}
           </ul>
@@ -129,15 +125,15 @@
             {% if user.is_authenticated %}
             <form action="{% url 'logout' %}" method="post">
               {% csrf_token %}
-              <button type="submit" style="border: 0px; background-color: rgba(255, 245, 238, 0)">
-                <i class="fontbolnav fa fa-sign-out fa-3x" aria-hidden="true"></i>
+              <button type="submit" class="btn btn-light">
+                Logout
               </button>
             </form>
             {% else %}
             <form action="/login_user/" method="GET">
               {% csrf_token %}
-              <button type="submit" style="border: 0px; background-color: rgba(255, 245, 238, 0)">
-                <i class="fontbolnav fa fa-user-circle fa-3x" aria-hidden="true"></i>
+              <button type="submit" class="btn btn-light">
+                Iniciar Sesion
               </button>
             </form>
             {% endif %}

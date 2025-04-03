@@ -25,16 +25,19 @@ body {
 
 /* ---------------------------------------------------------------------------------- */
 .navbol {
-  position: absolute;
+  position: absolute !important;
   top: 0;
   width: 100%;
   z-index: 10;
+  background-color: #0000008f;
 }
 
 .fontbolnav {
   text-decoration: none;
-  font-family: system-ui;
-  color: rgb(68, 68, 68);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+  font-weight: lighter;
+  font-size: medium !important;
+  color: rgb(255, 255, 255);
 }
 
 .fontbolnav:hover {
