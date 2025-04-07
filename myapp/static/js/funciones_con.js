@@ -1,9 +1,46 @@
+console.log("cargado 3");
+
+$(document).ready(function () {
+  $("#sidebarCollapse").on("click", function () {
+    $("#sidebar").toggleClass("active");
+    $("#icon").toggleClass("fa-arrow-circle-left fa-arrow-circle-right");
+  });
+});
+
 var map2 = L.map("map2", {
   center: [-17.964138034171146, -67.10734251787665],
   zoom: 14,
   maxZoom: 18,
   minZoom: 14,
 });
+
+function mostrarHotel() {
+  document.getElementById("select-hoteles").style.display = "block";
+  document.getElementById("select-restaurantes").style.display = "none";
+  document.getElementById("select-museos").style.display = "none";
+  document.getElementById("select-iglesias").style.display = "none";
+}
+
+function mostrarRest() {
+  document.getElementById("select-hoteles").style.display = "none";
+  document.getElementById("select-restaurantes").style.display = "block";
+  document.getElementById("select-museos").style.display = "none";
+  document.getElementById("select-iglesias").style.display = "none";
+}
+
+function mostrarMuseo() {
+  document.getElementById("select-hoteles").style.display = "none";
+  document.getElementById("select-restaurantes").style.display = "none";
+  document.getElementById("select-museos").style.display = "block";
+  document.getElementById("select-iglesias").style.display = "none";
+}
+
+function mostrarIglesia() {
+  document.getElementById("select-hoteles").style.display = "none";
+  document.getElementById("select-restaurantes").style.display = "none";
+  document.getElementById("select-museos").style.display = "none";
+  document.getElementById("select-iglesias").style.display = "block";
+}
 
 L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
   attribution:

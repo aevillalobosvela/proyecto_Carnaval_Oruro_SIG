@@ -1,73 +1,58 @@
 {% extends 'base.html' %} {% block content %}
 {% load static %}
 
-<div class="wrapper">
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div style="height: 100%; background-image: linear-gradient(to bottom, #1c4950, #133f4c, #103447, #122a3f, #161f36);" class="controls p-3">
-            <div>
-                <div>
-                    <h5 class="text-white">Hoteles</h5>
-                </div>
-                <select class="form-select mb-4" id="hotelSelect" aria-label="Default select example">
-                </select>
-            </div>
-            <div>
-                <div>
-                    <h5 class="text-white">Restaurante</h5>
-                </div>
-                <select class="form-select mb-4" id="foodSelect" aria-label="Default select example">
-                </select>
-            </div>
-            <div>
-                <div>
-                    <h5 class="text-white">Lugares turisticos</h5>
-                </div>
-                <select class="form-select mb-4" id="tourismSelect" aria-label="Default select example">
-                </select>
-            </div>
-            <div class="text-center">
-                <div>
-                    <h5 class="text-white">Generar ruta</h5>
-                </div>
+<div class="container-fluid" style="height: 70px !important;">
+</div>
 
-                <div class="row">
-                    <div class="col-12 col-md-6 mb-4">      
-                        <button type="button" class="btn btn-success btn-lg text-center mx-auto" id="generateRoute"> <a><i class="fa fa-car fa-2x"></i>Vehiculo</a></button>
-                    </div>
-                    <div class="col-12 col-md-6 mb-4">
-                        <button type="button" class="btn btn-warning btn-lg text-center mx-auto" id="generateRoutePie"> <a><i class="fa fa-person fa-2x"></i> <br> A pie</a></button>
-                    </div>
-                </div>
+<div class="container-fluid p-2">
+    <div class="row">
+        <div class="col-2">
+            <div class="">
+                <button type="button" class="btn btn-light text-center mx-auto boton-plan" id="generateRoutePie">
+                    Pie</button>
 
-            </div>
-            <div>
-                <p style="color: rgb(255, 255, 255); position: absolute; bottom: 0;" class="m-2">Usuario actual:
-                    {{usuario.username}}
-                </p>
+                <button type="button" class="btn btn-light text-center mx-auto boton-plan" id="generateRoute">
+                    Vehiculo</button>
             </div>
         </div>
+        <div class="col-4">
+            <div class="">
+                <div>
+                    <select class="form-select" id="hotelSelect" aria-label="Default select example">
+                    </select>
+                </div>
+                <div>
+                    <select class="form-select " id="foodSelect" aria-label="Default select example">
+                    </select>
+                </div>
+                <div>
+                    <select class="form-select " id="tourismSelect" aria-label="Default select example">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-4" style="background-color: aquamarine;"></div>
+        <div class="col-2">
+            <div class="">
+                <button type="button" class="btn text-center mx-auto" id="generateRoutePie">
+                    Pie</button>
 
-    </nav>
-    <button type="button" id="sidebarCollapse" class="btn btn-tab">
-        <i id="icon" class="text-white fas fa-arrow-circle-left"></i>
-    </button>
-
-    <div id="content">
-        <div style="height: 100%;" id="map"></div>
+            </div>
+            <div> <button type="button" class="btn text-center mx-auto" id="generateRoute">
+                    Vehiculo</button></div>
+        </div>
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navbol" style="justify-content:space-around;">
-    <div class="container-fluid mx-1">
-        </button>
+
+<div class="wrapper">
+    <div id="content">
+        <div style="height: 70%;  z-index: 1;" id="map"></div>
     </div>
-</nav>
+</div>
 
 
-
-<div class="container-fluid"
-    style="background-color: #471010;">
+<div class="container-fluid" style="background-color: #2b2b2b;">
     <div class="row">
         <div class="col-12 col-md-4 text-center">
             <div id="recommendation" class="text-center mx-4 mt-5 mb-3">
@@ -86,6 +71,7 @@
                     Quiero recibir una<br>Recomendacion</a>
             </div>
         </div>
+        <!-- 
         <div class="col-12 col-md-4">
             <div class="container text-center">
                 {% if usuario %}
@@ -150,8 +136,6 @@
                 </form>
                 {% endif %}
             </div>
-
-            <!-- Modal -->
             <div class="modal fade" id="thankYouModal" tabindex="-1" role="dialog" aria-labelledby="thankYouModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -172,25 +156,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-4">
-            <div class="container text-center">
-                <div class="m-4">
-                    <button type="button" class="btn btn-lg btn-danger btn-custom-places"
-                        onclick="mostrarLugaresRecomendados()">¡Visita hoy mismo!</button>
-                </div>
-
-                <div id="lugaresContainer" class="row">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Conoce mas</h5>
-                            <p class="card-text">Espacio Publicitario</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+         -->
     </div>
 </div>
 
-<script src="{% static '/js/funciones2.js' %}"></script>
+<script src="{% static '/js/funciones_plan.js' %}"></script>
 {% endblock %}
