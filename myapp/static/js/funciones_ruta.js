@@ -6,12 +6,6 @@ var datos_recorrido;
 var staticUrl = "/static/";
 var coordenadasRecibidas = [];
 
-$(document).ready(function () {
-  $("#sidebarCollapse").on("click", function () {
-    $("#sidebar").toggleClass("active");
-    $("#icon").toggleClass("fa-arrow-circle-left fa-arrow-circle-right");
-  });
-});
 
 /* -MAPA 1-------------------------------------------------------------------------------------- */
 

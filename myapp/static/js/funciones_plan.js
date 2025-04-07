@@ -2,36 +2,16 @@ var userLocation;
 var control = null;
 var routingControl = null;
 let routeLayer = null;
-
-function mostrarHotel() {
-  document.getElementById("select-hoteles").style.display = "block";
-  document.getElementById("select-restaurantes").style.display = "none";
-  document.getElementById("select-museos").style.display = "none";
-  document.getElementById("select-iglesias").style.display = "none";
-}
-
-function mostrarRest() {
-  document.getElementById("select-hoteles").style.display = "none";
-  document.getElementById("select-restaurantes").style.display = "block";
-  document.getElementById("select-museos").style.display = "none";
-  document.getElementById("select-iglesias").style.display = "none";
-}
-
-function mostrarMuseo() {
-  document.getElementById("select-hoteles").style.display = "none";
-  document.getElementById("select-restaurantes").style.display = "none";
-  document.getElementById("select-museos").style.display = "block";
-  document.getElementById("select-iglesias").style.display = "none";
-}
-
-function mostrarIglesia() {
-  document.getElementById("select-hoteles").style.display = "none";
-  document.getElementById("select-restaurantes").style.display = "none";
-  document.getElementById("select-museos").style.display = "none";
-  document.getElementById("select-iglesias").style.display = "block";
-}
-
+console.log("cargado 2");
 // Inicializa el mapa
+
+$(document).ready(function () {
+  $("#sidebarCollapse").on("click", function () {
+    $("#sidebar").toggleClass("active");
+    $("#icon").toggleClass("fa-arrow-circle-left fa-arrow-circle-right");
+  });
+});
+
 var map = L.map("map", {
   center: [-17.964138034171146, -67.10734251787665],
   zoom: 14,
@@ -50,11 +30,6 @@ var osmLayer = new L.TileLayer(
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }
 );
-
-var miniMap = new L.Control.MiniMap(osmLayer, {
-  toggleDisplay: true,
-  minimized: false,
-}).addTo(map);
 
 function onLocationFound(e) {
   userLocation = e.latlng;
