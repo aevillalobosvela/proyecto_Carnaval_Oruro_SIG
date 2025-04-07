@@ -3,9 +3,7 @@
 <div class="wrapper">
   <!-- Sidebar  -->
   <nav id="sidebar">
-    <div
-      class="text-white controls p-3"
-      style="
+    <div class="text-white controls p-3" style="
         height: 100%;
         background-image: linear-gradient(
           to bottom,
@@ -15,8 +13,7 @@
           #122a3f,
           #161f36
         );
-      "
-    >
+      ">
       <div>
         <div>
           <h5 class="text-center" ;>Guarda un lugar en un solo click</h5>
@@ -28,45 +25,21 @@
         {% endif %}
         <div class="row px-2">
           <label for="id_nombre">Nombre:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="mi_nombre"
-            name="nombre"
-            required
-          />
+          <input type="text" class="form-control" id="mi_nombre" name="nombre" required />
         </div>
         <div class="row px-2">
           <label for="descripcion">Descripcion:</label>
-          <textarea
-            type="text"
-            class="form-control"
-            id="mi_descripcion"
-            name="descripcion"
-            rows="3"
-            required
-          ></textarea>
+          <textarea type="text" class="form-control" id="mi_descripcion" name="descripcion" rows="3"
+            required></textarea>
         </div>
         <div class="row">
           <div class="col-6">
             <label for="mi_id_coord_lat">Latitud:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="mi_id_coord_lat"
-              name="coord_lat"
-              required
-            />
+            <input type="text" class="form-control" id="mi_id_coord_lat" name="coord_lat" required />
           </div>
           <div class="col-6">
             <label for="mi_id_coord_lng">Longitud:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="mi_id_coord_lng"
-              name="coord_lng"
-              required
-            />
+            <input type="text" class="form-control" id="mi_id_coord_lng" name="coord_lng" required />
           </div>
         </div>
 
@@ -90,4 +63,5 @@
   </div>
 </div>
 
+<script src="{% static '/js/funciones4.js' %}"></script>
 {% endblock %}

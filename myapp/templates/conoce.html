@@ -3,8 +3,7 @@
 <div class="wrapper">
   <!-- Sidebar  -->
   <nav id="sidebar">
-    <div
-      style="
+    <div style="
         height: 100%;
         background-image: linear-gradient(
           to bottom,
@@ -14,18 +13,11 @@
           #122a3f,
           #161f36
         );
-      "
-      class="controls p-3"
-    >
+      " class="controls p-3">
       <div class="text-center mb-3">
         <form class="d-flex" role="search" id="search-form">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Busca tu lugar"
-            aria-label="Search"
-            id="search-input"
-          />
+          <input class="form-control me-2" type="search" placeholder="Busca tu lugar" aria-label="Search"
+            id="search-input" />
           <button class="btn btn-success" type="submit" id="search-button">
             Buscar
           </button>
@@ -36,68 +28,41 @@
         <div class="row">
           <div class="col-12 col-md-6 mb-4">
             <a class="btn btn-lg btn-success text-center mx-auto" onclick="mostrarHotel()">
-              <i class="fa fa-bed fa-2x"></i> Hoteles</a
-            >
+              <i class="fa fa-bed fa-2x"></i> Hoteles</a>
           </div>
           <div class="col-12 col-md-6 mb-4">
             <a class="btn btn-lg btn-danger text-center mx-auto" onclick="mostrarRest()">
-              <i class="fa fa-cutlery fa-2x"></i>.  Comida</a
-            >
+              <i class="fa fa-cutlery fa-2x"></i>. Comida</a>
           </div>
         </div>
         <div class="row">
           <div class="col-12 col-md-6 mb-4">
             <a class="btn btn-lg btn-warning text-center mx-auto" onclick="mostrarMuseo()">
-              <i class="fa fa-university fa-2x"></i>.  Museos</a
-            >
+              <i class="fa fa-university fa-2x"></i>. Museos</a>
           </div>
           <div class="col-12 col-md-6 mb-4">
             <a class="btn btn-lg btn-primary text-center mx-auto" onclick="mostrarIglesia()">
-              <i class="fa fa-church fa-2x"></i>Iglesias</a
-            >
+              <i class="fa fa-church fa-2x"></i>Iglesias</a>
           </div>
         </div>
-        <select
-          class="form-select mb-4"
-          name="select-hoteles"
-          id="select-hoteles"
-          style="display: none"
-        >
+        <select class="form-select mb-4" name="select-hoteles" id="select-hoteles" style="display: none">
           <option value="-1">Seleccione un hotel:</option>
         </select>
 
-        <select
-          class="mb-4 form-select"
-          name="select-restaurantes"
-          id="select-restaurantes"
-          style="display: none"
-        >
+        <select class="mb-4 form-select" name="select-restaurantes" id="select-restaurantes" style="display: none">
           <option value="-1">Seleccione un restaurante:</option>
         </select>
 
-        <select
-          class="mb-4 form-select"
-          name="select-museos"
-          id="select-museos"
-          style="display: none"
-        >
+        <select class="mb-4 form-select" name="select-museos" id="select-museos" style="display: none">
           <option value="-1">Seleccione un museo:</option>
         </select>
 
-        <select
-          class="mb-4 form-select"
-          name="select-iglesias"
-          id="select-iglesias"
-          style="display: none"
-        >
+        <select class="mb-4 form-select" name="select-iglesias" id="select-iglesias" style="display: none">
           <option value="-1">Seleccione una iglesia:</option>
         </select>
       </div>
       <div>
-        <p
-          style="color: rgb(255, 255, 255); position: absolute; bottom: 0"
-          class="m-2"
-        >
+        <p style="color: rgb(255, 255, 255); position: absolute; bottom: 0" class="m-2">
           Usuario actual: {{usuario.username}}
         </p>
       </div>
@@ -112,16 +77,11 @@
   </div>
 </div>
 
-<nav
-  class="navbar navbar-expand-lg navbol"
-  style="justify-content: space-around"
->
+<nav class="navbar navbar-expand-lg navbol" style="justify-content: space-around">
   <div class="container-fluid mx-1"></div>
 </nav>
 
-<div
-  class="banner2 pb-3"
-  style="
+<div class="banner2 pb-3" style="
     background-image: linear-gradient(
       to right,
       #6d0606,
@@ -137,16 +97,13 @@
       #245b00,
       #0e5e02
     );
-  "
->
+  ">
   <img src="{% static '/img/conoceoruro/banner2.png' %}" alt="" />
 </div>
 
-<nav
-  class="navbar navbar-expand-lg navbol"
-  style="justify-content: space-around"
->
+<nav class="navbar navbar-expand-lg navbol" style="justify-content: space-around">
   <div class="container-fluid mx-1"></div>
 </nav>
 
+<script src="{% static '/js/funciones3.js' %}"></script>
 {% endblock %}

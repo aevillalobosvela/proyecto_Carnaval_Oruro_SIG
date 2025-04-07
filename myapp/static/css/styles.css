@@ -1,3 +1,23 @@
+.salud-icon {
+  color: rgb(255, 0, 13);
+}
+
+.seguridad-icon {
+  color: rgb(8, 4, 226);
+}
+
+.deposito-icon {
+  color: rgb(21, 148, 10);
+}
+
+.paso-icon {
+  color: rgb(0, 0, 0);
+}
+
+.usuario-icon {
+  color: rgb(204, 157, 4);
+}
+
 .centrado {
   display: block;
   margin: 0 auto;
@@ -243,4 +263,8 @@ a:focus {
 .input-group:hover .label,
 .input:focus {
   color: #05060fc2;
+}
+
+.otro{
+  color: #000;
 }
