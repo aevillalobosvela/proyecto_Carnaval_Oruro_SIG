@@ -1,6 +1,6 @@
 .boton-plan {
   border-radius: 0 !important;
-  width: 100px;
+  width: 100%;
   height: 35px;
   align-items: center;
 }
@@ -10,6 +10,18 @@
   background-color: rgb(82, 82, 82) !important;
 }
 
+.fondorojo:hover{
+  background-color: rgb(161, 4, 4) !important;
+}
+
+.fondoamarillo:hover{
+  background-color: rgb(238, 203, 3) !important;
+  color: rgb(46, 46, 46) !important;
+}
+
+.fondoverde:hover{
+  background-color: rgb(6, 128, 2) !important;
+}
 
 .rating {
   direction: rtl;

@@ -127,6 +127,13 @@ function selectOption(selectId, lat, lon) {
   document.getElementById(selectId).value = `${lat},${lon}`;
 }
 
+function mostrarElemento(selectedId, Id1, Id2) {
+  document.getElementById(selectedId).style.display = "block";
+  document.getElementById(Id1).style.display = "none";
+  document.getElementById(Id2).style.display = "none";
+}
+
+
 // Generar ruta
 document.getElementById("generateRoute").addEventListener("click", function () {
   if (routingControl) {
@@ -141,9 +148,7 @@ document.getElementById("generateRoute").addEventListener("click", function () {
   control = null;
   const hotelCoords = document.getElementById("hotelSelect").value.split(",");
   const foodCoords = document.getElementById("foodSelect").value.split(",");
-  const tourismCoords = document
-    .getElementById("tourismSelect")
-    .value.split(",");
+  const tourismCoords = document.getElementById("tourismSelect").value.split(",");
 
   const waypoints = [
     L.latLng(userLocation),
